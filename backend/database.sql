@@ -26,20 +26,18 @@ CREATE TABLE `candidate` (
   `id` int NOT NULL AUTO_INCREMENT,
   `job_title` varchar(255) NOT NULL,
   `profession` varchar(255) NOT NULL,
-  `profile_description` varchar(1000) NOT NULL,
   `researched_job` varchar(255) NOT NULL,
   `job_search_location` varchar(255) NOT NULL,
   `availability_date` date NOT NULL,
   `skills` varchar(255) NOT NULL,
   `languages` varchar(255) NOT NULL,
-  `is_admin` tinyint NOT NULL,
   `cv_url` varchar(1000) NOT NULL,
   `motivation_letter_url` varchar(1000) NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`,`user_id`),
   KEY `fk_candidate_user1_idx` (`user_id`),
   CONSTRAINT `fk_candidate_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +46,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,'Software Engineer','IT','Experienced software engineer specializing in web development.','Full Stack Developer','New York','2023-06-30','JavaScript, HTML, CSS','English, Spanish',1,'https://example.com/cv1','https://example.com/motivation_letter1',1),(2,'Marketing Specialist','Marketing','Marketing professional with expertise in digital marketing strategies.','Digital Marketing Manager','London','2023-07-15','SEO, PPC, Social Media Marketing','English, French',0,'https://example.com/cv2','https://example.com/motivation_letter2',2),(3,'Graphic Designer','Design','Creative graphic designer with a passion for visual storytelling.','Graphic Design Lead','San Francisco','2023-07-10','Adobe Creative Suite, Illustration','English',0,'https://example.com/cv3','https://example.com/motivation_letter3',3),(4,'Project Manager','Management','Experienced project manager with a track record of successfully leading cross-functional teams.','Senior Project Manager','Berlin','2023-07-05','Project Management, Team Leadership','English, German',0,'https://example.com/cv4','https://example.com/motivation_letter4',6),(10,'Project Managerrr','Management','Experienced project manager with a track record of successfully leading cross-functional teams.','Senior Project Manager','Berlin','2023-07-04','Project Management, Team Leadership','English, German',0,'https://example.com/cv4','https://example.com/motivation_letter555',12);
+INSERT INTO `candidate` VALUES (1,'Software Engineer','IT','Full Stack Developer','New York','2023-06-30','JavaScript, HTML, CSS','English, Spanish','https://example.com/cv1','https://example.com/motivation_letter1',1),(2,'Marketing Specialist','Marketing','Digital Marketing Manager','London','2023-07-15','SEO, PPC, Social Media Marketing','English, French','https://example.com/cv2','https://example.com/motivation_letter2',2),(3,'Graphic Designer','Design','Graphic Design Lead','San Francisco','2023-07-10','Adobe Creative Suite, Illustration','English','https://example.com/cv3','https://example.com/motivation_letter3',3),(4,'Project Manager','Management','Senior Project Manager','Berlin','2023-07-05','Project Management, Team Leadership','English, German','https://example.com/cv4','https://example.com/motivation_letter4',6);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,12 +91,11 @@ CREATE TABLE `headhunter` (
   `id` int NOT NULL AUTO_INCREMENT,
   `skills_area` varchar(255) DEFAULT NULL,
   `research_sector` varchar(255) DEFAULT NULL,
-  `is_admin` tinyint NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`,`user_id`),
   KEY `fk_headhunter_user1_idx` (`user_id`),
   CONSTRAINT `fk_headhunter_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +104,7 @@ CREATE TABLE `headhunter` (
 
 LOCK TABLES `headhunter` WRITE;
 /*!40000 ALTER TABLE `headhunter` DISABLE KEYS */;
-INSERT INTO `headhunter` VALUES (1,'Some Skill Area','Some research sector',0,4),(2,'Some Skill Area','Some research sector',0,5),(3,'Some Skill Area','Some research sector',0,10),(5,'Some Skill Areaaaaawwaahhh','Some research sector',0,11);
+INSERT INTO `headhunter` VALUES (1,'Some Skill Area','Some research sector',4),(2,'Some Skill Area','Some research sector',5),(3,'Some Skill Area','Some research sector',10),(5,'Some Skill Are','Some research sr',11);
 /*!40000 ALTER TABLE `headhunter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,13 +117,11 @@ DROP TABLE IF EXISTS `headhunter_companies`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `headhunter_companies` (
   `headhunter_id` int NOT NULL,
-  `headhunter_user_id` int NOT NULL,
   `company_id` int NOT NULL,
-  PRIMARY KEY (`headhunter_id`,`headhunter_user_id`,`company_id`),
+  PRIMARY KEY (`headhunter_id`,`company_id`),
   KEY `fk_headhunter_has_company_company1_idx` (`company_id`),
-  KEY `fk_headhunter_has_company_headhunter1_idx` (`headhunter_id`,`headhunter_user_id`),
-  CONSTRAINT `fk_headhunter_has_company_company1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
-  CONSTRAINT `fk_headhunter_has_company_headhunter1` FOREIGN KEY (`headhunter_id`, `headhunter_user_id`) REFERENCES `headhunter` (`id`, `user_id`)
+  KEY `fk_headhunter_has_company_headhunter1_idx` (`headhunter_id`),
+  CONSTRAINT `fk_headhunter_has_company_company1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -201,7 +196,7 @@ CREATE TABLE `job_offers` (
 
 LOCK TABLES `job_offers` WRITE;
 /*!40000 ALTER TABLE `job_offers` DISABLE KEYS */;
-INSERT INTO `job_offers` VALUES (1,'Job Offer 1','Location 1','Job Description 1',0,'2023-06-01','Contract Type 1',50000,70000,1),(2,'Job Offer 2','Location 2','Job Description 2',0,'2023-06-02','Contract Type 2',60000,80000,1),(3,'Job Offer 3','Location 3','Job Description 3',0,'2023-06-03','Contract Type 3',70000,90000,1),(4,'Job Offer 4','Location 4','Job Description 4',0,'2023-06-04','Contract Type 4',80000,100000,1),(5,'Job Offer 5','Location 5','Job Description 5',0,'2023-06-05','Contract Type 5',90000,110000,1),(6,'Job Offer 6','Location 6','Job Description 6',0,'2023-06-06','Contract Type 6',100000,120000,1),(7,'Job Offer 7','Location 7','Job Description 7',0,'2023-06-07','Contract Type 7',110000,130000,1),(8,'Job Offer 8','Location 8','Job Description 8',0,'2023-06-08','Contract Type 8',120000,140000,1),(9,'Job Offer 9','Location 9','Job Description 9',0,'2023-06-09','Contract Type 9',130000,150000,1),(10,'Job Offer 10','Location 10','Job Description 10',0,'2023-06-10','Contract Type 10',140000,160000,1),(11,'Job Offer 11','Location 11','Job Description 11',0,'2023-06-01','Contract Type 1',50000,70000,2),(12,'Job Offer 12','Location 12','Job Description 12',0,'2023-06-02','Contract Type 2',60000,80000,2),(13,'Job Offer 13','Location 13','Job Description 13',0,'2023-06-03','Contract Type 3',70000,90000,2),(14,'Job Offer 14','Location 14','Job Description 14',0,'2023-06-04','Contract Type 4',80000,100000,2),(15,'Job Offer 15','Location 15','Job Description 15',0,'2023-06-05','Contract Type 5',90000,110000,2);
+INSERT INTO `job_offers` VALUES (1,'Job Offer 1','Location 1','Job Description 1',0,'2023-06-01','Contract Type 1',50000,70000,1),(2,'Job Offer 2','Location 2','Job Description 2',0,'2023-06-02','Contract Type 2',60000,80000,1),(3,'Job Offer 3','Location 3','Job Description 3',0,'2023-06-03','Contract Type 3',70000,90000,1),(4,'Job Offer 4','Location 4','Job Description 4',0,'2023-06-04','Contract Type 4',80000,100000,1),(5,'Job Offer 5','Location 5','Job Description 5',0,'2023-06-05','Contract Type 5',90000,110000,1),(6,'Job Offer 6','Location 6','Job Description 6',0,'2023-06-06','Contract Type 6',100000,120000,1),(7,'Job Offer 7','Location 7','Job Description 7',0,'2023-06-07','Contract Type 7',110000,130000,1),(8,'Job Offer 8','Location 8','Job Description 8',0,'2023-06-08','Contract Type 8',120000,140000,1),(9,'Job Offer 9','Location 9','Job Description 9',0,'2023-06-09','Contract Type 9',130000,150000,1),(10,'Job Offer 10','Location 10','Job Description 10',0,'2023-06-10','Contract Type 10',140000,160000,1),(11,'Job Offer 11','Location 11','Job Description 11',0,'2023-06-01','Contract Type 1',50000,70000,2),(12,'Job Offer 12','Location 12','Job Description 12',0,'2023-06-02','Contract Type 2',60000,80000,2),(13,'Job Offer 13','Location 13','Job Description 13',0,'2023-06-03','Contract Type 3',70000,90000,2),(14,'Job Offer 14','Location 14','Job Description 14',0,'2023-06-04','Contract Type 4',80000,100000,2),(15,'Job Offer 15','Location 1555364','Job Description 15gf',1,'2023-06-01','Contract Type 55',90000,110000,3);
 /*!40000 ALTER TABLE `job_offers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,11 +217,12 @@ CREATE TABLE `user` (
   `phone` varchar(15) NOT NULL,
   `email` varchar(255) NOT NULL,
   `photo_url` varchar(1000) NOT NULL,
+  `profile_description` varchar(1000) NOT NULL,
   `adress` varchar(255) NOT NULL,
   `subscription_date` date NOT NULL,
   `status` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=armscii8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=armscii8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,7 +231,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'password1','{\"role\": \"admin\"}','John','Doe','1990-01-01','123456789','john.doe@example.com','https://example.com/photo1.jpg','123 Main St','2023-01-01',1),(2,'password2','{\"role\": \"candidate\"}','Jane','Smith','1995-02-02','987654321','jane.smith@example.com','https://example.com/photo2.jpg','456 Elm St','2023-01-02',2),(3,'password3','{\"role\": \"candidate\"}','David','Johnson','1985-03-03','555555555','david.johnson@example.com','https://example.com/photo3.jpg','789 Oak St','2023-01-03',1),(4,'password4','{\"role\": \"headhunter\"}','Sarah','Williams','1992-04-04','111111111','sarah.williams@example.com','https://example.com/photo4.jpg','321 Pine St','2023-01-04',2),(5,'password5','{\"role\": \"headhunter\"}','Michael','Brown','1988-05-05','999999999','michael.brown@example.com','https://example.com/photo5.jpg','654 Cedar St','2023-01-05',1),(6,'password6','{\"role\": \"candidate\"}','Emily','Davis','1997-06-06','444444444','emily.davis@example.com','https://example.com/photo6.jpg','987 Birch St','2023-01-06',2),(10,'password6','{\"role\": \"headhunter\"}','Emilyy','Daviss','1987-06-18','4244447444','emily.daviss@example.com','https://example.com/photo9.jpg','987 Birch Seet','2023-01-24',2),(11,'password6t77','{\"role\": \"headhunter\"}','Emildqsyyyy','Daviss','1987-06-18','4244447444','emily.daviss@example.com','https://example.com/photo9.jpg','987 Birch Seet','2023-01-24',2),(12,'password6t','{\"role\": \"candidate\"}','Emilyy','Daviss','1987-06-18','4244447444','emily.daviss@example.com','https://example.com/photo9.jpg','987 Birch Seet','2023-01-24',2);
+INSERT INTO `user` VALUES (1,'$argon2id$v=19$m=65536,t=3,p=4$N55MmSopO6kp1TPkl3TFhw$deDMmie4cUrn/Z8QnPF9HIeGhP+Esz/DJhQejzsREwg','[\"ROLE_ADMIN\"]','John','Doe','1989-12-31','123456789','john.doe@example.com','https://example.com/photo1.jpg','Experienced software engineer specializing in web development.','123 Main St','2022-12-31',1),(2,'password2','{\"role\": \"candidate\"}','Jane','Smith','1995-02-02','987654321','jane.smith@example.com','https://example.com/photo2.jpg','Marketing professional with expertise in digital marketing strategies.','456 Elm St','2023-01-02',2),(3,'password3','{\"role\": \"candidate\"}','David','Johnson','1985-03-03','555555555','david.johnson@example.com','https://example.com/photo3.jpg','Creative graphic designer with a passion for visual storytelling.','789 Oak St','2023-01-03',1),(4,'password4','{\"role\": \"headhunter\"}','Sarah','Williams','1992-04-04','111111111','sarah.williams@example.com','https://example.com/photo4.jpg','Experienced administrator with expertise in system administration.','321 Pine St','2023-01-04',2),(5,'password5','{\"role\": \"headhunter\"}','Michael','Brown','1988-05-05','999999999','michael.brown@example.com','https://example.com/photo5.jpg','Experienced headhunter with a vast network of industry connections.','654 Cedar St','2023-01-05',1),(6,'password6','{\"role\": \"candidate\"}','Emily','Davis','1997-06-06','444444444','emily.davis@example.com','https://example.com/photo6.jpg','Experienced project manager with a track record of successfully leading cross-functional teams.','987 Birch St','2023-01-06',2),(10,'password6','{\"role\": \"headhunter\"}','Emilyy','Daviss','1987-06-18','4244447444','emily.daviss@example.com','https://example.com/photo9.jpg','Experienced administrator with strong leadership and organizational skills.','987 Birch Seet','2023-01-24',2),(11,'password6t77','{\"role\": \"headhunter\"}','Emildqsyyyy','Daviss','1987-06-18','4244447444','emily.daviss@example.com','https://example.com/photo9.jpg','Experienced headhunter specializing in executive recruitment.','987 Birch Seet','2023-01-24',2),(12,'password1','[\"ROLE_ADMIN\"]','John','Doe','1989-12-31','123456789','john.doe@example.com','https://example.com/photo1.jpg','Experienced software engineer specializing in web development.','123 Main St','2022-12-31',1),(13,'$argon2id$v=19$m=65536,t=3,p=4$D1RF7Dsimpewns1TAqKUtg$/at6JLYLO/PF+kBmJoNM9J3O2MOFsBtG4kWeEuFIEek','{\"role\": \"candidate\"}','Johnnnn','Doeeee','1989-12-25','123456789','john.doett@example.com','https://example.com/photo12.jpg','Passionate software engineer with a focus on developing innovative solutions.','123 Main St','2022-02-15',1),(15,'$argon2id$v=19$m=65536,t=3,p=4$CoDNcdXRUOrfIVawjOzFhA$U/te351Z8e0R+UjavNukxgUh/LJZnRM5TuswndfXxeg','[\"ROLE_ADMIN\"]','John','Doe','1989-12-31','123456789','john.doe@example.com','https://example.com/photo1.jpg','Experienced software engineer specializing in web development.','123 Main St','2022-12-31',1),(17,'$argon2id$v=19$m=65536,t=3,p=4$UjhF+053NW5znLF30PdIaQ$1qFccAy7BZhySby2GXXFy4B6xfAXnW7czCKvPxpK0DU','[\"ROLE_ADMIN\"]','John','Doe','1989-12-31','123456789','john.doeee@example.com','https://example.com/photo1.jpg','Experienced software engineer specializing in web development.','123 Main St','2022-12-31',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -248,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-14 18:04:54
+-- Dump completed on 2023-06-21 15:57:25

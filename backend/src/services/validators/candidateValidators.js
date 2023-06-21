@@ -5,7 +5,6 @@ const validateCandidate = (data, forCreation = true) => {
   return Joi.object({
     job_title: Joi.string().max(255).presence(presence),
     profession: Joi.string().max(255).presence(presence),
-    profile_description: Joi.string().max(1000).presence(presence),
     researched_job: Joi.string().max(255).presence(presence),
     job_search_location: Joi.string().max(255).presence(presence),
     availability_date: Joi.string()

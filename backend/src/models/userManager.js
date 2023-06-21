@@ -2,14 +2,16 @@ const AbstractManager = require("./AbstractManager");
 
 const generateSqlSets = require("../services/generateSqlSets");
 
+// const { passwordHasher } = require("../services/passwordHelper");
+
 class userManager extends AbstractManager {
   constructor() {
     super({ table: "user" });
   }
 
-  insert(user) {
+  async insert(user) {
     return this.connection.query(
-      `insert into ${this.table} (password, role , first_name, last_name, birth_date, phone, email,photo_url, adress, subscription_date, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (password, role , first_name, last_name, birth_date, phone, email,photo_url, profile_description, adress, subscription_date, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         user.password,
         JSON.stringify(user.role),
@@ -19,6 +21,7 @@ class userManager extends AbstractManager {
         user.phone,
         user.email,
         user.photo_url,
+        user.profile_description,
         user.adress,
         user.subscription_date,
         user.status,
