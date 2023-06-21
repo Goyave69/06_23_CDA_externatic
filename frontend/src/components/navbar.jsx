@@ -8,8 +8,9 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-
-import logo from "../assets/Ressources/logo-externatic.png";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import logo from "../assets/Ressources/logo-externatic.svg";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,27 +58,42 @@ export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Box sx={{ width: "100%", maxWidth: 500 }}>
-        <img src={logo} alt="logo entreprise externatic" />
-        <Typography variant="h3">Plus qu'un cabinet de recrutement</Typography>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          sx={{ mr: 2 }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Stack spacing={2} direction="row">
+          <img src={logo} alt="logo entreprise externatic" />
+          <Button variant="text">Text</Button>
+          <Button variant="contained">Contained</Button>
+          <Button variant="outlined">Outlined</Button>
+        </Stack>
+        <Typography sx={{ fontSize: "24" }}>
+          Plus qu'un cabinet de recrutement
+        </Typography>
 
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography
               variant="h6"
               noWrap
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              MUI
+              Job recherhe
+            </Typography>{" "}
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            >
+              Où
             </Typography>
             <Search>
               <SearchIconWrapper>
