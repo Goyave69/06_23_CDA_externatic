@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 const generateSqlSets = require("../services/generateSqlSets");
 
-class JobOfferManager extends AbstractManager {
+class CandidateManager extends AbstractManager {
   constructor() {
     super({ table: "candidate" });
   }
@@ -36,4 +36,4 @@ class JobOfferManager extends AbstractManager {
   }
 }
 
-module.exports = JobOfferManager;
+module.exports = CandidateManager;

@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import InputLabel from "@mui/material/InputLabel";
@@ -80,7 +79,7 @@ export default function Navbar() {
     setAge(event.target.value);
   };
   return (
-    <Box>
+    <Box sx={{ mb: "3rem" }}>
       <Box sx={{ width: "100%" }}>
         <Box
           sx={{
@@ -132,16 +131,25 @@ export default function Navbar() {
             alt="logo externatic"
             style={{ width: "600px", height: "auto" }}
           />
-          <Box sx={{ mt: "20px", mr: "-120px" }}>
+          <Box
+            sx={{
+              mt: "20px",
+              mr: "-120px",
+              display: "flex",
+              flexDirection: "row",
+              gap: "3rem",
+            }}
+          >
             <Button
               variant="contained"
               style={{
                 backgroundColor: "black",
                 width: "120px",
                 borderRadius: 35,
+                height: "50%",
               }}
             >
-              CANDIDATE
+              CANDIDAT
             </Button>
             {/* <Button
               variant="contained"
@@ -159,9 +167,10 @@ export default function Navbar() {
                 backgroundColor: "black",
                 width: "120px",
                 borderRadius: 35,
+                height: "50%",
               }}
             >
-              Login
+              ENTREPRISE
             </Button>
             {/* <Button
               variant="contained"
@@ -210,7 +219,7 @@ export default function Navbar() {
                     <SearchIcon />
                   </SearchIconWrapper>
                   <StyledInputBase
-                    placeholder="Job offers"
+                    placeholder="Offres d'emploi"
                     inputProps={{ "aria-label": "search" }}
                   />
                 </Search>
@@ -233,7 +242,7 @@ export default function Navbar() {
                     <SearchIcon />
                   </SearchIconWrapper>
                   <StyledInputBase
-                    placeholder="Location"
+                    placeholder="Où"
                     inputProps={{ "aria-label": "search" }}
                   />
                 </Search>
@@ -244,7 +253,7 @@ export default function Navbar() {
             variant="contained"
             style={{ backgroundColor: "#CA2061", width: "200px" }}
           >
-            SEARCH
+            RECHERCHE
           </Button>
         </Box>
         <Box>
@@ -261,17 +270,17 @@ export default function Navbar() {
           >
             <FormControlLabel control={<Checkbox />} label="CDD" />
             <FormControlLabel control={<Checkbox />} label="CDI" />
-            <FormControlLabel control={<Checkbox />} label="Internship" />
-            <FormControlLabel control={<Checkbox />} label="Apprenticeship" />
-            <FormControlLabel control={<Checkbox />} label="Part-time" />
-            <FormControlLabel control={<Checkbox />} label="Full-time" />
+            <FormControlLabel control={<Checkbox />} label="Stage" />
+            <FormControlLabel control={<Checkbox />} label="Alternance" />
+            <FormControlLabel control={<Checkbox />} label="Temps partiel" />
+            <FormControlLabel control={<Checkbox />} label="Télé-travail" />
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <InputLabel id="demo-simple-select-label">Salary</InputLabel>
+              <InputLabel id="demo-simple-select-label">Salaire</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={age}
-                label="Salary"
+                label="Salaire"
                 onChange={handleChange}
                 sx={{ borderRadius: 2.5 }}
               >
@@ -295,10 +304,10 @@ export default function Navbar() {
             variant="contained"
             style={{ backgroundColor: "#CA2061", width: "200px" }}
           >
-            Companies
+            Entreprises
           </Button>
           <FormControl sx={{ width: "200px" }}>
-            <InputLabel id="demo-select-small-label">Job Field</InputLabel>
+            <InputLabel id="demo-select-small-label">Secteur</InputLabel>
             <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
@@ -306,19 +315,18 @@ export default function Navbar() {
               label="Job Field"
               onChange={handleChange}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>IT</MenuItem>
-              <MenuItem value={20}>Marketing</MenuItem>
-              <MenuItem value={30}>Industry</MenuItem>
+              <MenuItem value="">Cyber-securité</MenuItem>
+              <MenuItem value={10}>Big Data</MenuItem>
+              <MenuItem value={20}>Inteligence Artificielle</MenuItem>
+              <MenuItem value={30}>Applications web & mobile</MenuItem>
+              <MenuItem value={30}>Systèmes embarqués</MenuItem>
             </Select>
           </FormControl>
           <Button
             variant="contained"
             style={{ backgroundColor: "#CA2061", width: "200px" }}
           >
-            Job Offers
+            Offres d'emploi
           </Button>
         </Box>
       </Box>

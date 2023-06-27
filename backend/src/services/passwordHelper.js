@@ -1,10 +1,11 @@
+/* eslint-disable consistent-return */
 const argon2 = require("argon2");
 
 async function passwordHasher(password) {
   try {
     return await argon2.hash(password);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }
 
