@@ -3,8 +3,11 @@ const models = require("../models");
 const validator = require("../services/validators/jobOffersValidators");
 
 const browse = (req, res) => {
-  models.job_offers
-    .findAll()
+  const promise =
+    Object.keys(req.query).length > 0
+      ? models.job_offers.findAllBy(req)
+      : models.job_offers.findAll();
+  promise
     .then(([rows]) => {
       res.send(rows);
     })

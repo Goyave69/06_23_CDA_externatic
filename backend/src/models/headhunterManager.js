@@ -9,13 +9,8 @@ class headhunterManager extends AbstractManager {
 
   insert(headhunter) {
     return this.connection.query(
-      `INSERT INTO ${this.table} (skills_area, research_sector, is_admin, user_id) VALUES (?, ?, ?, ?)`,
-      [
-        headhunter.skills_area,
-        headhunter.research_sector,
-        headhunter.is_admin,
-        headhunter.user_id,
-      ]
+      `INSERT INTO ${this.table} (skills_area, research_sector, user_id) VALUES (?, ?, ?)`,
+      [headhunter.skills_area, headhunter.research_sector, headhunter.user_id]
     );
   }
 

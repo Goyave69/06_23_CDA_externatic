@@ -1,20 +1,20 @@
 import React from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/Ressources/logo-externatic.png";
 import ApiHelper from "../services/ApiHelper";
 import { useToken } from "../context/TokenContext";
 
 function Login() {
-  const [username, setUsername] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { setToken } = useToken();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (username && password) {
-      const data = JSON.stringify({ username, password });
+    if (email && password) {
+      const data = JSON.stringify({ email, password });
       await ApiHelper("/login", "POST", null, data)
         .then((response) => response.json())
         .then((result) => {
@@ -32,12 +32,13 @@ function Login() {
         <h2>Se connecter</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Identifiant:</label>
+            <label htmlFor="email">Identifiant:</label>
             <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               type="text"
-              id="username"
+              id="email"
+              placeholder="Email"
             />
           </div>
           <div className="form-group">

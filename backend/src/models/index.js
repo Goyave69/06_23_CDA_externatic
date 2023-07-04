@@ -27,7 +27,8 @@ const models = fs
       file !== "AbstractManager.js" &&
       file !== "index.js" &&
       file !== "AuthManager.js" &&
-      file !== "database.js"
+      file !== "database.js" &&
+      file !== "ImageManager.js"
   )
   .reduce((acc, file) => {
     // eslint-disable-next-line global-require, import/no-dynamic-require

@@ -126,7 +126,8 @@ router.post("/login", loginController);
 
 router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
-router.put("/user/:id", verifyToken, verifyTokenById, userControllers.edit);
+// router.put("/user/:id", verifyToken, verifyTokenById, userControllers.edit);
+router.put("/user/:id", userControllers.edit);
 router.post("/user", userControllers.add);
 router.delete(
   "/user/:id",

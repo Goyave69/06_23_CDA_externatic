@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const connection = require("./database");
@@ -17,8 +18,15 @@ function login({ email, password }) {
         return { status: 401, message: "Email or password is wrong" };
       }
 
+      const { id, role, first_name, last_name } = rows[0]; // Extract first_name and last_name from rows[0]
+
       const token = jwt.sign(
-        { userId: rows[0].id, role: rows[0].role },
+        {
+          userId: id,
+          role,
+          first_name,
+          last_name,
+        },
         privateKey,
         {
           algorithm: "RS256",

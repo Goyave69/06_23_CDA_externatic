@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class headhunterCompanyManager extends AbstractManager {
   constructor() {
-    super({ table: "user" });
+    super({ table: "headhunter_companies" });
   }
 }
 

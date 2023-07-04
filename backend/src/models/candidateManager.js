@@ -2,14 +2,14 @@ const AbstractManager = require("./AbstractManager");
 
 const generateSqlSets = require("../services/generateSqlSets");
 
-class JobOfferManager extends AbstractManager {
+class CandidateManager extends AbstractManager {
   constructor() {
     super({ table: "candidate" });
   }
 
   insert(candidate) {
     return this.connection.query(
-      `insert into ${this.table} (job_title, profession, researched_job, job_search_location, availability_date, skills, languages, is_admin, cv_url, motivation_letter_url, user_id) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (job_title, profession, researched_job, job_search_location, availability_date, skills, languages, cv_url, motivation_letter_url, user_id) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         candidate.job_title,
         candidate.profession,
@@ -18,7 +18,6 @@ class JobOfferManager extends AbstractManager {
         candidate.availability_date,
         candidate.skills,
         candidate.languages,
-        candidate.is_admin,
         candidate.cv_url,
         candidate.motivation_letter_url,
         candidate.user_id,
@@ -37,4 +36,4 @@ class JobOfferManager extends AbstractManager {
   }
 }
 
-module.exports = JobOfferManager;
+module.exports = CandidateManager;

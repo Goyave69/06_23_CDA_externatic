@@ -31,9 +31,9 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
+const edit = async (req, res) => {
   const user = req.body;
-
+  user.password = await passwordHasher(user.password);
   // TODO validations (length, format...)
 
   const { error } = validator.validateUser(user, false);
