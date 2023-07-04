@@ -1,10 +1,7 @@
+/* eslint-disable camelcase */
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -16,55 +13,39 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-
+import jwt_decode from "jwt-decode";
+import { useNavigate, NavLink } from "react-router-dom";
+import PersonIcon from "@mui/icons-material/Person";
+import { InputAdornment, TextField } from "@mui/material";
+import { useToken } from "../context/TokenContext";
 import logo from "../assets/Ressources/logo-externatic.png";
 
 const options = ["Candidate", "Companies", "Head Hunters", "Login", "Logout"];
 const ITEM_HEIGHT = 48;
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
 export default function Navbar() {
+  const { token, setToken } = useToken();
+  let firstName = "";
+  let lastName = "";
+
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    firstName = decodedToken.first_name;
+    lastName = decodedToken.last_name;
+  }
+
+  const navigate = useNavigate();
+
+  const handleSignUpLogOut = () => {
+    if (token) {
+      setToken(null);
+      navigate("/");
+    } else {
+      navigate("/signUp");
+    }
+  };
+  const logoutButtonText = token ? "Logout" : "Sign Up";
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -96,7 +77,7 @@ export default function Navbar() {
               aria-expanded={open ? "true" : undefined}
               aria-haspopup="true"
               onClick={handleClick}
-              sx={{ width: "50px", height: "50px", mt: "20px", ml: "-140px" }}
+              sx={{ width: "50px", height: "50px", mt: "20px", ml: "-100px" }}
             >
               <MoreVertIcon />
             </MenuRoundedIcon>
@@ -140,17 +121,20 @@ export default function Navbar() {
               gap: "3rem",
             }}
           >
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: "black",
-                width: "120px",
-                borderRadius: 35,
-                height: "50%",
-              }}
-            >
-              CANDIDAT
-            </Button>
+            <NavLink to="/login">
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "black",
+                  width: "120px",
+                  borderRadius: 35,
+                  height: "50%",
+                }}
+              >
+                CANDIDAT
+              </Button>
+            </NavLink>
+
             {/* <Button
               variant="contained"
               style={{
@@ -161,6 +145,28 @@ export default function Navbar() {
             >
               COMPANIES
             </Button> */}
+            <NavLink to="/login">
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "black",
+                  width: "120px",
+                  borderRadius: 35,
+                  height: "50%",
+                }}
+              >
+                ENTREPRISE
+              </Button>
+            </NavLink>
+
+            {firstName && lastName && (
+              <div className="user-info">
+                <div className="user-name">
+                  {firstName} {lastName}
+                </div>
+                <PersonIcon />
+              </div>
+            )}
             <Button
               variant="contained"
               style={{
@@ -169,19 +175,10 @@ export default function Navbar() {
                 borderRadius: 35,
                 height: "50%",
               }}
+              onClick={handleSignUpLogOut}
             >
-              ENTREPRISE
+              {logoutButtonText}
             </Button>
-            {/* <Button
-              variant="contained"
-              style={{
-                backgroundColor: "black",
-                width: "120px",
-                borderRadius: 35,
-              }}
-            >
-              Logout
-            </Button> */}
           </Box>
         </Box>
         <Typography
@@ -205,50 +202,33 @@ export default function Navbar() {
               maxWidth: 350,
             }}
           >
-            <AppBar
-              position="static"
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                backgroundColor: "lightGrey",
-              }}
-            >
-              <Toolbar sx={{ backgroundColor: "lightGrey", color: "black" }}>
-                <Search>
-                  <SearchIconWrapper>
+            <TextField
+              id="outlined-basic"
+              label="Job recherché"
+              variant="filled"
+              sx={{ backgroundColor: "lightGrey", width: "400px" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
                     <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Offres d'emploi"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
-              </Toolbar>
-            </AppBar>
-          </Box>
-          <Box sx={{ width: "100%", maxWidth: 350 }}>
-            <AppBar
-              position="static"
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-around",
-                backgroundColor: "lightGrey",
+                  </InputAdornment>
+                ),
               }}
-            >
-              <Toolbar sx={{ backgroundColor: "lightGrey", color: "black" }}>
-                <Search>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Où"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
-              </Toolbar>
-            </AppBar>
+            />
           </Box>
+          <TextField
+            id="outlined-basic"
+            label="Où"
+            variant="filled"
+            sx={{ backgroundColor: "lightGrey", width: "400px" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
           <Button
             variant="contained"
             style={{ backgroundColor: "#CA2061", width: "200px" }}
