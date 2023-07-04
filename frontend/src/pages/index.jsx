@@ -3,6 +3,7 @@ import Root from "./root";
 import Home from "./home";
 import JobOffers from "./jobOffers";
 import ErrorPage from "./errorPage";
+import Companies from "./companies";
 
 const Routes = [
   {
@@ -17,6 +18,10 @@ const Routes = [
       {
         path: "/jobOffers",
         element: <JobOffers />,
+      },
+      {
+        path: "/company",
+        element: <Companies />,
       },
     ],
   },
