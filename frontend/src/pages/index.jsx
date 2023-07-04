@@ -4,6 +4,7 @@ import Home from "./home";
 import JobOffers from "./jobOffers";
 import ErrorPage from "./errorPage";
 import Companies from "./companies";
+import CompaniesDetails from "./companyDetails";
 
 const Routes = [
   {
@@ -22,6 +23,10 @@ const Routes = [
       {
         path: "/company",
         element: <Companies />,
+      },
+      {
+        path: "/companyDetails",
+        element: <CompaniesDetails />,
       },
     ],
   },
