@@ -1,0 +1,50 @@
+button {
+  width: fit-content;
+  background-color: transparent;
+}
+button:hover {
+  background-color: inherit;
+}
+.offerTitle {
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.offer {
+  width: 80%;
+  margin: auto;
+  display: inherit;
+  display: flex;
+  flex-direction: column;
+}
+strong {
+  color: black;
+  text-decoration: underline;
+  font-weight: bolder;
+}
+a {
+  color: #000;
+  text-decoration: none;
+  margin: 2%;
+}
+.describe {
+  padding: 0 15px;
+}
+.icon {
+  max-width: 5%;
+}
+.box {
+  margin: auto;
+  margin-bottom: 10px;
+  width: 90%;
+  border-radius: 25px;
+  border: solid black 2px;
+  font-size: 3.1vw;
+}
+
+.box:hover {
+  border: solid blue 2px;
+}

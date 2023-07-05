@@ -1,6 +1,5 @@
 import React from "react";
 import Box from "@mui/material/Box";
-
 import logo from "../assets/Ressources/logo-externatic.png";
 import image1 from "../assets/Ressources/image1.svg";
 import image3 from "../assets/Ressources/image3.avif";
