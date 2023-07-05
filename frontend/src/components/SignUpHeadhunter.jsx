@@ -1,60 +1,35 @@
 /* eslint-disable camelcase */
-import React from "react";
-import "./SignUp.css";
-import { useNavigate } from "react-router-dom";
-import { TextField } from "@mui/material";
+import React, { useState } from "react";
+import "./SignUpHeadhunter.css";
+
+import { Button, TextField, Typography } from "@mui/material";
 import logo from "../assets/Ressources/logo-externatic.png";
-import ApiHelper from "../services/ApiHelper";
-import { useToken } from "../context/TokenContext";
 
-function Login() {
-  const [birth_date, setBirth_date] = React.useState("");
-  const [phone, setPhone] = React.useState("");
-  const [profile_description, setProfile_description] = React.useState("");
-  const [adress, setAdress] = React.useState("");
-  const [photo_url, setPhoto_url] = React.useState("");
-  const [skills_area, setSkills_area] = React.useState("");
-  const [research_sector, setResearch_sector] = React.useState("");
-
-  const { setToken } = useToken();
-  const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (
-      birth_date &&
-      phone &&
-      profile_description &&
-      adress &&
-      photo_url &&
-      skills_area &&
-      research_sector
-    ) {
-      const data = JSON.stringify({
-        birth_date,
-        phone,
-        profile_description,
-        adress,
-        photo_url,
-        skills_area,
-        research_sector,
-      });
-      await ApiHelper("/login", "POST", null, data)
-        .then((response) => response.json())
-        .then((result) => {
-          console.error(result.token);
-          return setToken(result.token);
-        })
-        .then(() => navigate("/"));
-    }
-  };
+function SignUpHeadhunter({
+  birth_date,
+  setBirth_date,
+  phone,
+  setPhone,
+  profile_description,
+  setProfile_description,
+  adress,
+  setAdress,
+  skills_area,
+  setSkills_area,
+  research_sector,
+  setResearch_sector,
+  handleSubmitHeadhunter,
+  handlePreviousClick,
+  photoInputRef,
+}) {
+  const [photoName, setPhotoName] = useState("");
 
   return (
     <div className="login-container">
-      <div className="login-card">
-        <img src={logo} alt="Logo" className="logo" />
+      <div className="login-cardH">
+        <img src={logo} alt="Logo" className="logoH" />
         <h2>Se connecter</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmitHeadhunter}>
           <div className="secondGroup">
             <div className="form-group">
               <TextField
@@ -100,17 +75,20 @@ function Login() {
                 fullWidth
               />
             </div>
-            <div className="photo_url">
-              <TextField
-                id="photo_url"
-                label="Photo URL"
-                variant="outlined"
-                value={photo_url}
-                onChange={(e) => setPhoto_url(e.target.value)}
-                type="photo_url"
-                fullWidth
+            <Button variant="contained" component="label">
+              Uploader une image
+              <input
+                type="file"
+                ref={photoInputRef}
+                hidden
+                onChange={(e) => {
+                  setPhotoName(e.target.value.split("\\")[2]);
+                }}
               />
-            </div>{" "}
+            </Button>
+            <Typography variant="body1" color="initial">
+              {photoName}
+            </Typography>
             <div className="form-group">
               <TextField
                 id="skills_area"
@@ -134,11 +112,38 @@ function Login() {
               />
             </div>
           </div>
-          <button type="submit">Enregistrer</button>
+          <div className="buttons">
+            <Button
+              type="button"
+              variant="contained"
+              onClick={handlePreviousClick}
+              sx={{ backgroundColor: "#CA2061" }}
+            >
+              Arrière
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ backgroundColor: "#CA2061" }}
+              disabled={
+                !(
+                  birth_date &&
+                  phone &&
+                  profile_description &&
+                  adress &&
+                  photoInputRef.current.files[0] &&
+                  skills_area &&
+                  research_sector
+                )
+              }
+            >
+              Enregistrer
+            </Button>
+          </div>
         </form>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default SignUpHeadhunter;
