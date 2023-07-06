@@ -4,15 +4,6 @@ import { useState } from "react";
 
 export default function OfferSearch() {
   const [favorites, setFavorites] = useState([]);
-
-  const handleSelect = (id) => {
-    if (favorites.includes(id)) {
-      setFavorites(favorites.filter((favorie) => favorie !== id));
-    } else {
-      setFavorites([...favorites, id]);
-    }
-  };
-
   const offres = [
     {
       id: 1,
@@ -57,6 +48,15 @@ export default function OfferSearch() {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut beatae minima hic inventore eum asperiores sequi, aliquam eius incidunt tempora eveniet fugiat adipisci. Cupiditate maiores rem corporis ex, neque possimus.",
     },
   ];
+
+  const handleSelect = (id) => {
+    if (favorites.includes(id)) {
+      setFavorites(favorites.filter((favorie) => favorie !== id));
+    } else {
+      setFavorites([...favorites, id]);
+    }
+  };
+
   const isFavorite = (id) => {
     return favorites.includes(id);
   };
@@ -67,12 +67,14 @@ export default function OfferSearch() {
         {offres.map((offre) => (
           <div>
             <div key={offre.id} className="offerTitle">
-              <p>{offre.nameOffre}</p>
+              <Link to="/detailsoffer">
+                <p>{offre.nameOffre}</p>
+              </Link>
 
               <button
+                className="btnEtoile"
                 type="button"
                 onClick={() => handleSelect(offre.id)}
-                className="icon"
               >
                 <img
                   src={`../src/assets/Ressources/Externatic/${
@@ -82,13 +84,12 @@ export default function OfferSearch() {
                 />
               </button>
             </div>
-
-            <div className="describe">
-              <Link to="/detailsoffer">
+            <Link to="/detailsoffer">
+              <div className="describe">
                 <strong>{offre.nameCompany}</strong> - {offre.codePostal}{" "}
                 {offre.ville}
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         ))}
       </div>

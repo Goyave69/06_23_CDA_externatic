@@ -7,6 +7,7 @@ import JobOffers from "./jobOffers";
 import ErrorPage from "./errorPage";
 import OfferSearch from "./offerSearch";
 import DetailsOffer from "./detailsOffer";
+import ApplyOffer from "./applyOffer";
 
 const Routes = [
   {
@@ -29,6 +30,10 @@ const Routes = [
       {
         path: "/detailsOffer",
         element: <DetailsOffer />,
+      },
+      {
+        path: "/applyOffer",
+        element: <ApplyOffer />,
       },
     ],
   },

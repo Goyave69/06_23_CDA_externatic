@@ -1,8 +1,20 @@
-button {
+.box {
+  width: 80%;
+  margin: auto;
+  border-radius: 25px;
+  border: solid black 2px;
+  font-size: 1.8;
+}
+
+.box:hover {
+  border: solid blue 2px;
+}
+.btnEtoile {
   width: fit-content;
   background-color: transparent;
+  max-width: 5%;
 }
-button:hover {
+.btnEtoile:hover {
   background-color: inherit;
 }
 .offerTitle {
@@ -14,7 +26,6 @@ button:hover {
 }
 
 .offer {
-  width: 80%;
   margin: auto;
   display: inherit;
   display: flex;
@@ -32,19 +43,4 @@ a {
 }
 .describe {
   padding: 0 15px;
-}
-.icon {
-  max-width: 5%;
-}
-.box {
-  margin: auto;
-  margin-bottom: 10px;
-  width: 90%;
-  border-radius: 25px;
-  border: solid black 2px;
-  font-size: 3.1vw;
-}
-
-.box:hover {
-  border: solid blue 2px;
 }

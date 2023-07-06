@@ -1,0 +1,37 @@
+.apply {
+  display: flex;
+  flex-direction: row;
+}
+.box {
+  width: 80%;
+}
+.btnContenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.btnTelechargement {
+  width: 100 vw;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 20px;
+  border: solid black 2px;
+  border-radius: 30px;
+  color: white;
+  background-color: #851342;
+}
+
+.btnDoc {
+  display: block;
+  margin: 10px;
+  width: 180px;
+  height: 35px;
+  border-radius: 10px;
+  border: solid black 2px;
+  color: black;
+  background-color: white;
+  box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7);
+}
