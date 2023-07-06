@@ -6,7 +6,7 @@ import image1 from "../assets/Ressources/image1.svg";
 import image3 from "../assets/Ressources/image3.avif";
 import image4 from "../assets/Ressources/image4.avif";
 
-function Home() {
+function CandidateProfile() {
   return (
     <Box
       sx={{
@@ -164,4 +164,4 @@ function Home() {
     </Box>
   );
 }
-export default Home;
+export default CandidateProfile;

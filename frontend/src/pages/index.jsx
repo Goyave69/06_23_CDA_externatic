@@ -7,6 +7,7 @@ import JobOffers from "./jobOffers";
 import ErrorPage from "./errorPage";
 import Companies from "./companies";
 import CompaniesDetails from "./companyDetails";
+import CandidateProfile from "./CandidateProfile";
 
 const Routes = [
   {
@@ -29,6 +30,10 @@ const Routes = [
       {
         path: "/companyDetails",
         element: <CompaniesDetails />,
+      },
+      {
+        path: "/candidateProfile",
+        element: <CandidateProfile />,
       },
     ],
   },
