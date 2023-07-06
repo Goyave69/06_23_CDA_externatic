@@ -8,6 +8,8 @@ import ErrorPage from "./errorPage";
 import Companies from "./companies";
 import CompaniesDetails from "./companyDetails";
 import CandidateProfile from "./CandidateProfile";
+import CompanyDashboard from "./CompanyDashboard";
+import UserDashboard from "./Userdashboard";
 
 const Routes = [
   {
@@ -34,6 +36,14 @@ const Routes = [
       {
         path: "/candidateProfile",
         element: <CandidateProfile />,
+      },
+      {
+        path: "/companydashboard",
+        element: <CompanyDashboard />,
+      },
+      {
+        path: "/userDashboard",
+        element: <UserDashboard />,
       },
     ],
   },
