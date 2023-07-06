@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 
@@ -23,7 +23,24 @@ function CandidateProfile({
   setSkills,
   languages,
   setLanguages,
+  birth_date,
+  setBirth_date,
+  adress,
+  setAdress,
+  phone,
+  setPhone,
+  email,
+  setEmail,
+  researched_job,
+  setResearched_job,
+  availability_date,
+  setAvailability_date,
+  job_search_location,
+  setJob_search_location,
+  profile_description,
+  setProfile_description,
 }) {
+  const [age, setAge] = useState("");
   return (
     <Box
       sx={{
@@ -76,14 +93,16 @@ function CandidateProfile({
             </div>
           </div>
 
-          <div className="ageName">
+          <div className="ageName" style={{ width: "80%" }}>
             <div className="form-group">
               <TextField
-                id="firstName"
-                label="Prénom"
+                id="firstNameLastNameAge"
+                label="Nom Prénom Age"
                 variant="standard"
-                value={first_name && last_name}
-                onChange={(e) => setFirstName && setLastName(e.target.value)}
+                value={first_name && last_name && age}
+                onChange={(e) =>
+                  setFirstName && setLastName && setAge(e.target.value)
+                }
                 fullWidth
                 InputProps={{
                   readOnly: true,
@@ -92,7 +111,7 @@ function CandidateProfile({
               />
             </div>
           </div>
-          <div className="profession">
+          <div className="profession" style={{ width: "80%" }}>
             <div className="form-group">
               <TextField
                 id="profession"
@@ -108,7 +127,7 @@ function CandidateProfile({
               />
             </div>
           </div>
-          <div className="skills">
+          <div className="skills" style={{ width: "80%" }}>
             <div className="form-group">
               <TextField
                 id="skills"
@@ -124,7 +143,7 @@ function CandidateProfile({
               />
             </div>
           </div>
-          <div className="languages">
+          <div className="languages" style={{ width: "80%" }}>
             <div className="form-group">
               <TextField
                 id="lanugages"
@@ -149,11 +168,11 @@ function CandidateProfile({
             width: "70%",
             border: "1.5px solid black",
             borderRadius: 16,
-            padding: "1rem 3rem 3rem 3rem",
+            padding: "3rem 3rem 3rem 3rem",
           }}
         >
-          <div className="nameBD" style={{ display: "flex" }}>
-            <div className="fistLastName" style={{ width: "50%" }}>
+          <div className="nameBirthDate" style={{ display: "flex" }}>
+            <div className="fistLastName" style={{ width: "40%" }}>
               <div className="form-group">
                 <TextField
                   id="firstNameLastName"
@@ -169,19 +188,150 @@ function CandidateProfile({
                 />
               </div>
             </div>
-            <div className="birthDate" style={{ width: "50%" }}>
-              fdfsssdssfd
+            <div style={{ width: "10%" }} />
+            <div className="birthDate" style={{ width: "30%" }}>
+              <div className="form-group">
+                <TextField
+                  id="birth_date"
+                  label="Date de naissance"
+                  variant="outlined"
+                  value={birth_date}
+                  type="date"
+                  onChange={(e) => setBirth_date(e.target.value)}
+                  fullWidth
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </div>
             </div>
           </div>
-          <div className="adress">dsds</div>
-          <div className="phone">sds</div>
-          <div className="email">sds</div>
-          <div>
-            <div className="researched_job">sds</div>
-            <div className="availability_date">sds</div>
+          <div className="adress" style={{ width: "80%" }}>
+            <div className="form-group">
+              <TextField
+                id="adress"
+                label="Adresse"
+                variant="standard"
+                value={adress}
+                onChange={(e) => setAdress(e.target.value)}
+                fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
+                InputLabelProps={{ shrink: true }}
+              />
+            </div>
           </div>
-          <div className="job_search_location">sds</div>
-          <div className="profile_description">sds</div>
+          <div className="phoneEmail" style={{ display: "flex" }}>
+            <div className="phone" style={{ width: "40%" }}>
+              <div className="form-group">
+                <TextField
+                  id="phone"
+                  label="Téléphone"
+                  variant="standard"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  fullWidth
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </div>
+            </div>
+            <div style={{ width: "10%" }} />
+            <div className="email" style={{ width: "30%" }}>
+              <div className="form-group">
+                <TextField
+                  id="email"
+                  label="Email"
+                  variant="standard"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  fullWidth
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="researched_job" style={{ width: "80%" }}>
+              <div className="form-group">
+                <TextField
+                  id="researched_job"
+                  label="Postes recherchés (max 3)"
+                  variant="standard"
+                  value={researched_job}
+                  onChange={(e) => setResearched_job(e.target.value)}
+                  fullWidth
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </div>
+            </div>
+            <div className="placeAndAvailability" style={{ display: "flex" }}>
+              <div className="job_search_location" style={{ width: "40%" }}>
+                <div className="form-group">
+                  <TextField
+                    id="job_search_location"
+                    label="Lieu recherché"
+                    variant="standard"
+                    value={job_search_location}
+                    onChange={(e) => setJob_search_location(e.target.value)}
+                    fullWidth
+                    InputProps={{
+                      readOnly: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </div>
+              </div>
+              <div style={{ width: "10%" }} />
+              <div className="availability_date" style={{ width: "30%" }}>
+                <div className="form-group">
+                  <TextField
+                    id="availability_date"
+                    label="Disponible à partir de"
+                    variant="outlined"
+                    value={availability_date}
+                    type="date"
+                    onChange={(e) => setAvailability_date(e.target.value)}
+                    fullWidth
+                    InputProps={{
+                      readOnly: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="profile_description">
+            <div className="job_search_location" style={{ width: "80%" }}>
+              <div className="form-group">
+                <TextField
+                  id="profile_description"
+                  label="Description de ta recherche"
+                  variant="outlined"
+                  placeholder="1000 caractères max"
+                  value={profile_description}
+                  onChange={(e) => setProfile_description(e.target.value)}
+                  fullWidth
+                  inputProps={{ maxLength: 1000, readOnly: true }} // Set maximum character length
+                  multiline // Allow multiple lines of text
+                  rows={4} // Adjust the number of rows to fit the desired height
+                  InputLabelProps={{ shrink: true }}
+                />
+              </div>
+            </div>
+          </div>
           <div>
             <div className="cv_upload">sds</div>
             <div className="cv_edit">sds</div>
