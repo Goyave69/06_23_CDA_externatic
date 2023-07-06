@@ -5,19 +5,20 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+ 
 }
 
-.login-card {
+.login-cardH {
   background-color: white;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  width: 400px;
   padding: 30px;
   font-family: "Jost", sans-serif;
 }
 
-.login-card h2 {
+.login-cardH h2 {
   margin-bottom: 10px;
   margin-top: 25px;
   font-size: 25px;
@@ -60,26 +61,30 @@ button:hover {
   background-color: #0056b3;
 }
 
-.logo {
+.logoH {
   display: block;
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 50%;
 }
-.firstandSecondGroup {
+.firstAndSecondGroup {
   display: flex;
- 
+ gap:50px;
 }
-
-.error-message {
-  color: red;
+.buttons{
   display: flex;
+  gap:30px
+}
+.buton {
+  display:flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 20px;
-  font-family: "Jost", sans-serif;
-  font-size: 14px;
+}
+.fileNames {
+  display: flex;
+  align-items: center;
 }
 
 
- 
+
 
 
