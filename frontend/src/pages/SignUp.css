@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap");
 
 .login-container {
   display: flex;
@@ -14,13 +14,13 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   width: 300px;
   padding: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Jost", sans-serif;
 }
 
 .login-card h2 {
   margin-bottom: 10px;
   margin-top: 25px;
-  font-size: 18px;
+  font-size: 25px;
   color: red;
   padding-bottom: 10px;
 }
@@ -32,7 +32,7 @@
 label {
   display: block;
   margin-bottom: 5px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Jost", sans-serif;
   font-weight: 800;
 }
 
@@ -42,7 +42,7 @@ input {
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-bottom: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Jost", sans-serif;
 }
 
 button {
@@ -53,7 +53,7 @@ button {
   color: white;
   border: none;
   cursor: pointer;
-  font-family: "Poppins", sans-serif;
+  font-family: "Jost", sans-serif;
 }
 
 button:hover {
@@ -75,7 +75,7 @@ button:hover {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 14px;
 }
 

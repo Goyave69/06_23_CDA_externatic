@@ -31,7 +31,6 @@ function SignUp() {
 
   // Candidate states
 
-  const [job_title, setJob_title] = useState("");
   const [profession, setProfession] = useState("");
   const [researched_job, setResearched_job] = useState("");
   const [job_search_location, setJob_search_location] = useState("");
@@ -63,7 +62,6 @@ function SignUp() {
       phone &&
       profile_description &&
       adress &&
-      job_title &&
       profession &&
       researched_job &&
       job_search_location &&
@@ -83,7 +81,6 @@ function SignUp() {
         phone,
         profile_description,
         adress,
-        job_title,
         profession,
         researched_job,
         job_search_location,
@@ -161,8 +158,6 @@ function SignUp() {
             setProfile_description={setProfile_description}
             adress={adress}
             setAdress={setAdress}
-            job_title={job_title}
-            setJob_title={setJob_title}
             profession={profession}
             setProfession={setProfession}
             researched_job={researched_job}

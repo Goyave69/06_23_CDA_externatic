@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
-import React from "react";
+import { React, useState } from "react";
 import "./SignUpCandidate.css";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 import logo from "../assets/Ressources/logo-externatic.png";
 
 function SignUpCandidate({
@@ -13,10 +14,7 @@ function SignUpCandidate({
   setProfile_description,
   adress,
   setAdress,
-  photo_url,
-  setPhoto_url,
-  job_title,
-  setJob_title,
+
   profession,
   setProfession,
   researched_job,
@@ -29,13 +27,16 @@ function SignUpCandidate({
   setSkills,
   languages,
   setLanguages,
-  cv_url,
-  setCv_url,
-  motivation_letter_url,
-  setMotivation_letter_url,
   handleSubmitCandidate,
   handlePreviousClick,
+  photoInputRef,
+  cvInputRef,
+  motivation_letterInputRef,
 }) {
+  const [photoName, setPhotoName] = useState("");
+  const [cvName, setCvName] = useState("");
+  const [motivation_letterName, setMotivation_letterName] = useState("");
+
   return (
     <div className="login-container">
       <div className="login-cardC">
@@ -43,51 +44,7 @@ function SignUpCandidate({
         <h2>Se connecter</h2>
         <form onSubmit={handleSubmitCandidate}>
           <div className="firstAndSecondGroup">
-            <div className="firstGroup">
-              <div className="form-group">
-                <TextField
-                  id="birth_date"
-                  label="Date de naissance JJ/MM/AAAA"
-                  variant="outlined"
-                  value={birth_date}
-                  onChange={(e) => setBirth_date(e.target.value)}
-                  type="date"
-                  fullWidth
-                />
-              </div>
-              <div className="form-group">
-                <TextField
-                  id="phone"
-                  label="Téléphone"
-                  variant="outlined"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  type="phone"
-                  fullWidth
-                />
-              </div>
-              <div className="form-group">
-                <TextField
-                  id="adress"
-                  label="Adresse"
-                  variant="outlined"
-                  value={adress}
-                  onChange={(e) => setAdress(e.target.value)}
-                  type="adress"
-                  fullWidth
-                />
-              </div>
-              <div className="form-group">
-                <TextField
-                  id="job_title"
-                  label="Intitulé du poste"
-                  variant="outlined"
-                  value={job_title}
-                  onChange={(e) => setJob_title(e.target.value)}
-                  type="job_title"
-                  fullWidth
-                />
-              </div>{" "}
+            <div className="firstGroupC">
               <div className="form-group">
                 <TextField
                   id="profession"
@@ -99,87 +56,90 @@ function SignUpCandidate({
                   fullWidth
                 />
               </div>
+
               <div className="form-group">
                 <TextField
-                  id="job_search_location"
-                  label="Lieu recherché"
+                  id="phone"
+                  label="Téléphone"
                   variant="outlined"
-                  value={job_search_location}
-                  onChange={(e) => setJob_search_location(e.target.value)}
-                  type="job_search_location"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  type="phone"
                   fullWidth
                 />
-              </div>{" "}
+              </div>
             </div>{" "}
-            <div className="secondGroup">
+            <div className="secondGroupC">
               <div className="form-group">
                 <TextField
                   id="birth_date"
-                  label="Disponible à partir de"
+                  label="Date de naissance"
                   variant="outlined"
                   value={birth_date}
                   onChange={(e) => setBirth_date(e.target.value)}
                   type="date"
                   fullWidth
+                  InputLabelProps={{ shrink: true }}
                 />
               </div>
               <div className="form-group">
                 <TextField
-                  id="skills"
-                  label="Compétences"
+                  id="availability_date"
+                  label="Disponible à partir de"
                   variant="outlined"
-                  value={skills}
-                  onChange={(e) => setSkills(e.target.value)}
-                  type="string"
+                  value={availability_date}
+                  onChange={(e) => setAvailability_date(e.target.value)}
+                  type="date"
                   fullWidth
-                />
-              </div>{" "}
-              <div className="form-group">
-                <TextField
-                  id="languages"
-                  label="Langues"
-                  variant="outlined"
-                  value={languages}
-                  onChange={(e) => setLanguages(e.target.value)}
-                  type="string"
-                  fullWidth
-                />
-              </div>{" "}
-              <div className="form-group">
-                <TextField
-                  id="cv_url"
-                  label="CV_URL"
-                  variant="outlined"
-                  value={cv_url}
-                  onChange={(e) => setCv_url(e.target.value)}
-                  type="string"
-                  fullWidth
-                />
-              </div>{" "}
-              <div className="form-group">
-                <TextField
-                  id="adress"
-                  label="Adresse"
-                  variant="outlined"
-                  value={motivation_letter_url}
-                  onChange={(e) => setMotivation_letter_url(e.target.value)}
-                  type="string"
-                  fullWidth
-                />
-              </div>
-              <div className="form-group">
-                <TextField
-                  id="photo_url"
-                  label="Photo URL"
-                  variant="outlined"
-                  value={photo_url}
-                  onChange={(e) => setPhoto_url(e.target.value)}
-                  type="string"
-                  fullWidth
+                  InputLabelProps={{ shrink: true }}
                 />
               </div>
             </div>
           </div>
+          <div className="form-group">
+            <TextField
+              id="adress"
+              label="Adresse"
+              variant="outlined"
+              value={adress}
+              onChange={(e) => setAdress(e.target.value)}
+              type="adress"
+              fullWidth
+            />
+          </div>
+          <div className="form-group">
+            <TextField
+              id="skills"
+              label="Compétences"
+              variant="outlined"
+              value={skills}
+              onChange={(e) => setSkills(e.target.value)}
+              type="string"
+              fullWidth
+            />
+          </div>{" "}
+          <div className="form-group">
+            <TextField
+              id="languages"
+              label="Langues"
+              variant="outlined"
+              value={languages}
+              onChange={(e) => setLanguages(e.target.value)}
+              type="string"
+              fullWidth
+            />
+          </div>{" "}
+          <div className="form-group">
+            <TextField
+              id="job_search_location"
+              label="Lieu recherché"
+              variant="outlined"
+              value={job_search_location}
+              onChange={(e) => setJob_search_location(e.target.value)}
+              type="job_search_location"
+              fullWidth
+            />
+          </div>{" "}
           <div className="form-group">
             <TextField
               id="researched_job"
@@ -207,6 +167,86 @@ function SignUpCandidate({
               type="text"
             />
           </div>
+          <div className="uploadButtons">
+            <div className="button">
+              <Button
+                variant="contained"
+                component="label"
+                sx={{
+                  borderRadius: "50px",
+                  mb: "15px",
+                  mt: "10px",
+                  backgroundColor: "#851342",
+                }}
+              >
+                <FileUploadIcon /> CV
+                <input
+                  type="file"
+                  ref={cvInputRef}
+                  hidden
+                  onChange={(e) => {
+                    setCvName(e.target.value.split("\\")[2]);
+                  }}
+                />
+              </Button>
+            </div>
+            <div className="button">
+              <Button
+                variant="contained"
+                component="label"
+                sx={{
+                  borderRadius: "50px",
+                  mb: "15px",
+                  mt: "10px",
+                  backgroundColor: "#851342",
+                }}
+              >
+                <FileUploadIcon /> Lettre de motivation
+                <input
+                  type="file"
+                  ref={motivation_letterInputRef}
+                  hidden
+                  onChange={(e) => {
+                    setMotivation_letterName(e.target.value.split("\\")[2]);
+                  }}
+                />
+              </Button>
+            </div>
+            <div className="button">
+              <Button
+                variant="contained"
+                component="label"
+                sx={{
+                  borderRadius: "50px",
+                  mb: "15px",
+                  mt: "10px",
+                  backgroundColor: "#851342",
+                }}
+              >
+                <FileUploadIcon /> avatar
+                <input
+                  type="file"
+                  ref={photoInputRef}
+                  hidden
+                  onChange={(e) => {
+                    setPhotoName(e.target.value.split("\\")[2]);
+                  }}
+                />
+              </Button>
+            </div>
+          </div>
+          <div className="fileNames">
+            {" "}
+            <Typography variant="body1" color="initial" sx={{ mb: "10px" }}>
+              {cvName}
+            </Typography>
+            <Typography variant="body1" color="initial" sx={{ mb: "10px" }}>
+              {motivation_letterName}
+            </Typography>
+            <Typography variant="body1" color="initial" sx={{ mb: "10px" }}>
+              {photoName}
+            </Typography>
+          </div>
           <div className="form-group" />
           <div className="buttons">
             <Button
@@ -217,25 +257,26 @@ function SignUpCandidate({
             >
               Arrière
             </Button>
+
             <Button
-              variant="contained"
               type="submit"
+              variant="contained"
+              sx={{ backgroundColor: "#CA2061" }}
               disabled={
                 !(
                   birth_date &&
                   phone &&
-                  profile_description &&
                   adress &&
-                  photo_url &&
-                  job_title &&
                   profession &&
-                  researched_job &&
                   job_search_location &&
                   availability_date &&
                   skills &&
                   languages &&
-                  cv_url &&
-                  motivation_letter_url
+                  cvInputRef.current.files[0] &&
+                  motivation_letterInputRef.current.files[0] &&
+                  researched_job &&
+                  photoInputRef.current.files[0] &&
+                  profile_description
                 )
               }
             >
