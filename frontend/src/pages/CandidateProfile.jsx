@@ -1,18 +1,32 @@
+/* eslint-disable camelcase */
 import React from "react";
 import Box from "@mui/material/Box";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 
-import logo from "../assets/Ressources/logo-externatic.png";
+import { TextField } from "@mui/material";
+import avatar1 from "../assets/Ressources/avatar1.jpg";
 import image1 from "../assets/Ressources/image1.svg";
 import image3 from "../assets/Ressources/image3.avif";
 import image4 from "../assets/Ressources/image4.avif";
 
-function CandidateProfile() {
+// A vérifier les props donnés ici, s'il faut les recupérer de SignUP
+// A vérifier si first_name&&last_name et SetFirstName&&SetLastName fonctionne dans value
+
+function CandidateProfile({
+  first_name,
+  setFirstName,
+  last_name,
+  setLastName,
+  profession,
+  setProfession,
+  skills,
+  setSkills,
+  languages,
+  setLanguages,
+}) {
   return (
     <Box
       sx={{
-        p: 0.5,
-        border: "1.5px solid black",
-        borderRadius: 16,
         width: "85%",
         margin: "auto",
         padding: "0 3rem 3rem 3rem",
@@ -20,148 +34,167 @@ function CandidateProfile() {
       }}
     >
       <div
+        className="title"
         style={{
           display: "flex",
           justifyContent: "center",
+          fontWeight: "bold",
+          fontFamily: "Jost, sans-serif",
+          fontSize: "20px",
+          marginBottom: "20px",
         }}
       >
-        <img
-          src={logo}
-          alt="logo entreprise externatic"
-          style={{ transform: "scale(0.5)", margin: "0" }}
-        />
+        MON PROFIL
       </div>
-      <div>
+      <div
+        className="leftAndRightProfile"
+        style={{
+          display: "flex",
+        }}
+      >
         <div
+          className="leftProfile"
           style={{
             display: "flex",
-            flexDirection: "row-reverse",
-            gap: "10%",
-            marginBottom: "3rem",
+            flexDirection: "column",
+            width: "30%",
           }}
         >
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "50%",
-            }}
+            className="uploadAvatar"
+            style={{ display: "flex", alignItems: "end", marginBottom: "25px" }}
           >
-            <h2
-              style={{
-                fontSize: "2.5rem",
-                margin: "0",
-                paddingBottom: "1.5rem",
-              }}
-            >
-              Notre proximité
-            </h2>
-            <div style={{ fontSize: "1.5rem" }}>
-              L’expérience professionnelle est une chose. L’expérience de vie en
-              est une autre. Alors nos consultants prennent le temps de faire
-              connaissance avec chaque personne, pour comprendre le contexte, le
-              parcours, les envies et les projets.
-              <p /> Notre expertise en placements de profils IT et notre
-              connaissance du marché nous permettent de vous accompagner sur
-              tous vos besoins en recrutements et de vous aiguiller de A à Z
-              dans votre recherche. Faites confiance à Externatic pour dénicher
-              votre prochain talent !
+            <div className="avatar">
+              <FileUploadIcon />
+            </div>
+            <div className="avatar">
+              <img
+                src={avatar1}
+                alt="avatar"
+                style={{ height: "100%", width: "50%", borderRadius: "200px" }}
+              />
             </div>
           </div>
-          <div style={{ height: "100%", width: "50%" }}>
-            <img
-              src={image1}
-              alt="people home page 1"
-              style={{ height: "100%", width: "100%", marginTop: "30%" }}
-            />
-          </div>
-        </div>
-        <div style={{ display: "flex", gap: "10%", marginBottom: "3rem" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "50%",
-            }}
-          >
-            <h2
-              style={{
-                fontSize: "2.5rem",
-                margin: "0",
-                paddingBottom: "1.5rem",
-              }}
-            >
-              Notre performance
-            </h2>
-            <div style={{ fontSize: "1.5rem" }}>
-              Notre réseau est une force et nous y travaillons sans relâche.
-              Notre expérience nous permet d’identifier les vrais besoins d’une
-              entreprise et de ceux qui la rejoignent.
-              <p />
-              Nos consultants sont à votre écoute quel que soit votre secteur
-              d’activité. En tant que cabinet de recrutement, notre rôle est de
-              créer une rencontre fructueuse entre candidat et recruteur, au
-              service des projets et des ambitions de votre entreprise. Notre
-              challenge est de trouver l’équipe qui fonctionnera ensemble de
-              manière professionnelle et personnelle, pour aller jusqu’au bout
-              d’un projet commun.
+
+          <div className="ageName">
+            <div className="form-group">
+              <TextField
+                id="firstName"
+                label="Prénom"
+                variant="standard"
+                value={first_name && last_name}
+                onChange={(e) => setFirstName && setLastName(e.target.value)}
+                fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
+                InputLabelProps={{ shrink: true }}
+              />
             </div>
           </div>
-          <div style={{ height: "100%", width: "50%" }}>
-            <img
-              src={image3}
-              alt="people home page 3"
-              style={{ height: "100%", width: "100%", marginTop: "25%" }}
-            />
+          <div className="profession">
+            <div className="form-group">
+              <TextField
+                id="profession"
+                label="Profession"
+                variant="standard"
+                value={profession}
+                onChange={(e) => setProfession(e.target.value)}
+                fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
+                InputLabelProps={{ shrink: true }}
+              />
+            </div>
+          </div>
+          <div className="skills">
+            <div className="form-group">
+              <TextField
+                id="skills"
+                label="Compétences"
+                variant="standard"
+                value={skills}
+                onChange={(e) => setSkills(e.target.value)}
+                fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
+                InputLabelProps={{ shrink: true }}
+              />
+            </div>
+          </div>
+          <div className="languages">
+            <div className="form-group">
+              <TextField
+                id="lanugages"
+                label="Langues"
+                variant="standard"
+                value={languages}
+                onChange={(e) => setLanguages(e.target.value)}
+                fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
+                InputLabelProps={{ shrink: true }}
+              />
+            </div>
           </div>
         </div>
         <div
+          className="rightProfile"
           style={{
             display: "flex",
-            flexDirection: "row-reverse",
-            gap: "10%",
-            marginBottom: "3rem",
+            flexDirection: "column",
+            width: "70%",
+            border: "1.5px solid black",
+            borderRadius: 16,
+            padding: "1rem 3rem 3rem 3rem",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "50%",
-            }}
-          >
-            <h2
-              style={{
-                fontSize: "2.5rem",
-                margin: "0",
-                paddingBottom: "1.5rem",
-              }}
-            >
-              Notre durabilité
-            </h2>
-            <div style={{ fontSize: "1.5rem" }}>
-              Experts en placement de profils IT, notre mission est de trouver
-              le talent en adéquation à la fois avec le poste, mais également
-              avec votre entreprise ! Pour cela, notre équipe de consultants
-              déploie différentes stratégies de recherche afin de trouver le
-              meilleur profil pour le poste : diffusion de votre annonce sur
-              plus de 20 plateformes, approche directe sur LinkedIn ou encore
-              recherche dans notre vivier de candidats qualifiés.
-              <p /> Notre responsabilité vis-à-vis des impacts de nos décisions
-              et nos actions sur le long-terme correspondent également à notre
-              politique RSE.
+          <div className="nameBD" style={{ display: "flex" }}>
+            <div className="fistLastName" style={{ width: "50%" }}>
+              <div className="form-group">
+                <TextField
+                  id="firstNameLastName"
+                  label="Nom et Prénom"
+                  variant="standard"
+                  value={first_name && last_name}
+                  onChange={(e) => setFirstName && setLastName(e.target.value)}
+                  fullWidth
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </div>
+            </div>
+            <div className="birthDate" style={{ width: "50%" }}>
+              fdfsssdssfd
             </div>
           </div>
-          <div style={{ height: "100%", width: "50%" }}>
-            <img
-              src={image4}
-              alt="people home page 4"
-              style={{ height: "100%", width: "100%", marginTop: "30%" }}
-            />
+          <div className="adress">dsds</div>
+          <div className="phone">sds</div>
+          <div className="email">sds</div>
+          <div>
+            <div className="researched_job">sds</div>
+            <div className="availability_date">sds</div>
+          </div>
+          <div className="job_search_location">sds</div>
+          <div className="profile_description">sds</div>
+          <div>
+            <div className="cv_upload">sds</div>
+            <div className="cv_edit">sds</div>
+          </div>
+          <div>
+            <div className="motivation_letter_upload">sds</div>
+            <div className="motivation_letter_edit">sds</div>
+            <div className="save_button">sds</div>
           </div>
         </div>
       </div>
     </Box>
   );
 }
+
 export default CandidateProfile;
