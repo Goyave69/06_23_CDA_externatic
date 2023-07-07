@@ -5,19 +5,22 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+ 
+ 
 }
 
-.login-card {
+.login-cardC {
   background-color: white;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  width: 600px;
   padding: 30px;
   font-family: "Jost", sans-serif;
+  
 }
 
-.login-card h2 {
+.login-cardC h2 {
   margin-bottom: 10px;
   margin-top: 25px;
   font-size: 25px;
@@ -49,7 +52,7 @@ button {
   width: 100%;
   padding: 10px;
   border-radius: 15px;
-  background-color: #ca2061;
+  background-color: #CA2061;
   color: white;
   border: none;
   cursor: pointer;
@@ -60,26 +63,36 @@ button:hover {
   background-color: #0056b3;
 }
 
-.logo {
+.logoC {
   display: block;
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 50%;
 }
-.firstandSecondGroup {
+.firstAndSecondGroup {
   display: flex;
- 
+  gap:50px;
+}
+.firstGroupC,
+.secondGroupC {
+  width: 50%;
 }
 
-.error-message {
-  color: red;
+.buttons{
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  font-family: "Jost", sans-serif;
-  font-size: 14px;
+  gap:30px
 }
 
+.uploadButtons {
+  display: flex;
+ justify-content: center;
+ gap:15px;
+}
+.fileNames {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
 
- 
 
 

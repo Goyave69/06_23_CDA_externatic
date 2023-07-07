@@ -3,7 +3,6 @@ const Joi = require("joi");
 const validateCandidate = (data, forCreation = true) => {
   const presence = forCreation ? "required" : "optional";
   return Joi.object({
-    job_title: Joi.string().max(255).presence(presence),
     profession: Joi.string().max(255).presence(presence),
     researched_job: Joi.string().max(255).presence(presence),
     job_search_location: Joi.string().max(255).presence(presence),

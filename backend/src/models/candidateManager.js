@@ -9,9 +9,8 @@ class CandidateManager extends AbstractManager {
 
   insert(candidate) {
     return this.connection.query(
-      `insert into ${this.table} (job_title, profession, researched_job, job_search_location, availability_date, skills, languages, cv_url, motivation_letter_url, user_id) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} ( profession, researched_job, job_search_location, availability_date, skills, languages, cv_url, motivation_letter_url, user_id) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        candidate.job_title,
         candidate.profession,
         candidate.researched_job,
         candidate.job_search_location,
