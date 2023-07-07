@@ -1,0 +1,46 @@
+.box {
+  width: 80%;
+  margin: auto;
+  border-radius: 25px;
+  border: solid black 2px;
+  font-size: 1.8;
+}
+
+.box:hover {
+  border: solid blue 2px;
+}
+.btnEtoile {
+  width: fit-content;
+  background-color: transparent;
+  max-width: 5%;
+}
+.btnEtoile:hover {
+  background-color: inherit;
+}
+.offerTitle {
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.offer {
+  margin: auto;
+  display: inherit;
+  display: flex;
+  flex-direction: column;
+}
+strong {
+  color: black;
+  text-decoration: underline;
+  font-weight: bolder;
+}
+a {
+  color: #000;
+  text-decoration: none;
+  margin: 2%;
+}
+.describe {
+  padding: 0 15px;
+}

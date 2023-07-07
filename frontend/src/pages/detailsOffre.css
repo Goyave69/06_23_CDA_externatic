@@ -1,0 +1,32 @@
+.presntationoffre {
+  display: flex;
+  justify-content: center;
+}
+.offres {
+  width: 80%;
+}
+.box {
+  width: 80%;
+}
+.btn {
+  width: fit-content;
+  background-color: black;
+}
+.btn:hover {
+  background-color: green;
+}
+/* .offres {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 80%;
+} */
+.detailsoffre {
+  margin: auto;
+  border-radius: 25px;
+  border: solid black 2px;
+  font-size: 1.8rem;
+}
+.detailsoffre:hover {
+  border: solid blue 2px;
+}

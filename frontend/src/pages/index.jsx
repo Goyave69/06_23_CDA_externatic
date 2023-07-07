@@ -5,10 +5,16 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import JobOffers from "./jobOffers";
 import ErrorPage from "./errorPage";
+
+import OfferSearch from "./offerSearch";
+import DetailsOffer from "./detailsOffer";
+import ApplyOffer from "./applyOffer";
+
 import Companies from "./companies";
 import CompaniesDetails from "./companyDetails";
 import CompanyDashboard from "./CompanyDashboard";
 import UserDashboard from "./Userdashboard";
+
 
 const Routes = [
   {
@@ -23,6 +29,18 @@ const Routes = [
       {
         path: "/jobOffers",
         element: <JobOffers />,
+      },
+      {
+        path: "/offerSearch",
+        element: <OfferSearch />,
+      },
+      {
+        path: "/detailsOffer",
+        element: <DetailsOffer />,
+      },
+      {
+        path: "/applyOffer",
+        element: <ApplyOffer />,
       },
       {
         path: "/company",

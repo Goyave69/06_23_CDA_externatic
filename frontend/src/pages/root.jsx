@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../components/header";
+
 // import { useToken } from "../context/TokenContext";
 
 export default function Root() {
@@ -14,7 +15,7 @@ export default function Root() {
   // });
   return (
     <main>
-      <Navbar />
+      <Header />
       <Outlet />
     </main>
   );
