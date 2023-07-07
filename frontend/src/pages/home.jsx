@@ -34,15 +34,11 @@ function Home() {
         <div
           style={{
             display: "flex",
+            flexDirection: "row-reverse",
             gap: "10%",
-            marginBottom: "5rem",
+            marginBottom: "3rem",
           }}
         >
-          <img
-            src={image1}
-            alt="people home page 1"
-            style={{ transform: "scale(1.0)", width: "40%" }}
-          />
           <div
             style={{
               display: "flex",
@@ -70,6 +66,13 @@ function Home() {
               dans votre recherche. Faites confiance à Externatic pour dénicher
               votre prochain talent !
             </div>
+          </div>
+          <div style={{ height: "100%", width: "50%" }}>
+            <img
+              src={image1}
+              alt="people home page 1"
+              style={{ height: "100%", width: "100%", marginTop: "25%" }}
+            />
           </div>
         </div>
         <div style={{ display: "flex", gap: "10%", marginBottom: "3rem" }}>
@@ -103,21 +106,38 @@ function Home() {
               d’un projet commun.
             </div>
           </div>
-          <img
-            src={image3}
-            alt="people home page 3"
-            style={{ transform: "scale(1.0)", width: "40%" }}
-          />
+          <div style={{ height: "100%", width: "50%" }}>
+            <img
+              src={image3}
+              alt="people home page 3"
+              style={{ height: "100%", width: "100%", marginTop: "15%" }}
+            />
+          </div>
         </div>
-
-        <div style={{ display: "flex", gap: "10%" }}>
-          <img
-            src={image4}
-            alt="people home page 3"
-            style={{ transform: "scale(1.0)", width: "40%" }}
-          />
-          <div>
-            <h2 style={{ fontSize: "2.5rem  " }}>Notre durabilité</h2>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row-reverse",
+            gap: "10%",
+            marginBottom: "3rem",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "50%",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "2.5rem",
+                margin: "0",
+                paddingBottom: "1.5rem",
+              }}
+            >
+              Notre durabilité
+            </h2>
             <div style={{ fontSize: "1.5rem" }}>
               Experts en placement de profils IT, notre mission est de trouver
               le talent en adéquation à la fois avec le poste, mais également
@@ -129,8 +149,14 @@ function Home() {
               <p /> Notre responsabilité vis-à-vis des impacts de nos décisions
               et nos actions sur le long-terme correspondent également à notre
               politique RSE.
-              <p />
             </div>
+          </div>
+          <div style={{ height: "100%", width: "50%" }}>
+            <img
+              src={image4}
+              alt="people home page 4"
+              style={{ height: "100%", width: "100%", marginTop: "15%" }}
+            />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import OfferSearch from "./offerSearch";
 import "./detailsOffre.css";
-import { Link } from "react-router-dom";
 
 export default function DetailsOffer() {
   return (
