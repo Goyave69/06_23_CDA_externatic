@@ -206,20 +206,22 @@ function CandidateProfile({
         </div>
         <div
           className="rightProfile"
-          style={{
-            border: "1.5px solid black",
-            borderRadius: 16,
-            padding: "3rem 3rem 3rem 3rem",
-            width: "70%",
-            // display: "flex",
-            // justifyContent: "space-between",
-          }}
+          style={
+            {
+              // display: "flex",
+              // justifyContent: "space-between",
+            }
+          }
         >
           <div
             className="rightProfileL"
             style={{
               display: "flex",
               flexDirection: "column",
+              border: "1.5px solid black",
+              borderRadius: 16,
+              padding: "3rem 3rem 3rem 3rem",
+              width: "70%",
             }}
           >
             <div className="nameBirthDate" style={{ display: "flex" }}>
