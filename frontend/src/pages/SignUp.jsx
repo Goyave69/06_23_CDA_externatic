@@ -226,7 +226,7 @@ function SignUp() {
               <div className="form-group">
                 <TextField
                   id="firstName"
-                  label="First Name"
+                  label="Prénom"
                   variant="outlined"
                   value={first_name}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -236,7 +236,7 @@ function SignUp() {
               <div className="form-group">
                 <TextField
                   id="lastName"
-                  label="Last Name"
+                  label="Nom"
                   variant="outlined"
                   value={last_name}
                   onChange={(e) => setLastName(e.target.value)}

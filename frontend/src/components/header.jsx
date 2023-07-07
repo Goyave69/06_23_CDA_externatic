@@ -77,7 +77,7 @@ export default function Navbar() {
               aria-expanded={open ? "true" : undefined}
               aria-haspopup="true"
               onClick={handleClick}
-              sx={{ width: "50px", height: "50px", mt: "20px", ml: "-100px" }}
+              sx={{ width: "50px", height: "50px", mt: "20px", ml: "-60px" }}
             >
               <MoreVertIcon />
             </MenuRoundedIcon>
@@ -115,7 +115,7 @@ export default function Navbar() {
           <Box
             sx={{
               mt: "20px",
-              mr: "-120px",
+              mr: "-50px",
               display: "flex",
               flexDirection: "row",
               gap: "3rem",
@@ -160,12 +160,23 @@ export default function Navbar() {
             </NavLink>
 
             {firstName && lastName && (
-              <div className="user-info">
-                <div className="user-name">
-                  {firstName} {lastName}
-                </div>
-                <PersonIcon />
-              </div>
+              <NavLink to="/candidateProfile">
+                <Button
+                  className="user-info"
+                  variant="contained"
+                  style={{
+                    display: "flex",
+                    backgroundColor: "black",
+                    width: "150px",
+                    borderRadius: 35,
+                    height: "50%",
+                    textTransform: "none",
+                  }}
+                >
+                  <PersonIcon />
+                  &nbsp;&nbsp;{firstName} {lastName}
+                </Button>
+              </NavLink>
             )}
             <Button
               variant="contained"

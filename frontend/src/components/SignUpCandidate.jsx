@@ -143,7 +143,7 @@ function SignUpCandidate({
           <div className="form-group">
             <TextField
               id="researched_job"
-              label="Postes recherchés"
+              label="Postes recherchés (max 3)"
               placeholder="Maximum 3 postes"
               variant="outlined"
               value={researched_job}
