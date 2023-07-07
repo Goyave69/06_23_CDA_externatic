@@ -14,7 +14,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import jwt_decode from "jwt-decode";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import { InputAdornment, TextField } from "@mui/material";
 import { useToken } from "../context/TokenContext";
@@ -61,7 +61,7 @@ export default function Navbar() {
   };
   return (
     <Box sx={{ mb: "3rem" }}>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ margin: 0, width: "100%" }}>
         <Box
           sx={{
             display: "flex",
@@ -233,7 +233,7 @@ export default function Navbar() {
             variant="contained"
             style={{ backgroundColor: "#CA2061", width: "200px" }}
           >
-            RECHERCHE
+            <Link to="/offersearch">RECHERCHE</Link>
           </Button>
         </Box>
         <Box>

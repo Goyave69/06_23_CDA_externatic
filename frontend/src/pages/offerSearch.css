@@ -1,5 +1,5 @@
 .box {
-  width: 80%;
+  width: 50%;
   margin: auto;
   border-radius: 25px;
   border: solid black 2px;
@@ -9,6 +9,17 @@
 .box:hover {
   border: solid blue 2px;
 }
+.offer {
+  height: 50vh;
+}
+.suboffer {
+  line-height: 10px;
+}
+.offer p {
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
 .btnEtoile {
   width: fit-content;
   background-color: transparent;
@@ -25,12 +36,12 @@
   padding: 0 15px;
 }
 
-.offer {
+/* .offer {
   margin: auto;
   display: inherit;
   display: flex;
   flex-direction: column;
-}
+} */
 strong {
   color: black;
   text-decoration: underline;
@@ -42,5 +53,5 @@ a {
   margin: 2%;
 }
 .describe {
-  padding: 0 15px;
+  padding: 0 25px;
 }

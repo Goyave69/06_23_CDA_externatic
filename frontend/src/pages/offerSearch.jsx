@@ -65,7 +65,7 @@ export default function OfferSearch() {
     <div className="box">
       <div className="offer">
         {offres.map((offre) => (
-          <div>
+          <div className="suboffer">
             <div key={offre.id} className="offerTitle">
               <Link to="/detailsoffer">
                 <p>{offre.nameOffre}</p>
