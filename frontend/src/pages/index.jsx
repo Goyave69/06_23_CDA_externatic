@@ -12,6 +12,7 @@ import ApplyOffer from "./applyOffer";
 
 import Companies from "./companies";
 import CompaniesDetails from "./companyDetails";
+import CandidateProfile from "./CandidateProfile";
 import CompanyDashboard from "./CompanyDashboard";
 import UserDashboard from "./Userdashboard";
 
@@ -49,6 +50,10 @@ const Routes = [
       {
         path: "/companyDetails",
         element: <CompaniesDetails />,
+      },
+      {
+        path: "/candidateProfile",
+        element: <CandidateProfile />,
       },
       {
         path: "/companydashboard",
