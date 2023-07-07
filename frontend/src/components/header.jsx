@@ -9,7 +9,7 @@ import Checkbox from "@mui/material/Checkbox";
 import InputLabel from "@mui/material/InputLabel";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
@@ -23,7 +23,7 @@ import logo from "../assets/Ressources/logo-externatic.png";
 const options = ["Candidate", "Companies", "Head Hunters", "Login", "Logout"];
 const ITEM_HEIGHT = 48;
 
-export default function Navbar() {
+export default function Header() {
   const { token, setToken } = useToken();
   let firstName = "";
   let lastName = "";
@@ -63,13 +63,14 @@ export default function Navbar() {
     <Box sx={{ mb: "3rem" }}>
       <Box sx={{ width: "100%" }}>
         <Box
+          className="topBar"
           sx={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-around",
           }}
         >
-          <Box>
+          <Box className="boxMenu">
             <MenuRoundedIcon
               aria-label="more"
               id="long-button"
@@ -77,10 +78,8 @@ export default function Navbar() {
               aria-expanded={open ? "true" : undefined}
               aria-haspopup="true"
               onClick={handleClick}
-              sx={{ width: "50px", height: "50px", mt: "20px", ml: "-60px" }}
-            >
-              <MoreVertIcon />
-            </MenuRoundedIcon>
+              sx={{ width: "50px", height: "50px" }}
+            />
             <Menu
               id="long-menu"
               MenuListProps={{
@@ -107,15 +106,10 @@ export default function Navbar() {
               ))}
             </Menu>
           </Box>
-          <img
-            src={logo}
-            alt="logo externatic"
-            style={{ width: "600px", height: "auto" }}
-          />
+
           <Box
+            className="rightButtons"
             sx={{
-              mt: "20px",
-              mr: "-50px",
               display: "flex",
               flexDirection: "row",
               gap: "3rem",
@@ -182,7 +176,7 @@ export default function Navbar() {
               variant="contained"
               style={{
                 backgroundColor: "black",
-                width: "120px",
+                width: "150px",
                 borderRadius: 35,
                 height: "50%",
               }}
@@ -192,13 +186,25 @@ export default function Navbar() {
             </Button>
           </Box>
         </Box>
-        <Typography
-          variant="h3"
-          sx={{ textAlign: "center", fontSize: 40, mb: "25px" }}
+        <div
+          className="logoAndMessage"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          Plus qu'un cabinet de recrutement
-        </Typography>
+          <img
+            src={logo}
+            alt="logo externatic"
+            style={{ width: "600px", height: "auto" }}
+          />
+          <Typography variant="h3" sx={{ fontSize: 30, mb: "25px" }}>
+            Plus qu'un cabinet de recrutement
+          </Typography>
+        </div>
         <Box
+          className="searchBarTop"
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -247,7 +253,7 @@ export default function Navbar() {
             RECHERCHE
           </Button>
         </Box>
-        <Box>
+        <Box className="contractType">
           <Box
             sx={{
               display: "flex",
@@ -283,6 +289,7 @@ export default function Navbar() {
           </Box>
         </Box>
         <Box
+          className="companiesOffers"
           sx={{
             display: "flex",
             flexDirection: "row",

@@ -13,9 +13,9 @@ import ApplyOffer from "./applyOffer";
 import Companies from "./companies";
 import CompaniesDetails from "./companyDetails";
 import CandidateProfile from "./CandidateProfile";
+import HeadhunterProfile from "./HeadhunterProfile";
 import CompanyDashboard from "./CompanyDashboard";
 import UserDashboard from "./Userdashboard";
-
 
 const Routes = [
   {
@@ -54,6 +54,10 @@ const Routes = [
       {
         path: "/candidateProfile",
         element: <CandidateProfile />,
+      },
+      {
+        path: "/headhunterProfile",
+        element: <HeadhunterProfile />,
       },
       {
         path: "/companydashboard",

@@ -10,17 +10,13 @@ import avatar1 from "../assets/Ressources/avatar1.jpg";
 // A vérifier si first_name&&last_name et SetFirstName&&SetLastName fonctionne dans value
 // A vérifier  si les inputRef on les donne directement ici on on doit les remonter via props
 
-function CandidateProfile({
+function HeadhunterProfile({
   first_name,
   setFirstName,
   last_name,
   setLastName,
   profession,
   setProfession,
-  skills,
-  setSkills,
-  languages,
-  setLanguages,
   birth_date,
   setBirth_date,
   adress,
@@ -29,10 +25,10 @@ function CandidateProfile({
   setPhone,
   email,
   setEmail,
-  researched_job,
-  setResearched_job,
-  availability_date,
-  setAvailability_date,
+  research_sector,
+  setResearch_sector,
+  skills_area,
+  setSkills_area,
   job_search_location,
   setJob_search_location,
   profile_description,
@@ -42,12 +38,9 @@ function CandidateProfile({
   // A voir si on peut les donner en props depuis SignUp
 
   const [photoName, setPhotoName] = useState("");
-  const [cvName, setCvName] = useState("");
-  const [motivation_letterName, setMotivation_letterName] = useState("");
 
   const photoInputRef = useRef();
-  const cvInputRef = useRef();
-  const motivation_letterInputRef = useRef();
+
   return (
     <Box
       sx={{
@@ -168,41 +161,6 @@ function CandidateProfile({
               />
             </div>
           </div>
-          <div className="skills" style={{ width: "80%", marginTop: "20px" }}>
-            <div className="form-group">
-              <TextField
-                id="skills"
-                label="Compétences"
-                variant="standard"
-                value={skills}
-                onChange={(e) => setSkills(e.target.value)}
-                fullWidth
-                InputProps={{
-                  readOnly: true,
-                }}
-                InputLabelProps={{ shrink: true }}
-              />
-            </div>
-          </div>
-          <div
-            className="languages"
-            style={{ width: "80%", marginTop: "20px" }}
-          >
-            <div className="form-group">
-              <TextField
-                id="lanugages"
-                label="Langues"
-                variant="standard"
-                value={languages}
-                onChange={(e) => setLanguages(e.target.value)}
-                fullWidth
-                InputProps={{
-                  readOnly: true,
-                }}
-                InputLabelProps={{ shrink: true }}
-              />
-            </div>
-          </div>
         </div>
         <div
           className="rightProfile"
@@ -313,14 +271,14 @@ function CandidateProfile({
               </div>
             </div>
             <div>
-              <div className="researched_job" style={{ width: "100%" }}>
+              <div className="research_sector," style={{ width: "100%" }}>
                 <div className="form-group">
                   <TextField
-                    id="researched_job"
-                    label="Postes recherchés (max 3)"
+                    id="research_sector,"
+                    label="Secteur de recherche"
                     variant="standard"
-                    value={researched_job}
-                    onChange={(e) => setResearched_job(e.target.value)}
+                    value={research_sector}
+                    onChange={(e) => setResearch_sector(e.target.value)}
                     fullWidth
                     InputProps={{
                       readOnly: true,
@@ -330,32 +288,14 @@ function CandidateProfile({
                 </div>
               </div>
               <div className="placeAndAvailability" style={{ display: "flex" }}>
-                <div className="job_search_location" style={{ width: "60%" }}>
+                <div className="skills_area" style={{ width: "100%" }}>
                   <div className="form-group">
                     <TextField
-                      id="job_search_location"
-                      label="Lieu recherché"
+                      id="skills_area"
+                      label="Domaine de compétences"
                       variant="standard"
-                      value={job_search_location}
-                      onChange={(e) => setJob_search_location(e.target.value)}
-                      fullWidth
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                      InputLabelProps={{ shrink: true }}
-                    />
-                  </div>
-                </div>
-                <div style={{ width: "10%" }} />
-                <div className="availability_date" style={{ width: "30%" }}>
-                  <div className="form-group">
-                    <TextField
-                      id="availability_date"
-                      label="Disponible à partir de"
-                      variant="outlined"
-                      value={availability_date}
-                      type="date"
-                      onChange={(e) => setAvailability_date(e.target.value)}
+                      value={skills_area}
+                      onChange={(e) => setSkills_area(e.target.value)}
                       fullWidth
                       InputProps={{
                         readOnly: true,
@@ -372,7 +312,7 @@ function CandidateProfile({
                 <div className="form-group">
                   <TextField
                     id="profile_description"
-                    label="Description de ta recherche"
+                    label="Description de ton profil"
                     variant="outlined"
                     placeholder="1000 caractères max"
                     value={profile_description}
@@ -384,86 +324,6 @@ function CandidateProfile({
                     InputLabelProps={{ shrink: true }}
                   />
                 </div>
-              </div>
-            </div>
-
-            <div
-              className="uploadButtons"
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                width: "100%",
-                justifyContent: "space-around",
-                marginTop: "20px",
-              }}
-            >
-              <div
-                className="buttonText"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <div className="button">
-                  <Button
-                    variant="contained"
-                    component="label"
-                    sx={{
-                      borderRadius: "50px",
-                      mb: "0px",
-                      mt: "10px",
-                      backgroundColor: "#851342",
-                    }}
-                  >
-                    <FileUploadIcon /> CV
-                    <input
-                      type="file"
-                      ref={cvInputRef}
-                      hidden
-                      onChange={(e) => {
-                        setCvName(e.target.value.split("\\")[2]);
-                      }}
-                    />
-                  </Button>
-                </div>
-                <Typography variant="body1" color="initial" sx={{ mb: "10px" }}>
-                  {cvName}
-                </Typography>
-              </div>
-              <div
-                className="buttonText"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <div className="button">
-                  <Button
-                    variant="contained"
-                    component="label"
-                    sx={{
-                      borderRadius: "50px",
-                      mb: "0px",
-                      mt: "10px",
-                      backgroundColor: "#851342",
-                    }}
-                  >
-                    <FileUploadIcon /> Lettre de motivation
-                    <input
-                      type="file"
-                      ref={motivation_letterInputRef}
-                      hidden
-                      onChange={(e) => {
-                        setMotivation_letterName(e.target.value.split("\\")[2]);
-                      }}
-                    />
-                  </Button>
-                </div>
-                <Typography variant="body1" color="initial" sx={{ mb: "10px" }}>
-                  {motivation_letterName}
-                </Typography>
               </div>
             </div>
           </div>
@@ -482,4 +342,4 @@ function CandidateProfile({
   );
 }
 
-export default CandidateProfile;
+export default HeadhunterProfile;
