@@ -10,11 +10,11 @@ import {
   RadioGroup,
   Radio,
 } from "@mui/material";
-import logo from "../../assets/Ressources/logo-externatic.png";
-import ApiHelper from "../../services/ApiHelper";
-import { useToken } from "../../context/TokenContext";
-import SignUpCandidate from "../../components/SignUpCandidate";
-import SignUpHeadhunter from "../../components/SignUpHeadhunter";
+import logo from "../assets/Ressources/logo-externatic.png";
+import ApiHelper from "../services/ApiHelper";
+import { useToken } from "../context/TokenContext";
+import SignUpCandidate from "../components/SignUpCandidate";
+import SignUpHeadhunter from "../components/SignUpHeadhunter";
 
 function SignUp() {
   // User states
@@ -50,12 +50,7 @@ function SignUp() {
   const { setToken } = useToken();
   const navigate = useNavigate();
 
-  const photoInputRef = useRef();
-  const cvInputRef = useRef();
-  const motivation_letterInputRef = useRef();
-
   const handleSubmitCandidate = async (event) => {
-    const formData = new FormData();
     event.preventDefault();
     if (
       first_name &&
@@ -95,14 +90,6 @@ function SignUp() {
         cv_url,
         motivation_letter_url,
       });
-      formData.append("data", data);
-      formData.append("photo", photoInputRef.current.files[0]);
-      formData.append("cv", cvInputRef.current.files[0]);
-      formData.append(
-        "motivation_letter",
-        motivation_letterInputRef.current.files[0]
-      );
-
       await ApiHelper("/login", "POST", null, data)
         .then((response) => response.json())
         .then((result) => {
@@ -114,7 +101,6 @@ function SignUp() {
   };
 
   const handleSubmitHeadhunter = async (event) => {
-    const formData = new FormData();
     event.preventDefault();
     if (
       first_name &&
@@ -142,13 +128,6 @@ function SignUp() {
         skills_area,
         research_sector,
       });
-      formData.append("data", data);
-      formData.append("photo", photoInputRef.current.files[0]);
-      formData.append("cv", cvInputRef.current.files[0]);
-      formData.append(
-        "motivation_letter",
-        motivation_letterInputRef.current.files[0]
-      );
       await ApiHelper("/login", "POST", null, data)
         .then((response) => response.json())
         .then((result) => {
@@ -161,6 +140,10 @@ function SignUp() {
   const handlePreviousClick = () => {
     setIsNextClicked(!isNextClicked);
   };
+
+  const photoInputRef = useRef();
+  const cvInputRef = useRef();
+  const motivation_letterInputRef = useRef();
 
   const renderSignUpComponent = () => {
     if (isNextClicked) {
@@ -227,6 +210,10 @@ function SignUp() {
   const handleNextClick = () => {
     setIsNextClicked(!isNextClicked);
   };
+
+  // const formData = new FormData();
+
+  // formData.append("image", inputRef.current.files[0]);
 
   return (
     <div className="login-container">

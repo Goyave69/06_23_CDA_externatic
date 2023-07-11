@@ -39,8 +39,7 @@ strong {
 a {
   color: #000;
   text-decoration: none;
-  /* margin: 2%; */ 
-  /* A renommer cette div par rapport à tes besoins spécifiques, car le margin impacte sur le header */
+  margin: 2%;
 }
 .describe {
   padding: 0 15px;

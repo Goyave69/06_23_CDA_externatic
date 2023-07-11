@@ -1,7 +1,8 @@
-CREATE TABLE item (
-  id int(11) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  title varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
+--
+-- Host: localhost    Database: db_externatic
+-- ------------------------------------------------------
+-- Server version	8.0.33-0ubuntu0.22.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
