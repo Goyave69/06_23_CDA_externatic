@@ -1,8 +1,8 @@
 import React from "react";
 import Root from "./root";
 import Home from "./home";
-import Login from "./Login";
-import SignUp from "./SignUp";
+import Login from "./Login/Login";
+import SignUp from "./SignUp/SignUp";
 import JobOffers from "./jobOffers";
 import ErrorPage from "./errorPage";
 
@@ -12,8 +12,8 @@ import ApplyOffer from "./applyOffer";
 
 import Companies from "./companies";
 import CompaniesDetails from "./companyDetails";
-import CandidateProfile from "./CandidateProfile";
-import HeadhunterProfile from "./HeadhunterProfile";
+import CandidateProfile from "./UserProfile/CandidateProfile";
+import HeadhunterProfile from "./UserProfile/HeadhunterProfile";
 import CompanyDashboard from "./CompanyDashboard";
 import UserDashboard from "./Userdashboard";
 

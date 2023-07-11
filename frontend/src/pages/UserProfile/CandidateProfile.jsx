@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 import { Button, TextField, Typography } from "@mui/material";
-import avatar1 from "../assets/Ressources/avatar1.jpg";
+import avatar1 from "../../assets/Ressources/avatar1.jpg";
 
 // A vérifier les props donnés ici, s'il faut les recupérer de SignUP
 // A vérifier si first_name&&last_name et SetFirstName&&SetLastName fonctionne dans value
