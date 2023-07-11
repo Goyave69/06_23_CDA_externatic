@@ -29,8 +29,6 @@ function HeadhunterProfile({
   setResearch_sector,
   skills_area,
   setSkills_area,
-  job_search_location,
-  setJob_search_location,
   profile_description,
   setProfile_description,
 }) {
