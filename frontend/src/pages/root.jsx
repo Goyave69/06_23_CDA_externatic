@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import Navbar from "../components/header";
+import Header from "../components/header";
 
 // import { useToken } from "../context/TokenContext";
 
