@@ -23,7 +23,7 @@ import logo from "../assets/Ressources/logo-externatic.png";
 const options = ["Candidate", "Companies", "Head Hunters", "Login", "Logout"];
 const ITEM_HEIGHT = 48;
 
-export default function Navbar() {
+export default function Header() {
   const { token, setToken } = useToken();
   let firstName = "";
   let lastName = "";

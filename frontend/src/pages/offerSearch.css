@@ -1,25 +1,29 @@
-.box {
-  width: 50%;
+.bordure {
   margin: auto;
+  width: 50%;
   border-radius: 25px;
-  border: solid black 2px;
-  font-size: 1.8;
+  border: solid black 4px;
+  padding: 20px;
 }
-
-.box:hover {
-  border: solid blue 2px;
+.box {
+  overflow: overlay;
+  gap: 5px;
+  display: flex;
+}
+.bordure:hover {
+  border: solid blue 4px;
 }
 .offer {
-  height: 50vh;
+  line-height: 25px;
+  margin: 20px;
 }
 .suboffer {
-  line-height: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-.offer p {
-  font-weight: bolder;
-  font-size: 1.2rem;
-}
-
 .btnEtoile {
   width: fit-content;
   background-color: transparent;
@@ -28,20 +32,6 @@
 .btnEtoile:hover {
   background-color: inherit;
 }
-.offerTitle {
-  color: #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
-}
-
-/* .offer {
-  margin: auto;
-  display: inherit;
-  display: flex;
-  flex-direction: column;
-} */
 strong {
   color: black;
   text-decoration: underline;
@@ -50,8 +40,4 @@ strong {
 a {
   color: #000;
   text-decoration: none;
-  margin: 2%;
-}
-.describe {
-  padding: 0 25px;
 }
