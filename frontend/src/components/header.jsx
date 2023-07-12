@@ -19,7 +19,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { InputAdornment, TextField } from "@mui/material";
 import { useToken } from "../context/TokenContext";
 import logo from "../assets/Ressources/logo-externatic.png";
-
+//sfs
 const options = [
   { label: "Candidate", route: "/candidateProfile" },
   { label: "Companies", route: "/company" },
