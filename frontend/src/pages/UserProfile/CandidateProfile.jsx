@@ -1,45 +1,22 @@
 /* eslint-disable camelcase */
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 import { Button, TextField, Typography } from "@mui/material";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import { useToken } from "../../context/TokenContext";
 import avatar1 from "../../assets/Ressources/avatar1.jpg";
 
-// A vérifier les props donnés ici, s'il faut les recupérer de SignUP
-// A vérifier si first_name&&last_name et SetFirstName&&SetLastName fonctionne dans value
 // A vérifier  si les inputRef on les donne directement ici on on doit les remonter via props
 
-function CandidateProfile({
-  first_name,
-  setFirstName,
-  last_name,
-  setLastName,
-  profession,
-  setProfession,
-  skills,
-  setSkills,
-  languages,
-  setLanguages,
-  birth_date,
-  setBirth_date,
-  adress,
-  setAdress,
-  phone,
-  setPhone,
-  email,
-  setEmail,
-  researched_job,
-  setResearched_job,
-  availability_date,
-  setAvailability_date,
-  job_search_location,
-  setJob_search_location,
-  profile_description,
-  setProfile_description,
-}) {
-  const [age, setAge] = useState("");
-  // A voir si on peut les donner en props depuis SignUp
+function CandidateProfile() {
+  const [data, setData] = useState([]);
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
   const [photoName, setPhotoName] = useState("");
   const [cvName, setCvName] = useState("");
@@ -48,6 +25,40 @@ function CandidateProfile({
   const photoInputRef = useRef();
   const cvInputRef = useRef();
   const motivation_letterInputRef = useRef();
+
+  const { VITE_BACKEND_URL } = import.meta.env;
+
+  const { token } = useToken();
+  let role = "";
+  let userId = "";
+
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    role = decodedToken.role;
+    userId = decodedToken.userId;
+  }
+
+  useEffect(() => {
+    console.log(role);
+    if (role.includes("ROLE_CANDIDATE")) {
+      axios
+        .get(`${VITE_BACKEND_URL}/userCandidate/${userId}`)
+        .then((res) => {
+          setData(res.data);
+          console.log(res.data);
+        })
+        .catch((error) => console.warn(error));
+    } else {
+      axios
+        .get(`${VITE_BACKEND_URL}/userHeadhunter/${userId}`)
+        .then((res) => {
+          setData(res.data);
+          console.log(res.data);
+        })
+        .catch((error) => console.warn(error));
+    }
+  }, []);
+
   return (
     <Box
       sx={{
@@ -130,17 +141,15 @@ function CandidateProfile({
               />
             </div>
           </div>
-
           <div className="ageName" style={{ width: "80%", marginTop: "20px" }}>
             <div className="form-group">
               <TextField
                 id="firstNameLastNameAge"
                 label="Nom Prénom Age"
                 variant="standard"
-                value={first_name && last_name && age}
-                onChange={(e) =>
-                  setFirstName && setLastName && setAge(e.target.value)
-                }
+                value={data.first_name}
+                name="first_name"
+                onChange={handleChange}
                 fullWidth
                 InputProps={{
                   readOnly: true,
@@ -158,8 +167,9 @@ function CandidateProfile({
                 id="profession"
                 label="Profession"
                 variant="standard"
-                value={profession}
-                onChange={(e) => setProfession(e.target.value)}
+                value={data.profession}
+                name="profession"
+                onChange={handleChange}
                 fullWidth
                 InputProps={{
                   readOnly: true,
@@ -174,8 +184,9 @@ function CandidateProfile({
                 id="skills"
                 label="Compétences"
                 variant="standard"
-                value={skills}
-                onChange={(e) => setSkills(e.target.value)}
+                value={data.skills}
+                name="profession"
+                onChange={handleChange}
                 fullWidth
                 InputProps={{
                   readOnly: true,
@@ -193,8 +204,9 @@ function CandidateProfile({
                 id="lanugages"
                 label="Langues"
                 variant="standard"
-                value={languages}
-                onChange={(e) => setLanguages(e.target.value)}
+                value={data.languages}
+                name="languages"
+                onChange={handleChange}
                 fullWidth
                 InputProps={{
                   readOnly: true,
@@ -230,10 +242,9 @@ function CandidateProfile({
                     id="firstNameLastName"
                     label="Nom et Prénom"
                     variant="standard"
-                    value={first_name && last_name}
-                    onChange={(e) =>
-                      setFirstName && setLastName(e.target.value)
-                    }
+                    value={data.first_name}
+                    name="first_name"
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
                       readOnly: true,
@@ -249,9 +260,10 @@ function CandidateProfile({
                     id="birth_date"
                     label="Date de naissance"
                     variant="outlined"
-                    value={birth_date}
+                    value={data.birth_date}
+                    name="birth_date"
                     type="date"
-                    onChange={(e) => setBirth_date(e.target.value)}
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
                       readOnly: true,
@@ -267,8 +279,9 @@ function CandidateProfile({
                   id="adress"
                   label="Adresse"
                   variant="standard"
-                  value={adress}
-                  onChange={(e) => setAdress(e.target.value)}
+                  value={data.adress}
+                  name="birth_date"
+                  onChange={handleChange}
                   fullWidth
                   InputProps={{
                     readOnly: true,
@@ -284,8 +297,9 @@ function CandidateProfile({
                     id="phone"
                     label="Téléphone"
                     variant="standard"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    value={data.phone}
+                    name="phone"
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
                       readOnly: true,
@@ -301,8 +315,9 @@ function CandidateProfile({
                     id="email"
                     label="Email"
                     variant="standard"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={data.email}
+                    name="email"
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
                       readOnly: true,
@@ -319,8 +334,9 @@ function CandidateProfile({
                     id="researched_job"
                     label="Postes recherchés (max 3)"
                     variant="standard"
-                    value={researched_job}
-                    onChange={(e) => setResearched_job(e.target.value)}
+                    value={data.researched_job}
+                    name="researched_job"
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
                       readOnly: true,
@@ -336,8 +352,9 @@ function CandidateProfile({
                       id="job_search_location"
                       label="Lieu recherché"
                       variant="standard"
-                      value={job_search_location}
-                      onChange={(e) => setJob_search_location(e.target.value)}
+                      value={data.job_search_location}
+                      name="job_search_location"
+                      onChange={handleChange}
                       fullWidth
                       InputProps={{
                         readOnly: true,
@@ -353,9 +370,10 @@ function CandidateProfile({
                       id="availability_date"
                       label="Disponible à partir de"
                       variant="outlined"
-                      value={availability_date}
+                      value={data.availability_date}
+                      name="availability_date"
                       type="date"
-                      onChange={(e) => setAvailability_date(e.target.value)}
+                      onChange={handleChange}
                       fullWidth
                       InputProps={{
                         readOnly: true,
@@ -375,8 +393,9 @@ function CandidateProfile({
                     label="Description de ta recherche"
                     variant="outlined"
                     placeholder="1000 caractères max"
-                    value={profile_description}
-                    onChange={(e) => setProfile_description(e.target.value)}
+                    value={data.profile_description}
+                    name="profile_description"
+                    onChange={handleChange}
                     fullWidth
                     inputProps={{ maxLength: 1000, readOnly: true }} // Set maximum character length
                     multiline // Allow multiple lines of text

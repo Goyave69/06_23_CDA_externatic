@@ -15,6 +15,62 @@ const browse = (req, res) => {
     });
 };
 
+const getOneCandidate = (req, res) => {
+  models.user
+    .findOneCandidate(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const getOneHeadhunter = (req, res) => {
+  models.user
+    .findOneHeadhunter(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const getCandidate = (req, res) => {
+  models.user
+    .findCandidate()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const getHeadhunter = (req, res) => {
+  models.user
+    .findHeadhunter()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const read = (req, res) => {
   models.user
     .find(req.params.id)
@@ -100,4 +156,8 @@ module.exports = {
   edit,
   add,
   destroy,
+  getCandidate,
+  getHeadhunter,
+  getOneCandidate,
+  getOneHeadhunter,
 };

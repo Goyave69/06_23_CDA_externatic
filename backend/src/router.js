@@ -124,6 +124,11 @@ const loginController = require("./controllers/authControllers/LoginController")
 
 router.post("/login", loginController);
 
+router.get("/userCandidate", userControllers.getCandidate);
+router.get("/userCandidate/:id", userControllers.getOneCandidate);
+router.get("/userHeadhunter", userControllers.getHeadhunter);
+router.get("/userHeadhunter/:id", userControllers.getOneHeadhunter);
+
 router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
 // router.put("/user/:id", verifyToken, verifyTokenById, userControllers.edit);
