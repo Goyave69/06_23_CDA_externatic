@@ -27,7 +27,10 @@ const Routes = [
         path: "/",
         element: <Home />,
       },
-
+      {
+        path: "/jobOffers",
+        element: <JobOffers />,
+      },
       {
         path: "/offerSearch",
         element: <OfferSearch />,
@@ -40,7 +43,10 @@ const Routes = [
         path: "/applyOffer",
         element: <ApplyOffer />,
       },
-
+      {
+        path: "/company",
+        element: <Companies />,
+      },
       {
         path: "/companyDetails",
         element: <CompaniesDetails />,
@@ -70,14 +76,6 @@ const Routes = [
   {
     path: "/signUp",
     element: <SignUp />,
-  },
-  {
-    path: "/company",
-    element: <Companies />,
-  },
-  {
-    path: "/jobOffers",
-    element: <JobOffers />,
   },
 ];
 export default Routes;
