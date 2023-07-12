@@ -198,14 +198,16 @@ export default function Header() {
             alignItems: "center",
           }}
         >
-          <img
-            src={logo}
-            alt="logo externatic"
-            style={{
-              width: "600px",
-              height: "auto",
-            }}
-          />
+          <NavLink tp="/">
+            <img
+              src={logo}
+              alt="logo externatic"
+              style={{
+                width: "600px",
+                height: "auto",
+              }}
+            />
+          </NavLink>
           <Typography variant="h3" sx={{ fontSize: 30, mb: "25px" }}>
             Plus qu'un cabinet de recrutement
           </Typography>
@@ -310,12 +312,14 @@ export default function Header() {
                 marginRight: "340px",
               }}
             >
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#CA2061", width: "200px" }}
-              >
-                Entreprises
-              </Button>
+              <NavLink to="/company">
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#CA2061", width: "200px" }}
+                >
+                  Entreprises
+                </Button>
+              </NavLink>
               <FormControl sx={{ width: "200px" }}>
                 <InputLabel id="demo-select-small-label">Secteur</InputLabel>
                 <Select
