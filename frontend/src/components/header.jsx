@@ -20,7 +20,13 @@ import { InputAdornment, TextField } from "@mui/material";
 import { useToken } from "../context/TokenContext";
 import logo from "../assets/Ressources/logo-externatic.png";
 
-const options = ["Candidate", "Companies", "Head Hunters", "Login", "Logout"];
+const options = [
+  { label: "Candidate", route: "/candidateProfile" },
+  { label: "Companies", route: "/company" },
+  { label: "Head Hunters", route: "/headHunter" },
+  { label: "Login", route: "/login" },
+  { label: "Logout", route: "/logout" },
+];
 const ITEM_HEIGHT = 48;
 
 export default function Header() {
@@ -100,13 +106,14 @@ export default function Header() {
               }}
             >
               {options.map((option) => (
-                <MenuItem
-                  key={option}
-                  selected={option === "Pyxis"}
-                  onClick={handleClose}
-                >
-                  {option}
-                </MenuItem>
+                <NavLink key={option.label} to={option.route}>
+                  <MenuItem
+                    selected={option.label === "Pyxis"}
+                    onClick={handleClose}
+                  >
+                    {option.label}
+                  </MenuItem>
+                </NavLink>
               ))}
             </Menu>
           </Box>
@@ -325,12 +332,14 @@ export default function Header() {
                   <MenuItem value={30}>Systèmes embarqués</MenuItem>
                 </Select>
               </FormControl>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#CA2061", width: "200px" }}
-              >
-                Offres d'emploi
-              </Button>
+              <NavLink to="/jobOffers">
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#CA2061", width: "200px" }}
+                >
+                  Offres d'emploi
+                </Button>
+              </NavLink>
             </Box>
           </div>
         )}
