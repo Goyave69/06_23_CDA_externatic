@@ -120,33 +120,36 @@ export default function Header() {
               gap: "3rem",
             }}
           >
-            <NavLink to="/login">
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: "black",
-                  width: "120px",
-                  borderRadius: 35,
-                  height: "50%",
-                }}
-              >
-                CANDIDAT
-              </Button>
-            </NavLink>
-
-            <NavLink to="/login">
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: "black",
-                  width: "120px",
-                  borderRadius: 35,
-                  height: "50%",
-                }}
-              >
-                ENTREPRISE
-              </Button>
-            </NavLink>
+            {!firstName && !lastName && (
+              <NavLink to="/login">
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "black",
+                    width: "120px",
+                    borderRadius: 35,
+                    height: "50%",
+                  }}
+                >
+                  CANDIDAT
+                </Button>
+              </NavLink>
+            )}
+            {!firstName && !lastName && (
+              <NavLink to="/login">
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "black",
+                    width: "120px",
+                    borderRadius: 35,
+                    height: "50%",
+                  }}
+                >
+                  ENTREPRISE
+                </Button>
+              </NavLink>
+            )}
 
             {firstName && lastName && (
               <NavLink className="candidate" to="/candidateProfile">
@@ -159,7 +162,7 @@ export default function Header() {
                     width: "150px",
                     borderRadius: 35,
                     height: "50%",
-                    textTransform: "none",
+                    textTransform: "uppercase",
                   }}
                 >
                   <PersonIcon />
