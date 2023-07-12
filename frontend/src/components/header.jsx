@@ -303,6 +303,7 @@ export default function Header() {
                 </FormControl>
               </Box>
             </Box>
+
             <Box
               className="companiesOffers"
               sx={{
@@ -313,12 +314,14 @@ export default function Header() {
                 marginRight: "340px",
               }}
             >
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#CA2061", width: "200px" }}
-              >
-                Entreprises
-              </Button>
+              <NavLink to="/company">
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#CA2061", width: "200px" }}
+                >
+                  Entreprises
+                </Button>
+              </NavLink>
               <FormControl sx={{ width: "200px" }}>
                 <InputLabel id="demo-select-small-label">Secteur</InputLabel>
                 <Select
