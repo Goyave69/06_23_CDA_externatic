@@ -201,14 +201,16 @@ export default function Header() {
             alignItems: "center",
           }}
         >
-          <img
-            src={logo}
-            alt="logo externatic"
-            style={{
-              width: "600px",
-              height: "auto",
-            }}
-          />
+          <NavLink tp="/">
+            <img
+              src={logo}
+              alt="logo externatic"
+              style={{
+                width: "600px",
+                height: "auto",
+              }}
+            />
+          </NavLink>
           <Typography variant="h3" sx={{ fontSize: 30, mb: "25px" }}>
             Plus qu'un cabinet de recrutement
           </Typography>
