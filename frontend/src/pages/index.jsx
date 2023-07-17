@@ -16,7 +16,6 @@ import CandidateProfile from "./CandidateProfile";
 import CompanyDashboard from "./CompanyDashboard";
 import UserDashboard from "./Userdashboard";
 
-
 const Routes = [
   {
     path: "/",

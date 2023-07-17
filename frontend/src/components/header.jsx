@@ -60,8 +60,8 @@ export default function Header() {
     setAge(event.target.value);
   };
   return (
-    <Box sx={{ mb: "3rem" }}>
-      <Box sx={{ margin: 0, width: "100%" }}>
+    <Box sx={{ mb: "1rem" }}>
+      <Box sx={{ margin: "auto", width: "80%" }}>
         <Box
           sx={{
             display: "flex",
@@ -107,11 +107,7 @@ export default function Header() {
               ))}
             </Menu>
           </Box>
-          <img
-            src={logo}
-            alt="logo externatic"
-            style={{ width: "600px", height: "auto" }}
-          />
+          <img src={logo} alt="logo externatic" style={{ width: "600px" }} />
           <Box
             sx={{
               mt: "20px",
@@ -194,7 +190,7 @@ export default function Header() {
         </Box>
         <Typography
           variant="h3"
-          sx={{ textAlign: "center", fontSize: 40, mb: "25px" }}
+          sx={{ marginLeft: "270px", fontSize: 40, mb: "25px" }}
         >
           Plus qu'un cabinet de recrutement
         </Typography>

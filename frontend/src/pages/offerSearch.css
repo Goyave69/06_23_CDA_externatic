@@ -1,33 +1,35 @@
 .bordure {
   margin: auto;
-  width: 50%;
+  width: 80%;
   border-radius: 25px;
   border: solid black 4px;
-  padding: 20px;
 }
 .box {
-  overflow: overlay;
-  gap: 5px;
   display: flex;
 }
 .bordure:hover {
   border: solid blue 4px;
 }
 .offer {
-  line-height: 25px;
+  width: 100%;
+  height: 100vh;
   margin: 20px;
+  overflow-y: scroll;
 }
 .suboffer {
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+}
+
+button img {
+  width: 60px;height: 100vh;
 }
 .btnEtoile {
-  width: fit-content;
   background-color: transparent;
-  max-width: 5%;
+  width: fit-content;
+  max-width: 9%;
 }
 .btnEtoile:hover {
   background-color: inherit;
@@ -40,4 +42,5 @@ strong {
 a {
   color: #000;
   text-decoration: none;
+  font-size: 2rem;
 }

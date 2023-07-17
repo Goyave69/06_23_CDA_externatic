@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./offerSearch.css";
 import { useState } from "react";
 
@@ -109,27 +109,25 @@ export default function OfferSearch() {
         <div className="offer">
           {offres.map((offre) => (
             <div className="suboffer">
-              <div key={offre.id} className="offerTitle">
-                <Link to="/detailsoffer">
+              <titre key={offre.id} className="offerTitle">
+                <NavLink to="/detailsoffer">
                   <p>{offre.nameOffre}</p>
                   <strong>{offre.nameCompany}</strong> - {offre.codePostal}{" "}
                   {offre.ville}
-                </Link>
-              </div>
-              <div>
-                <button
-                  className="btnEtoile"
-                  type="button"
-                  onClick={() => handleSelect(offre.id)}
-                >
-                  <img
-                    src={`../src/assets/Ressources/Externatic/${
-                      isFavorite(offre.id) ? "icon.svg" : "iconStar.svg"
-                    }`}
-                    alt="logo alt"
-                  />
-                </button>
-              </div>
+                </NavLink>
+              </titre>
+              <button
+                className="btnEtoile"
+                type="button"
+                onClick={() => handleSelect(offre.id)}
+              >
+                <img
+                  src={`../src/assets/Ressources/Externatic/${
+                    isFavorite(offre.id) ? "icon.svg" : "iconStar.svg"
+                  }`}
+                  alt="logo alt"
+                />
+              </button>
             </div>
           ))}
         </div>
