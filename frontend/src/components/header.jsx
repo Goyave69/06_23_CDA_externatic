@@ -33,16 +33,20 @@ export default function Header() {
   const { token, setToken } = useToken();
   let firstName = "";
   let lastName = "";
+  let role = "";
 
   if (token) {
     const decodedToken = jwt_decode(token);
     firstName = decodedToken.first_name;
     lastName = decodedToken.last_name;
+    role = decodedToken.role;
   }
 
   const navigate = useNavigate();
   const location = useLocation();
-  const isCandidateProfile = location.pathname === "/candidateProfile";
+  const isCandidateProfile =
+    location.pathname === "/candidateProfile" ||
+    location.pathname === "/headhunterProfile";
 
   const handleSignUpLogOut = () => {
     if (token) {
@@ -160,25 +164,36 @@ export default function Header() {
               </NavLink>
             )}
 
-            {firstName && lastName && (
-              <NavLink className="candidate" to="/candidateProfile">
-                <Button
-                  className="user-info"
-                  variant="contained"
-                  style={{
-                    display: "flex",
-                    backgroundColor: "black",
-                    width: "150px",
-                    borderRadius: 35,
-                    height: "50%",
-                    textTransform: "uppercase",
-                  }}
+            {firstName &&
+              lastName &&
+              (role.includes("ROLE_CANDIDATE") ||
+              role.includes("ROLE_HEADHUNTER") ? (
+                <NavLink
+                  className="candidate"
+                  to={
+                    role.includes("ROLE_CANDIDATE")
+                      ? "/candidateProfile"
+                      : "/headhunterProfile"
+                  }
                 >
-                  <PersonIcon />
-                  &nbsp;&nbsp;{firstName} {lastName}
-                </Button>
-              </NavLink>
-            )}
+                  <Button
+                    className="user-info"
+                    variant="contained"
+                    style={{
+                      display: "flex",
+                      backgroundColor: "black",
+                      width: "150px",
+                      borderRadius: 35,
+                      height: "50%",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    <PersonIcon />
+                    &nbsp;&nbsp;{firstName} {lastName}
+                  </Button>
+                </NavLink>
+              ) : null)}
+
             <NavLink className="logoutSignUp">
               <Button
                 variant="contained"

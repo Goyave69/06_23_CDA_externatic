@@ -116,11 +116,8 @@ const add = async (req, res) => {
   const newUser = JSON.parse(req.body.data);
   newUser.password = await passwordHasher(newUser.password);
 
-  const headhunterData = JSON.parse(req.body.headhunterData);
-
   // TODO validations (length, format...)
   const { error } = validator.validateUser(newUser);
-
   if (error) {
     res.status(422).json({ validationErrors: error.details });
   } else {
@@ -128,8 +125,6 @@ const add = async (req, res) => {
       .insert(newUser, req.file.filename)
       .then(([result]) => {
         const userId = result.insertId; // Extract the user_id from the result
-
-        headhunterData.user_id = userId;
 
         if (newUser?.role === "ROLE_CANDIDATE") {
           models.candidate
@@ -142,6 +137,13 @@ const add = async (req, res) => {
               res.sendStatus(500);
             });
         } else {
+          // Insert headhunter using the userId obtained above
+          const headhunterData = {
+            skills_area: newUser.skills_area,
+            research_sector: newUser.research_sector,
+            user_id: userId,
+          };
+
           models.headhunter
             .insert(headhunterData)
             .then(() => {

@@ -14,7 +14,6 @@ function SignUpCandidate({
   setProfile_description,
   adress,
   setAdress,
-
   profession,
   setProfession,
   researched_job,

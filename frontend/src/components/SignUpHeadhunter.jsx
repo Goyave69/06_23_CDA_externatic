@@ -150,7 +150,7 @@ function SignUpHeadhunter({
                   phone &&
                   profile_description &&
                   adress &&
-                  photoInputRef.current.files[0] &&
+                  photoInputRef.current?.files[0] &&
                   skills_area &&
                   research_sector
                 )

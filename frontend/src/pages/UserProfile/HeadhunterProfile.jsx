@@ -1,43 +1,74 @@
 /* eslint-disable camelcase */
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 
-import { Button, TextField, Typography } from "@mui/material";
-import avatar1 from "../../assets/Ressources/avatar1.jpg";
+import { Button, TextField } from "@mui/material";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
-// A vérifier les props donnés ici, s'il faut les recupérer de SignUP
-// A vérifier si first_name&&last_name et SetFirstName&&SetLastName fonctionne dans value
-// A vérifier  si les inputRef on les donne directement ici on on doit les remonter via props
+import { useToken } from "../../context/TokenContext";
 
-function HeadhunterProfile({
-  first_name,
-  setFirstName,
-  last_name,
-  setLastName,
-  profession,
-  setProfession,
-  birth_date,
-  setBirth_date,
-  adress,
-  setAdress,
-  phone,
-  setPhone,
-  email,
-  setEmail,
-  research_sector,
-  setResearch_sector,
-  skills_area,
-  setSkills_area,
-  profile_description,
-  setProfile_description,
-}) {
-  const [age, setAge] = useState("");
-  // A voir si on peut les donner en props depuis SignUp
+function HeadhunterProfile() {
+  const [data, setData] = useState([]);
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
   const [photoName, setPhotoName] = useState("");
 
   const photoInputRef = useRef();
+
+  const { VITE_BACKEND_URL } = import.meta.env;
+
+  const { token } = useToken();
+  let role = "";
+  let userId = "";
+
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    role = decodedToken.role;
+    userId = decodedToken.userId;
+  }
+
+  useEffect(() => {
+    if (role.includes("ROLE_CANDIDATE")) {
+      axios
+        .get(`${VITE_BACKEND_URL}/userCandidate/${userId}`)
+        .then((res) => {
+          setData(res.data);
+          setPhotoName(res.data.photo_url);
+        })
+        .catch((error) => console.warn(error));
+    } else {
+      axios
+        .get(`${VITE_BACKEND_URL}/userHeadhunter/${userId}`)
+        .then((res) => {
+          setData(res.data);
+          setPhotoName(res.data.photo_url);
+        })
+        .catch((error) => console.warn(error));
+    }
+  }, []);
+
+  const calculateAge = (birthDate) => {
+    const today = new Date();
+    const birthDateObj = new Date(birthDate);
+    let age = today.getFullYear() - birthDateObj.getFullYear();
+    const monthsDiff = today.getMonth() - birthDateObj.getMonth();
+    if (
+      monthsDiff < 0 ||
+      (monthsDiff === 0 && today.getDate() < birthDateObj.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
+
+  const fullName = `${data.first_name} ${data.last_name}`;
+
+  const age = calculateAge(data.birth_date);
 
   return (
     <Box
@@ -108,52 +139,46 @@ function HeadhunterProfile({
               </Button>
             </div>
 
-            <div>
+            {/* <div>
               <Typography variant="body1" color="initial" sx={{ mb: "10px" }}>
                 {photoName}
               </Typography>
-            </div>
+            </div> */}
             <div className="avatar">
               <img
-                src={avatar1}
+                src={`${VITE_BACKEND_URL}/uploads/${photoName}`}
                 alt="avatar"
                 style={{ height: "100%", width: "50%", borderRadius: "200px" }}
               />
             </div>
           </div>
 
-          <div className="ageName" style={{ width: "80%", marginTop: "20px" }}>
-            <div className="form-group">
-              <TextField
-                id="firstNameLastNameAge"
-                label="Nom Prénom Age"
-                variant="standard"
-                value={first_name && last_name && age}
-                onChange={(e) =>
-                  setFirstName && setLastName && setAge(e.target.value)
-                }
-                fullWidth
-                InputProps={{
-                  readOnly: true,
-                }}
-                InputLabelProps={{ shrink: true }}
-              />
-            </div>
+          <div
+            className="ageName"
+            style={{
+              width: "80%",
+              marginTop: "20px",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{ fontWeight: "bold" }}
+            >{`${fullName} - ${age} years`}</div>
           </div>
           <div
-            className="profession"
+            className="entreprise"
             style={{ width: "80%", marginTop: "20px" }}
           >
             <div className="form-group">
               <TextField
-                id="profession"
-                label="Profession"
+                id="entreprise"
+                label="Entreprise"
                 variant="standard"
-                value={profession}
-                onChange={(e) => setProfession(e.target.value)}
+                value="Externatic IT"
                 fullWidth
                 InputProps={{
-                  readOnly: true,
+                  readOnly: false,
                 }}
                 InputLabelProps={{ shrink: true }}
               />
@@ -180,37 +205,68 @@ function HeadhunterProfile({
             }}
           >
             <div className="nameBirthDate" style={{ display: "flex" }}>
-              <div className="fistLastName" style={{ width: "60%" }}>
+              <div
+                className="fistName"
+                style={{ width: "25%", paddingBottom: "10px" }}
+              >
                 <div className="form-group">
                   <TextField
-                    id="firstNameLastName"
-                    label="Nom et Prénom"
+                    id="firstName"
+                    label="Prénom"
                     variant="standard"
-                    value={first_name && last_name}
-                    onChange={(e) =>
-                      setFirstName && setLastName(e.target.value)
-                    }
+                    value={data.first_name}
+                    name="first_name"
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
-                      readOnly: true,
+                      readOnly: false,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </div>
+              </div>
+              <div style={{ width: "10%", paddingBottom: "10px" }} />
+              <div
+                className="lastName"
+                style={{ width: "25%", paddingBottom: "10px" }}
+              >
+                <div className="form-group">
+                  <TextField
+                    id="lastName"
+                    label="Nom"
+                    variant="standard"
+                    value={data.last_name}
+                    name="first_name"
+                    onChange={handleChange}
+                    fullWidth
+                    InputProps={{
+                      readOnly: false,
                     }}
                     InputLabelProps={{ shrink: true }}
                   />
                 </div>
               </div>
               <div style={{ width: "10%" }} />
-              <div className="birthDate" style={{ width: "30%" }}>
+              <div
+                className="birthDate"
+                style={{ width: "30%", paddingBottom: "10px" }}
+              >
                 <div className="form-group">
                   <TextField
                     id="birth_date"
                     label="Date de naissance"
                     variant="outlined"
-                    value={birth_date}
+                    value={
+                      data.birth_date
+                        ? new Date(data.birth_date).toISOString().split("T")[0]
+                        : ""
+                    }
+                    name="birth_date"
                     type="date"
-                    onChange={(e) => setBirth_date(e.target.value)}
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
-                      readOnly: true,
+                      readOnly: false,
                     }}
                     InputLabelProps={{ shrink: true }}
                   />
@@ -223,11 +279,12 @@ function HeadhunterProfile({
                   id="adress"
                   label="Adresse"
                   variant="standard"
-                  value={adress}
-                  onChange={(e) => setAdress(e.target.value)}
+                  value={data.adress}
+                  name="adress"
+                  onChange={handleChange}
                   fullWidth
                   InputProps={{
-                    readOnly: true,
+                    readOnly: false,
                   }}
                   InputLabelProps={{ shrink: true }}
                 />
@@ -240,11 +297,12 @@ function HeadhunterProfile({
                     id="phone"
                     label="Téléphone"
                     variant="standard"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    value={data.phone}
+                    name="phone"
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
-                      readOnly: true,
+                      readOnly: false,
                     }}
                     InputLabelProps={{ shrink: true }}
                   />
@@ -257,11 +315,12 @@ function HeadhunterProfile({
                     id="email"
                     label="Email"
                     variant="standard"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={data.email}
+                    name="email"
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
-                      readOnly: true,
+                      readOnly: false,
                     }}
                     InputLabelProps={{ shrink: true }}
                   />
@@ -275,28 +334,29 @@ function HeadhunterProfile({
                     id="research_sector,"
                     label="Secteur de recherche"
                     variant="standard"
-                    value={research_sector}
-                    onChange={(e) => setResearch_sector(e.target.value)}
+                    value={data.research_sector}
+                    name="research_sector"
+                    onChange={handleChange}
                     fullWidth
                     InputProps={{
-                      readOnly: true,
+                      readOnly: false,
                     }}
                     InputLabelProps={{ shrink: true }}
                   />
                 </div>
               </div>
-              <div className="placeAndAvailability" style={{ display: "flex" }}>
+              <div className="skills_area" style={{ display: "flex" }}>
                 <div className="skills_area" style={{ width: "100%" }}>
                   <div className="form-group">
                     <TextField
                       id="skills_area"
                       label="Domaine de compétences"
                       variant="standard"
-                      value={skills_area}
-                      onChange={(e) => setSkills_area(e.target.value)}
+                      value={data.skills_area}
+                      onChange={handleChange}
                       fullWidth
                       InputProps={{
-                        readOnly: true,
+                        readOnly: false,
                       }}
                       InputLabelProps={{ shrink: true }}
                     />
@@ -313,10 +373,11 @@ function HeadhunterProfile({
                     label="Description de ton profil"
                     variant="outlined"
                     placeholder="1000 caractères max"
-                    value={profile_description}
-                    onChange={(e) => setProfile_description(e.target.value)}
+                    value={data.profile_description}
+                    name="profile_description"
+                    onChange={handleChange}
                     fullWidth
-                    inputProps={{ maxLength: 1000, readOnly: true }} // Set maximum character length
+                    inputProps={{ maxLength: 1000, readOnly: false }} // Set maximum character length
                     multiline // Allow multiple lines of text
                     rows={4} // Adjust the number of rows to fit the desired height
                     InputLabelProps={{ shrink: true }}

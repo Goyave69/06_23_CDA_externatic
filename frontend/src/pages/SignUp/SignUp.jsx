@@ -21,6 +21,7 @@ function SignUp() {
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [uploadedPhotoUrl, setUploadedPhotoUrl] = useState("");
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
@@ -28,6 +29,8 @@ function SignUp() {
   const [phone, setPhone] = useState("");
   const [profile_description, setProfile_description] = useState("");
   const [adress, setAdress] = useState("");
+  const [subscription_date, setSubscription_date] = useState("");
+  const [status, setStatus] = useState("");
 
   // Candidate states
 
@@ -37,8 +40,9 @@ function SignUp() {
   const [availability_date, setAvailability_date] = useState("");
   const [skills, setSkills] = useState("");
   const [languages, setLanguages] = useState("");
-  const [cv_url, setCv_url] = useState("");
-  const [motivation_letter_url, setMotivation_letter_url] = useState("");
+  const [uploadedCv_url, setUploadedCv_url] = useState("");
+  const [uploadedMotivation_letter_url, setUploadedMotivation_letter_url] =
+    useState("");
 
   // Heahhunter states
 
@@ -54,9 +58,17 @@ function SignUp() {
   const cvInputRef = useRef();
   const motivation_letterInputRef = useRef();
 
+  const getCurrentDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const handleSubmitCandidate = async (event) => {
-    const formData = new FormData();
     event.preventDefault();
+    const formData = new FormData();
     if (
       first_name &&
       last_name &&
@@ -72,40 +84,48 @@ function SignUp() {
       job_search_location &&
       availability_date &&
       skills &&
-      languages &&
-      cv_url &&
-      motivation_letter_url
+      languages
     ) {
-      const data = JSON.stringify({
+      const currentDate = getCurrentDate(); // Get the current date
+      setSubscription_date(currentDate); // Set the subscription_date dynamically
+      setStatus(1); // Set the status to 1 for new user
+      const userData = JSON.stringify({
         first_name,
         last_name,
         email,
+        photo_url: uploadedPhotoUrl,
         password,
         role,
         birth_date,
         phone,
         profile_description,
         adress,
+        subscription_date: currentDate,
+        status: 1,
+      });
+      formData.append("data", userData);
+      formData.append("photo", photoInputRef.current.files[0]);
+      const candidateData = JSON.stringify({
         profession,
         researched_job,
         job_search_location,
         availability_date,
         skills,
         languages,
-        cv_url,
-        motivation_letter_url,
+        cv_url: uploadedCv_url,
+        motivation_letter_url: uploadedMotivation_letter_url,
       });
-      formData.append("data", data);
-      formData.append("photo", photoInputRef.current.files[0]);
+      formData.append("candidateData", candidateData);
       formData.append("cv", cvInputRef.current.files[0]);
       formData.append(
         "motivation_letter",
         motivation_letterInputRef.current.files[0]
       );
 
-      await ApiHelper("/login", "POST", null, data)
+      await ApiHelper("/user", "POST", null, formData, "")
         .then((response) => response.json())
-        .then((result) => {
+        .then(async (result) => {
+          await ApiHelper("/candidate", "POST", null, formData, "");
           console.error(result.token);
           return setToken(result.token);
         })
@@ -114,8 +134,9 @@ function SignUp() {
   };
 
   const handleSubmitHeadhunter = async (event) => {
-    const formData = new FormData();
     event.preventDefault();
+    const formData = new FormData();
+
     if (
       first_name &&
       last_name &&
@@ -129,42 +150,55 @@ function SignUp() {
       skills_area &&
       research_sector
     ) {
-      const data = JSON.stringify({
+      const currentDate = getCurrentDate();
+      setSubscription_date(currentDate);
+      setStatus(1);
+
+      // User data
+      const userData = JSON.stringify({
         first_name,
         last_name,
         email,
+        photo_url: uploadedPhotoUrl,
         password,
         role,
         birth_date,
         phone,
         profile_description,
         adress,
+        subscription_date: currentDate,
+        status: 1,
+      });
+
+      formData.append("data", userData);
+      formData.append("photo", photoInputRef.current.files[0]);
+
+      // Headhunter data
+      const headhunterData = JSON.stringify({
         skills_area,
         research_sector,
       });
-      formData.append("data", data);
-      formData.append("photo", photoInputRef.current.files[0]);
-      formData.append("cv", cvInputRef.current.files[0]);
-      formData.append(
-        "motivation_letter",
-        motivation_letterInputRef.current.files[0]
-      );
-      await ApiHelper("/login", "POST", null, data)
+
+      formData.append("headhunterData", headhunterData);
+
+      await ApiHelper("/user", "POST", null, formData, "")
         .then((response) => response.json())
-        .then((result) => {
+        .then(async (result) => {
+          await ApiHelper("/headhunter", "POST", null, formData, "");
           console.error(result.token);
           return setToken(result.token);
         })
         .then(() => navigate("/"));
     }
   };
+
   const handlePreviousClick = () => {
     setIsNextClicked(!isNextClicked);
   };
 
   const renderSignUpComponent = () => {
     if (isNextClicked) {
-      if (role === "ROLE_CANDIDATE") {
+      if (role.includes("ROLE_CANDIDATE")) {
         return (
           <SignUpCandidate
             birth_date={birth_date}
@@ -187,10 +221,6 @@ function SignUp() {
             setSkills={setSkills}
             languages={languages}
             setLanguages={setLanguages}
-            cv_url={cv_url}
-            setCv_url={setCv_url}
-            motivation_letter_url={motivation_letter_url}
-            setMotivation_letter_url={setMotivation_letter_url}
             handleSubmitCandidate={handleSubmitCandidate}
             handlePreviousClick={handlePreviousClick}
             photoInputRef={photoInputRef}
@@ -199,7 +229,7 @@ function SignUp() {
           />
         );
       }
-      if (role === "ROLE_HEADHUNTER") {
+      if (role.includes("ROLE_HEADHUNTER")) {
         return (
           <SignUpHeadhunter
             birth_date={birth_date}
@@ -298,7 +328,7 @@ function SignUp() {
                 <RadioGroup
                   id="role"
                   value={role}
-                  onChange={(e) => setRole(e.target.value)}
+                  onChange={(e) => setRole([e.target.value])}
                   row
                 >
                   <FormControlLabel
