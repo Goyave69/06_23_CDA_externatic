@@ -73,8 +73,8 @@ export default function Header() {
   };
 
   return (
-    <Box sx={{ mb: "3rem" }}>
-      <Box sx={{ width: "100%" }}>
+    <Box sx={{ mb: "1rem" }}>
+      <Box sx={{ margin: "auto", width: "80%" }}>
         <Box
           className="topBar"
           sx={{
@@ -122,7 +122,6 @@ export default function Header() {
               ))}
             </Menu>
           </Box>
-
           <Box
             className="rightButtons"
             sx={{
@@ -250,6 +249,7 @@ export default function Header() {
                   maxWidth: 350,
                 }}
               >
+                {" "}
                 <TextField
                   id="outlined-basic"
                   label="Job recherché"
@@ -277,12 +277,15 @@ export default function Header() {
                   ),
                 }}
               />
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#CA2061", width: "200px" }}
-              >
-                RECHERCHE
-              </Button>
+              <NavLink to="/OfferSearch">
+                {" "}
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#CA2061", width: "200px" }}
+                >
+                  RECHERCHE
+                </Button>
+              </NavLink>
             </Box>
             <Box className="contractType">
               <Box

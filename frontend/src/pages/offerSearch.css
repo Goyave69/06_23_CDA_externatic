@@ -1,35 +1,36 @@
-.box {
-  width: 80%;
+.bordure {
   margin: auto;
+  width: 90%;
   border-radius: 25px;
   border: solid black 2px;
-  font-size: 1.8;
 }
 
-.box:hover {
+.bordure:hover {
   border: solid blue 2px;
 }
+.offers {
+  width: 100%;
+  height: 70vh;
+  margin: 10px;
+  overflow-y: scroll;
+}
+.suboffer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button img {
+  width: 30px;
+}
 .btnEtoile {
-  width: fit-content;
   background-color: transparent;
-  max-width: 5%;
+  width: fit-content;
+  max-width: 9%;
 }
 .btnEtoile:hover {
   background-color: inherit;
-}
-.offerTitle {
-  color: #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
-}
-
-.offer {
-  margin: auto;
-  display: inherit;
-  display: flex;
-  flex-direction: column;
 }
 strong {
   color: black;
@@ -39,9 +40,14 @@ strong {
 a {
   color: #000;
   text-decoration: none;
-  /* margin: 2%; */ 
-  /* A renommer cette div par rapport à tes besoins spécifiques, car le margin impacte sur le header */
+  font-size: 2rem;
 }
 .describe {
   padding: 0 15px;
+}
+.offer {
+  padding: 10px;
+  overflow-y: scroll;
+  margin-right: 2%;
+  height: 50vh;
 }

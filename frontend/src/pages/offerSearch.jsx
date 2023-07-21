@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./offerSearch.css";
 import { useState } from "react";
 
@@ -47,6 +47,48 @@ export default function OfferSearch() {
       job_description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut beatae minima hic inventore eum asperiores sequi, aliquam eius incidunt tempora eveniet fugiat adipisci. Cupiditate maiores rem corporis ex, neque possimus.",
     },
+    {
+      id: 5,
+      nameOffre: "Alternance-Développeur Full Stack H/F",
+      nameCompany: "Atos",
+      codePostal: "69100",
+      ville: "Villeurbanne",
+      job_description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut beatae minima hic inventore eum asperiores sequi, aliquam eius incidunt tempora eveniet fugiat adipisci. Cupiditate maiores rem corporis ex, neque possimus.",
+    },
+    {
+      id: 6,
+      nameOffre: "Développeur H/F",
+      nameCompany: "YESSS Electrique",
+      codePostal: "69340",
+      ville: "Francheville",
+      job_description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut beatae minima hic inventore eum asperiores sequi, aliquam eius incidunt tempora eveniet fugiat adipisci. Cupiditate maiores rem corporis ex, neque possimus.",
+    },
+    {
+      id: 7,
+      nameOffre: "Développeur Full Stack (PHP Symfony) - H/F",
+      nameCompany: "Seyos",
+      codePostal: "69003",
+      ville: "Lyon",
+      salary_min: "32 000 €",
+      salary_max: "50 000€",
+      contract_type: "Temps plein,CDI",
+      job_description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut beatae minima hic inventore eum asperiores sequi, aliquam eius incidunt tempora eveniet fugiat adipisci. Cupiditate maiores rem corporis ex, neque possimus.",
+    },
+    {
+      id: 8,
+      nameOffre: "Développeur back-end PHP/Laravel H/F",
+      nameCompany: "HelloCSE",
+      codePostal: "69007",
+      ville: "Lyon",
+      salary_min: "32 000 €",
+      salary_max: "50 000€",
+      contract_type: "Temps plein, CDI",
+      job_description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut beatae minima hic inventore eum asperiores sequi, aliquam eius incidunt tempora eveniet fugiat adipisci. Cupiditate maiores rem corporis ex, neque possimus.",
+    },
   ];
 
   const handleSelect = (id) => {
@@ -62,15 +104,20 @@ export default function OfferSearch() {
   };
 
   return (
-    <div className="box">
-      <div className="offer">
-        {offres.map((offre) => (
-          <div>
-            <div key={offre.id} className="offerTitle">
-              <Link to="/detailsoffer">
-                <p>{offre.nameOffre}</p>
-              </Link>
-
+    <div className="bordure">
+      <div className="box">
+        <div className="offer">
+          {offres.map((offre) => (
+            <div className="suboffer">
+              <div>
+                <titre key={offre.id} className="offerTitle">
+                  <NavLink to="/detailsoffer">
+                    <p>{offre.nameOffre}</p>
+                    <strong>{offre.nameCompany}</strong> - {offre.codePostal}{" "}
+                    {offre.ville}
+                  </NavLink>
+                </titre>
+              </div>
               <button
                 className="btnEtoile"
                 type="button"
@@ -84,14 +131,8 @@ export default function OfferSearch() {
                 />
               </button>
             </div>
-            <Link to="/detailsoffer">
-              <div className="describe">
-                <strong>{offre.nameCompany}</strong> - {offre.codePostal}{" "}
-                {offre.ville}
-              </div>
-            </Link>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

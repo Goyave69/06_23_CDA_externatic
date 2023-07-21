@@ -1,20 +1,22 @@
+import { Link } from "react-router-dom";
 import OfferSearch from "./offerSearch";
 import "./detailsOffre.css";
-import { Link } from "react-router-dom";
 
 export default function DetailsOffer() {
   return (
-    <div className="presntationoffre">
-      <div className="offres">
-        <div>
-          <OfferSearch />
-        </div>
-        <div>
-          <p>Alternance-Développeur Full Stack H/F</p>
-          <img
-            src="./src/assets/Ressources/Externatic/icon.svg"
-            alt="favorie"
-          />
+    <div className="presentationoffre">
+      <OfferSearch />
+      <div className="offre">
+        <div className="details">
+          <div>
+            {" "}
+            <p>Alternance-Développeur Full Stack H/F</p>
+            <img
+              src="./src/assets/Ressources/Externatic/icon.svg"
+              alt="favorie"
+            />
+          </div>
+
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste ea
             reprehenderit corporis, architecto sit sint molestias inventore

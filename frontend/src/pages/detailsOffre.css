@@ -1,32 +1,44 @@
-.presntationoffre {
+* {
+  margin: 0;
+  padding: 0;
+}
+.presentationoffre {
+  width: 90%;
+  margin: auto;
   display: flex;
-  justify-content: center;
+  gap: 90px;
+  margin-bottom: 50px;
 }
-.offres {
-  width: 80%;
+.details {
+  margin: 10px;
 }
-.box {
+
+.border {
+  width: 50%;
+}
+.offer {
+  padding: 10px;
+}
+.offer {
+  height: 70vh;
+}
+.offre {
+  height: 72vh;
   width: 80%;
+  overflow-y: scroll;
+  border-radius: 15px;
+  border: solid black 2px;
+}
+.details > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .btn {
-  width: fit-content;
   background-color: black;
+  width: 25%;
+  margin-top: 50px;
 }
 .btn:hover {
-  background-color: green;
-}
-/* .offres {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 80%;
-} */
-.detailsoffre {
-  margin: auto;
-  border-radius: 25px;
-  border: solid black 2px;
-  font-size: 1.8rem;
-}
-.detailsoffre:hover {
-  border: solid blue 2px;
+  background-color: #851342;
 }
