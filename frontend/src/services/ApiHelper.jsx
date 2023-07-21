@@ -16,6 +16,8 @@ const ApiHelper = async (
     body,
   };
   return fetch(import.meta.env.VITE_BACKEND_URL + route, requestOptions);
+  // return fetch(`http://localhost:5000${route}`, requestOptions); // en dur car problème :
+  // rajoute après .env un élement qui ressort en "undefined"
 };
 
 export default ApiHelper;
