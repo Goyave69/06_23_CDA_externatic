@@ -9,7 +9,33 @@ class userManager extends AbstractManager {
     super({ table: "user" });
   }
 
-  async insert(user) {
+  findCandidate() {
+    return this.connection.query(
+      `select * from  ${this.table} join candidate as c on c.user_id = user.id`
+    );
+  }
+
+  findHeadhunter() {
+    return this.connection.query(
+      `select * from  ${this.table} join headhunter as h on h.user_id = user.id`
+    );
+  }
+
+  findOneCandidate(id) {
+    return this.connection.query(
+      `select * from  ${this.table} join candidate as c on c.user_id = user.id where user.id = ?`,
+      [id]
+    );
+  }
+
+  findOneHeadhunter(id) {
+    return this.connection.query(
+      `select * from  ${this.table} join headhunter as h on h.user_id = user.id where user.id = ?`,
+      [id]
+    );
+  }
+
+  async insert(user, photoUrl) {
     return this.connection.query(
       `insert into ${this.table} (password, role , first_name, last_name, birth_date, phone, email,photo_url, profile_description, adress, subscription_date, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
@@ -20,7 +46,7 @@ class userManager extends AbstractManager {
         user.birth_date,
         user.phone,
         user.email,
-        user.photo_url,
+        photoUrl,
         user.profile_description,
         user.adress,
         user.subscription_date,

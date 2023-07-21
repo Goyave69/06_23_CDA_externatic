@@ -13,7 +13,7 @@ const validateUser = (data, forCreation = true) => {
       .presence(presence),
     phone: Joi.number().positive().presence(presence),
     email: Joi.string().email().presence(presence),
-    photo_url: Joi.string().max(1000).presence(presence),
+    photo_url: Joi.string().allow("").max(1000).presence(presence),
     profile_description: Joi.string().max(1000).presence(presence),
     adress: Joi.string().max(255).presence(presence),
     subscription_date: Joi.string()

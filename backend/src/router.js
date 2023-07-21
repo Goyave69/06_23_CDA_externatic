@@ -7,8 +7,13 @@ const {
 } = require("./middleware/securityMiddleware");
 
 const router = express.Router();
+const upload = require("./services/UploadHelper");
 
 const candidateControllers = require("./controllers/candidateControllers");
+
+const loginController = require("./controllers/authControllers/LoginController");
+
+router.post("/login", loginController);
 
 router.get("/candidate", candidateControllers.browse);
 router.get("/candidate/:id", candidateControllers.read);
@@ -120,20 +125,32 @@ router.delete(
 
 const userControllers = require("./controllers/userControllers");
 
-const loginController = require("./controllers/authControllers/LoginController");
-
-router.post("/login", loginController);
+router.get("/userCandidate", userControllers.getCandidate);
+router.get("/userCandidate/:id", userControllers.getOneCandidate);
+router.get("/userHeadhunter", userControllers.getHeadhunter);
+router.get("/userHeadhunter/:id", userControllers.getOneHeadhunter);
 
 router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
-// router.put("/user/:id", verifyToken, verifyTokenById, userControllers.edit);
-router.put("/user/:id", userControllers.edit);
-router.post("/user", userControllers.add);
+router.put("/user/:id", verifyToken, verifyTokenById, userControllers.edit);
+// router.put("/user/:id", userControllers.edit);
+router.post("/user", upload.single("photo"), userControllers.add);
 router.delete(
   "/user/:id",
   verifyToken,
   verifyTokenById,
   userControllers.destroy
 );
+
+const CreateFileController = require("./controllers/fileControllers/CreateFileController");
+const UpdateFileController = require("./controllers/fileControllers/UpdateFileController");
+
+// Route for handling avatar file upload
+router.post("/", upload.single("photo"), CreateFileController);
+router.put("/:id", upload.single("photo"), UpdateFileController);
+
+// Route for handling CV file upload
+router.post("/cv", upload.array("cv", 3), CreateFileController);
+router.put("/cv/:id", upload.array("cv", 3), UpdateFileController);
 
 module.exports = router;

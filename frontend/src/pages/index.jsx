@@ -1,6 +1,6 @@
 import React from "react";
 import Root from "./root";
-import Home from "./home";
+import Home from "./Home";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import JobOffers from "./jobOffers";
