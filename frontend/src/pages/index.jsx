@@ -16,6 +16,7 @@ import CandidateProfile from "./UserProfile/CandidateProfile";
 import HeadhunterProfile from "./UserProfile/HeadhunterProfile";
 import CompanyDashboard from "./CompanyDashboard";
 import UserDashboard from "./Userdashboard";
+import OffersDashboard from "./OffersDashboard";
 
 const Routes = [
   {
@@ -48,7 +49,7 @@ const Routes = [
         element: <Companies />,
       },
       {
-        path: "/companyDetails",
+        path: "/companyDetails/:id",
         element: <CompaniesDetails />,
       },
       {
@@ -66,6 +67,10 @@ const Routes = [
       {
         path: "/userDashboard",
         element: <UserDashboard />,
+      },
+      {
+        path: "/offersDashboard",
+        element: <OffersDashboard />,
       },
     ],
   },

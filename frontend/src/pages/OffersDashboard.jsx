@@ -27,26 +27,23 @@ export default function AdminDashboard() {
     role = decodedToken.role;
     userId = decodedToken.userId;
   }
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
-      axios
-        .get("http://localhost:5000/company")
-        .then((response) => {
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+    axios
+      .get("http://localhost:5000/job_offers")
+      .then((response) => {
+        setData(response.data); // Mettre à jour les données dans le state
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   const handleEdit = (id) => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .put(`http://localhost:5000/company/${id}`)
+        .put(`http://localhost:5000/job_offers/${id}`)
         .then((response) => {
           setData(response.data);
         })
@@ -59,7 +56,7 @@ export default function AdminDashboard() {
   const handleDelete = (id) => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .delete(`http://localhost:5000/company/${id}`)
+        .delete(`http://localhost:5000/job_offers/${id}`)
         .then((response) => {
           setData(response.data);
         })
@@ -69,27 +66,37 @@ export default function AdminDashboard() {
     }
   };
 
+  // job_offers: id, name, location, job_description, status, contract_type, edition_date
+
   const columns = [
     { field: "id", headerName: "ID", width: 50 },
     {
       field: "name",
-      headerName: "Entreprise",
+      headerName: "Offre d'Emploi",
       width: 350,
     },
     {
-      field: "industry_field",
-      headerName: "Activité",
+      field: "contract_type",
+      headerName: "Type",
       width: 150,
     },
     {
-      field: "adress",
+      field: "location",
       headerName: "Localité",
       width: 200,
     },
     {
-      field: "email",
-      headerName: "Contact",
-      width: 200,
+      field: "edition_date",
+      headerName: "Date Création",
+      type: "number",
+      width: 150,
+    },
+    {
+      field: "nbre_candidats",
+      headerName: "Nbre Candidats",
+      type: "number",
+      align: "center",
+      width: 150,
     },
     {
       field: "actions",
@@ -99,7 +106,7 @@ export default function AdminDashboard() {
       width: 200,
       renderCell: (params) => {
         const { id } = params.row;
-
+        console.warn(params.id);
         return (
           <Box
             sx={{
@@ -134,7 +141,7 @@ export default function AdminDashboard() {
         margin: "auto",
       }}
     >
-      <h2 style={{ textAlign: "center" }}>Les Entreprises Partenaires</h2>
+      <h2 style={{ textAlign: "center" }}>Mes offres</h2>
       <Grid container spacing={2} alignItems="center" sx={{ mb: "15px" }}>
         <Grid item xs={3}>
           <TextField
