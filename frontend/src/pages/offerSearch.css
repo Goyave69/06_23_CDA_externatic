@@ -1,19 +1,17 @@
 .bordure {
   margin: auto;
-  width: 80%;
+  width: 90%;
   border-radius: 25px;
-  border: solid black 4px;
+  border: solid black 2px;
 }
-.box {
-  display: flex;
-}
+
 .bordure:hover {
-  border: solid blue 4px;
+  border: solid blue 2px;
 }
-.offer {
+.offers {
   width: 100%;
-  height: 100vh;
-  margin: 20px;
+  height: 70vh;
+  margin: 10px;
   overflow-y: scroll;
 }
 .suboffer {
@@ -24,7 +22,7 @@
 }
 
 button img {
-  width: 60px;height: 100vh;
+  width: 30px;
 }
 .btnEtoile {
   background-color: transparent;
@@ -42,9 +40,14 @@ strong {
 a {
   color: #000;
   text-decoration: none;
-  /* margin: 2%; */ 
-  /* A renommer cette div par rapport à tes besoins spécifiques, car le margin impacte sur le header */
+  font-size: 2rem;
 }
 .describe {
   padding: 0 15px;
+}
+.offer {
+  padding: 10px;
+  overflow-y: scroll;
+  margin-right: 2%;
+  height: 50vh;
 }

@@ -109,13 +109,15 @@ export default function OfferSearch() {
         <div className="offer">
           {offres.map((offre) => (
             <div className="suboffer">
-              <titre key={offre.id} className="offerTitle">
-                <NavLink to="/detailsoffer">
-                  <p>{offre.nameOffre}</p>
-                  <strong>{offre.nameCompany}</strong> - {offre.codePostal}{" "}
-                  {offre.ville}
-                </NavLink>
-              </titre>
+              <div>
+                <titre key={offre.id} className="offerTitle">
+                  <NavLink to="/detailsoffer">
+                    <p>{offre.nameOffre}</p>
+                    <strong>{offre.nameCompany}</strong> - {offre.codePostal}{" "}
+                    {offre.ville}
+                  </NavLink>
+                </titre>
+              </div>
               <button
                 className="btnEtoile"
                 type="button"

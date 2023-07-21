@@ -5,19 +5,18 @@ import "./detailsOffre.css";
 export default function DetailsOffer() {
   return (
     <div className="presentationoffre">
-      <div className="composant">
-        <OfferSearch />
-      </div>
+      <OfferSearch />
+      <div className="offre">
+        <div className="details">
+          <div>
+            {" "}
+            <p>Alternance-Développeur Full Stack H/F</p>
+            <img
+              src="./src/assets/Ressources/Externatic/icon.svg"
+              alt="favorie"
+            />
+          </div>
 
-      <div className="detailsoffre">
-        <div className="offertitle">
-          <p>Alternance-Développeur Full Stack H/F</p>
-          <img
-            src="./src/assets/Ressources/Externatic/icon.svg"
-            alt="favorie"
-          />
-        </div>
-        <div>
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste ea
             reprehenderit corporis, architecto sit sint molestias inventore

@@ -229,6 +229,7 @@ export default function Header() {
                   maxWidth: 350,
                 }}
               >
+                {" "}
                 <TextField
                   id="outlined-basic"
                   label="Job recherché"
@@ -256,12 +257,15 @@ export default function Header() {
                   ),
                 }}
               />
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#CA2061", width: "200px" }}
-              >
-                RECHERCHE
-              </Button>
+              <NavLink to="/OfferSearch">
+                {" "}
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#CA2061", width: "200px" }}
+                >
+                  RECHERCHE
+                </Button>
+              </NavLink>
             </Box>
             <Box className="contractType">
               <Box
