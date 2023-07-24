@@ -143,23 +143,7 @@ export default function Header() {
                     height: "50%",
                   }}
                 >
-                  CANDIDAT
-                </Button>
-              </NavLink>
-            )}
-
-            {!firstName && !lastName && (
-              <NavLink to="/login">
-                <Button
-                  variant="contained"
-                  style={{
-                    backgroundColor: "black",
-                    width: "120px",
-                    borderRadius: 35,
-                    height: "50%",
-                  }}
-                >
-                  ENTREPRISE
+                  CONNEXION
                 </Button>
               </NavLink>
             )}

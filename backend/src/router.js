@@ -25,8 +25,11 @@ router.put(
 );
 router.post(
   "/candidate",
-  verifyToken,
-  verifyTokenByRoleAdminOrCandidate,
+  upload.fields([
+    { name: "cv", maxCount: 1 },
+    { name: "lm", maxCount: 1 },
+    { name: "avatar", maxCount: 1 },
+  ]),
   candidateControllers.add
 );
 router.delete(

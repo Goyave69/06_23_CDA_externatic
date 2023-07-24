@@ -1,5 +1,8 @@
 const models = require("../models");
-const validator = require("../services/validators/candidateValidators");
+const candidateValidator = require("../services/validators/candidateValidators");
+// const userValidator = require("../services/validators/userValidators");
+const validator = require("../services/validators/userValidators");
+const { passwordHasher } = require("../services/passwordHelper");
 
 const browse = (req, res) => {
   models.candidate
@@ -54,18 +57,49 @@ const edit = (req, res) => {
       });
   }
 };
-const add = (req, res) => {
-  const candidate = req.body;
+const add = async (req, res) => {
+  const data = JSON.parse(req.body.data);
+  data.password = await passwordHasher(data.password);
+
+  const candidateData = JSON.parse(req.body.candidateData);
+  const { cv, lm, avatar } = req.files;
+  data.photo_url = avatar[0].filename;
+  candidateData.cv_url = cv[0].filename;
+  candidateData.motivation_letter_url = lm[0].filename;
+  console.log(data);
+  console.log(candidateData);
 
   // TODO validations (length, format...)
-  const { error } = validator.validateCandidate(candidate);
-  if (error) {
-    res.status(422).json({ validationErrors: error.details });
+
+  const { error: userError } = validator.validateUser(data);
+
+  if (userError) {
+    res.status(422).json({ validationErrors: userError.details });
   } else {
-    models.candidate
-      .insert(candidate)
+    models.user
+      .insert(data)
       .then(([result]) => {
-        res.location(`/candidates/${result.insertId}`).sendStatus(201);
+        const userId = result.insertId; // Extract the user_id from the result
+        candidateData.user_id = userId; // Associate the user_id with candidateData
+        const { error: candidateError } =
+          candidateValidator.validateCandidate(candidateData);
+        if (candidateError) {
+          res.status(422).json({ validationErrors: candidateError.details });
+        }
+        return userId;
+        // Insert the candidate data
+      })
+      .then(() => {
+        models.candidate
+          .insert(candidateData)
+          .then(() => {
+            // console.log(response.userId);
+            // res.location(`/candidate/${userId}`).sendStatus(201);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
       })
       .catch((err) => {
         console.error(err);

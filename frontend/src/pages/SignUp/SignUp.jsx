@@ -104,7 +104,7 @@ function SignUp() {
         status: 1,
       });
       formData.append("data", userData);
-      formData.append("photo", photoInputRef.current.files[0]);
+      formData.append("avatar", photoInputRef.current.files[0]);
       const candidateData = JSON.stringify({
         profession,
         researched_job,
@@ -117,12 +117,9 @@ function SignUp() {
       });
       formData.append("candidateData", candidateData);
       formData.append("cv", cvInputRef.current.files[0]);
-      formData.append(
-        "motivation_letter",
-        motivation_letterInputRef.current.files[0]
-      );
+      formData.append("lm", motivation_letterInputRef.current.files[0]);
 
-      await ApiHelper("/user", "POST", null, formData, "")
+      await ApiHelper("/candidate", "POST", null, formData, "")
         .then((response) => response.json())
         .then(async (result) => {
           await ApiHelper("/candidate", "POST", null, formData, "");
