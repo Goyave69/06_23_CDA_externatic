@@ -114,41 +114,19 @@ const edit = async (req, res) => {
   }
 };
 
-const add = async (req, res) => {
-  const data = JSON.parse(req.body.data);
-  const photo = req.file;
-  data.photo_url = photo.filename;
-  data.password = await passwordHasher(data.password);
-
-  const headhunterData = JSON.parse(req.body.headhunterData);
+const add = (req, res) => {
+  const user = req.body;
 
   // TODO validations (length, format...)
-  const { error } = validator.validateUser(data);
 
+  const { error } = validator.validateUser(user);
   if (error) {
     res.status(422).json({ validationErrors: error.details });
   } else {
     models.user
-      .insert(data)
+      .insert(user)
       .then(([result]) => {
-        const userId = result.insertId; // Extract the user_id from the result
-        headhunterData.user_id = userId;
-
-        const { error: candidateError } =
-          headhunterValidator.validateHeadhunter(headhunterData);
-        if (candidateError) {
-          res.status(422).json({ validationErrors: candidateError.details });
-        }
-
-        models.headhunter
-          .insert(headhunterData)
-          .then(() => {
-            res.location(`/user/${userId}`).sendStatus(201);
-          })
-          .catch((err) => {
-            console.error(err);
-            res.sendStatus(500);
-          });
+        res.location(`/user/${result.insertId}`).sendStatus(201);
       })
       .catch((err) => {
         console.error(err);

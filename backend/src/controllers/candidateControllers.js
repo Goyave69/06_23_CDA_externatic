@@ -86,15 +86,10 @@ const add = async (req, res) => {
         if (candidateError) {
           res.status(422).json({ validationErrors: candidateError.details });
         }
-        return userId;
-        // Insert the candidate data
-      })
-      .then(() => {
         models.candidate
           .insert(candidateData)
           .then(() => {
-            // console.log(response.userId);
-            // res.location(`/candidate/${userId}`).sendStatus(201);
+            res.location(`/candidate/${userId}`).sendStatus(201);
           })
           .catch((err) => {
             console.error(err);

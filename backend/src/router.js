@@ -72,12 +72,7 @@ router.put(
   verifyTokenByRoleAdminOrHeadhunter,
   headhunterControllers.edit
 );
-router.post(
-  "/headhunter",
-  verifyToken,
-  verifyTokenByRoleAdminOrHeadhunter,
-  headhunterControllers.add
-);
+router.post("/headhunter", upload.single("photo"), headhunterControllers.add);
 router.delete(
   "/headhunter/:id",
   verifyToken,
@@ -136,24 +131,12 @@ router.get("/userHeadhunter/:id", userControllers.getOneHeadhunter);
 router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
 router.put("/user/:id", verifyToken, verifyTokenById, userControllers.edit);
-// router.put("/user/:id", userControllers.edit);
-router.post("/user", upload.single("photo"), userControllers.add);
+router.post("/user", userControllers.add);
 router.delete(
   "/user/:id",
   verifyToken,
   verifyTokenById,
   userControllers.destroy
 );
-
-const CreateFileController = require("./controllers/fileControllers/CreateFileController");
-const UpdateFileController = require("./controllers/fileControllers/UpdateFileController");
-
-// Route for handling avatar file upload
-router.post("/", upload.single("photo"), CreateFileController);
-router.put("/:id", upload.single("photo"), UpdateFileController);
-
-// Route for handling CV file upload
-router.post("/cv", upload.array("cv", 3), CreateFileController);
-router.put("/cv/:id", upload.array("cv", 3), UpdateFileController);
 
 module.exports = router;

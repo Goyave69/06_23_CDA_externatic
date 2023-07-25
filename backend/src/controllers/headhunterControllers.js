@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 const models = require("../models");
-const validator = require("../services/validators/headhunterValidators");
+const headhunterValidator = require("../services/validators/headhunterValidators");
+const validator = require("../services/validators/userValidators");
+const { passwordHasher } = require("../services/passwordHelper");
 
 const browse = (req, res) => {
   models.headhunter
@@ -55,19 +57,42 @@ const edit = (req, res) => {
       });
   }
 };
-const add = (req, res) => {
-  const headhunter = req.body;
+
+const add = async (req, res) => {
+  const data = JSON.parse(req.body.data);
+  const photo = req.file;
+  data.photo_url = photo.filename;
+  data.password = await passwordHasher(data.password);
+
+  const headhunterData = JSON.parse(req.body.headhunterData);
 
   // TODO validations (length, format...)
+  const { error } = validator.validateUser(data);
 
-  const { error } = validator.validateHeadhunter(headhunter);
   if (error) {
     res.status(422).json({ validationErrors: error.details });
   } else {
-    models.headhunter
-      .insert(headhunter)
+    models.user
+      .insert(data)
       .then(([result]) => {
-        res.location(`/headhunter/${result.insertId}`).sendStatus(201);
+        const userId = result.insertId; // Extract the user_id from the result
+        headhunterData.user_id = userId;
+
+        const { error: headhunterError } =
+          headhunterValidator.validateHeadhunter(headhunterData);
+        if (headhunterError) {
+          res.status(422).json({ validationErrors: headhunterError.details });
+        }
+
+        models.headhunter
+          .insert(headhunterData)
+          .then(() => {
+            res.location(`/user/${userId}`).sendStatus(201);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
       })
       .catch((err) => {
         console.error(err);
