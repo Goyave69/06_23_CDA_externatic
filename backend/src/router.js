@@ -21,6 +21,11 @@ router.put(
   "/candidate/:id",
   verifyToken,
   verifyTokenByRoleAdminOrCandidate,
+  upload.fields([
+    { name: "cv", maxCount: 1 },
+    { name: "lm", maxCount: 1 },
+    { name: "avatar", maxCount: 1 },
+  ]),
   candidateControllers.edit
 );
 router.post(
@@ -70,6 +75,7 @@ router.put(
   "/headhunter/:id",
   verifyToken,
   verifyTokenByRoleAdminOrHeadhunter,
+  upload.single("photo"),
   headhunterControllers.edit
 );
 router.post("/headhunter", upload.single("photo"), headhunterControllers.add);

@@ -119,18 +119,16 @@ function SignUp() {
       formData.append("cv", cvInputRef.current.files[0]);
       formData.append("lm", motivation_letterInputRef.current.files[0]);
 
-      ApiHelper("/candidate", "POST", null, formData, "").then(async () => {
-        ApiHelper("/candidate", "POST", null, formData, "").then(() => {
-          ApiHelper("/login", "POST", null, JSON.stringify({ email, password }))
-            .then((response) => response.json())
-            .then((result) => {
-              console.log(result.token);
-              if (result.token) {
-                setToken(result.token);
-              }
-              navigate("/");
-            });
-        });
+      ApiHelper("/candidate", "POST", null, formData, "").then(() => {
+        ApiHelper("/login", "POST", null, JSON.stringify({ email, password }))
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result.token);
+            if (result.token) {
+              setToken(result.token);
+            }
+            navigate("/");
+          });
       });
     }
   };
@@ -183,18 +181,16 @@ function SignUp() {
 
       formData.append("headhunterData", headhunterData);
 
-      ApiHelper("/headhunter", "POST", null, formData, "").then(async () => {
-        ApiHelper("/headhunter", "POST", null, formData, "").then(() => {
-          ApiHelper("/login", "POST", null, JSON.stringify({ email, password }))
-            .then((response) => response.json())
-            .then((result) => {
-              console.log(result.token);
-              if (result.token) {
-                setToken(result.token);
-              }
-              navigate("/");
-            });
-        });
+      ApiHelper("/headhunter", "POST", null, formData, "").then(() => {
+        ApiHelper("/login", "POST", null, JSON.stringify({ email, password }))
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result.token);
+            if (result.token) {
+              setToken(result.token);
+            }
+            navigate("/");
+          });
       });
     }
   };
