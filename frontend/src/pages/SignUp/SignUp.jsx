@@ -120,7 +120,7 @@ function SignUp() {
       formData.append("lm", motivation_letterInputRef.current.files[0]);
 
       ApiHelper("/candidate", "POST", null, formData, "").then(async () => {
-        await ApiHelper("/candidate", "POST", null, formData, "").then(() => {
+        ApiHelper("/candidate", "POST", null, formData, "").then(() => {
           ApiHelper("/login", "POST", null, JSON.stringify({ email, password }))
             .then((response) => response.json())
             .then((result) => {
