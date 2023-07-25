@@ -66,8 +66,8 @@ const add = async (req, res) => {
   data.photo_url = avatar[0].filename;
   candidateData.cv_url = cv[0].filename;
   candidateData.motivation_letter_url = lm[0].filename;
-  console.log(data);
-  console.log(candidateData);
+  // console.log(data);
+  // console.log(candidateData);
 
   // TODO validations (length, format...)
 

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 const models = require("../models");
+const headhunterValidator = require("../services/validators/headhunterValidators");
 const validator = require("../services/validators/userValidators");
 const { passwordHasher } = require("../services/passwordHelper");
 
@@ -112,46 +113,42 @@ const edit = async (req, res) => {
       });
   }
 };
+
 const add = async (req, res) => {
-  const newUser = JSON.parse(req.body.data);
-  newUser.password = await passwordHasher(newUser.password);
+  const data = JSON.parse(req.body.data);
+  const photo = req.file;
+  data.photo_url = photo.filename;
+  data.password = await passwordHasher(data.password);
 
   const headhunterData = JSON.parse(req.body.headhunterData);
 
   // TODO validations (length, format...)
-  const { error } = validator.validateUser(newUser);
+  const { error } = validator.validateUser(data);
 
   if (error) {
     res.status(422).json({ validationErrors: error.details });
   } else {
     models.user
-      .insert(newUser, req.file.filename)
+      .insert(data)
       .then(([result]) => {
         const userId = result.insertId; // Extract the user_id from the result
-
         headhunterData.user_id = userId;
 
-        if (newUser?.role === "ROLE_CANDIDATE") {
-          models.candidate
-            .insert(newUser)
-            .then(() => {
-              res.location(`/user/${userId}`).sendStatus(201);
-            })
-            .catch((err) => {
-              console.error(err);
-              res.sendStatus(500);
-            });
-        } else {
-          models.headhunter
-            .insert(headhunterData)
-            .then(() => {
-              res.location(`/user/${userId}`).sendStatus(201);
-            })
-            .catch((err) => {
-              console.error(err);
-              res.sendStatus(500);
-            });
+        const { error: candidateError } =
+          headhunterValidator.validateHeadhunter(headhunterData);
+        if (candidateError) {
+          res.status(422).json({ validationErrors: candidateError.details });
         }
+
+        models.headhunter
+          .insert(headhunterData)
+          .then(() => {
+            res.location(`/user/${userId}`).sendStatus(201);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
       })
       .catch((err) => {
         console.error(err);
