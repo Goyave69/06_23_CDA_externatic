@@ -4,6 +4,7 @@ const {
   verifyTokenById,
   verifyTokenByRoleAdminOrCandidate,
   verifyTokenByRoleAdminOrHeadhunter,
+  verifyTokenByRoleAdminOrSelfId,
 } = require("./middleware/securityMiddleware");
 
 const router = express.Router();
@@ -14,6 +15,8 @@ const candidateControllers = require("./controllers/candidateControllers");
 const loginController = require("./controllers/authControllers/LoginController");
 
 router.post("/login", loginController);
+
+router.get("/candidateDashboard", candidateControllers.getCandidateWithUser);
 
 router.get("/candidate", candidateControllers.browse);
 router.get("/candidate/:id", candidateControllers.read);
@@ -138,7 +141,7 @@ router.post("/user", upload.single("photo"), userControllers.add);
 router.delete(
   "/user/:id",
   verifyToken,
-  verifyTokenById,
+  verifyTokenByRoleAdminOrSelfId,
   userControllers.destroy
 );
 
