@@ -10,31 +10,6 @@ import { useToken } from "../../context/TokenContext";
 import ApiHelper from "../../services/ApiHelper";
 
 function CandidateProfile() {
-  // // User states for update
-  // const [first_name, setFirstName] = useState("");
-  // const [last_name, setLastName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [uploadedPhotoUrl, setUploadedPhotoUrl] = useState("");
-  // const [role, setRole] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [password_confirmation, setPasswordConfirmation] = useState("");
-  // const [birth_date, setBirth_date] = useState("");
-  // const [phone, setPhone] = useState("");
-  // const [profile_description, setProfile_description] = useState("");
-  // const [adress, setAdress] = useState("");
-
-  // // Candidate states for update
-
-  // const [profession, setProfession] = useState("");
-  // const [researched_job, setResearched_job] = useState("");
-  // const [job_search_location, setJob_search_location] = useState("");
-  // const [availability_date, setAvailability_date] = useState("");
-  // const [skills, setSkills] = useState("");
-  // const [languages, setLanguages] = useState("");
-  // const [uploadedCv_url, setUploadedCv_url] = useState("");
-  // const [uploadedMotivation_letter_url, setUploadedMotivation_letter_url] =
-  //   useState("");
-
   const [data, setData] = useState([]);
 
   const handleChange = (e) => {
@@ -127,12 +102,13 @@ function CandidateProfile() {
         photo_url: data.photo_url,
         password: data.password,
         role: data.role,
-        birth_date: data.date,
+        birth_date: data.birth_date.split("T")[0],
         phone: data.phone,
         profile_description: data.profile_description,
         adress: data.adress,
       });
       formData.append("data", userData);
+      formData.append("userId", userId);
       formData.append("avatar", photoInputRef.current.files[0]);
       const candidateData = JSON.stringify({
         profession: data.profession,
@@ -147,7 +123,20 @@ function CandidateProfile() {
       formData.append("candidateData", candidateData);
       formData.append("cv", cvInputRef.current.files[0]);
       formData.append("lm", motivation_letterInputRef.current.files[0]);
-      ApiHelper(`/candidate/${data.id}`, "PUT", token, formData, "").then();
+      ApiHelper(`/candidate/${data.id}`, "PUT", token, formData, "").then(
+        (res) => console.log(res)
+      );
+      window.location.reload();
+    }
+  };
+  const handleDeleteCandidate = async () => {
+    if (window.confirm("Are you sure you want to delete your profile?")) {
+      try {
+        await ApiHelper(`/candidate/${data.id}`, "DELETE", token, null, "");
+        alert("Profile deleted successfully.");
+      } catch (error) {
+        alert("Failed to delete profile. Please try again later.");
+      }
     }
   };
 
@@ -283,7 +272,7 @@ function CandidateProfile() {
                   label="Compétences"
                   variant="standard"
                   value={data.skills}
-                  name="profession"
+                  name="skills"
                   onChange={handleChange}
                   fullWidth
                   InputProps={{
@@ -365,7 +354,7 @@ function CandidateProfile() {
                       label="Nom"
                       variant="standard"
                       value={data.last_name}
-                      name="first_name"
+                      name="last_name"
                       onChange={handleChange}
                       fullWidth
                       InputProps={{
@@ -665,6 +654,16 @@ function CandidateProfile() {
                 style={{ backgroundColor: "#000000", width: "120px" }}
               >
                 ENREGISTRER
+              </Button>
+            </div>
+            <div className="deleteButton" style={{ marginBottom: "10px" }}>
+              <Button
+                variant="contained"
+                size="small"
+                onClick={handleDeleteCandidate}
+                style={{ backgroundColor: "#ff0000", width: "120px" }}
+              >
+                DELETE
               </Button>
             </div>
           </div>
