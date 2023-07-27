@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import { Grid } from "@mui/material";
 
 import axios from "axios";
@@ -21,6 +18,9 @@ export default function AdminDashboard() {
   let role = "";
   let userId = "";
 
+  // const [search, setSearch] = useState("");
+  // console.warn(search); // FIXME:
+
   if (token) {
     const decodedToken = jwt_decode(token);
     role = decodedToken.role;
@@ -30,7 +30,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user")
+      .get("http://localhost:5000/candidateDashboard")
       .then((response) => {
         setData(response.data); // Mettre à jour les données dans le state
       })
@@ -39,24 +39,13 @@ export default function AdminDashboard() {
       });
   }, []);
 
-  // FIXME: seul l'utilisateur peut éditer SON profil
-  // const handleEdit = (id) => {
-  //   if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
-  //     axios
-  //       .put(`http://localhost:5000/user/${id}`)
-  //       .then((response) => {
-  //         setData(response.data);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   }
-  // };
-
+  // FIXME: Delete en "cascade" car user lié à HeadHunter par ID => Delete enfant ou parent en premier ?
   const handleDelete = (id) => {
-    if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
+    if (role.includes("ROLE_ADMIN") || role.includes("ROLE_HEADHUNTER")) {
       axios
-        .delete(`http://localhost:5000/user/${id}`)
+        .delete(`http://localhost:5000/user/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
         .then((response) => {
           setData(response.data);
         })
@@ -66,91 +55,37 @@ export default function AdminDashboard() {
     }
   };
 
-  // const rows = [
-  //   {
-  //     id: 1,
-  //     userName: "Dark Vador",
-  //     type: "Candidat",
-  //     profession: "Développeur Web Fullstask",
-  //     date_creation: "29/02/2023",
-  //     status: "inscrit",
-  //   },
-  //   {
-  //     id: 2,
-  //     userName: "Emile Louis",
-  //     type: "Recruteur",
-  //     profession: "Ressources Humaines",
-  //     date_creation: "14/02/2023",
-  //     status: "inscrit",
-  //   },
-  //   {
-  //     id: 3,
-  //     userName: "Bilbon Saquet",
-  //     type: "Candidat",
-  //     profession: "Développeur Frontend",
-  //     date_creation: "15/08/2023",
-  //     status: "Attente de validation",
-  //   },
-  //   {
-  //     id: 4,
-  //     userName: "Jeffrey Dahmer",
-  //     type: "Recruteur",
-  //     profession: "Ressources Humaines",
-  //     date_creation: "14/07/2023",
-  //     status: "inscrit",
-  //   },
-  //   {
-  //     id: 5,
-  //     userName: "Catherine Nay",
-  //     type: "Candidat",
-  //     profession: "Développeuse Web Fullstack",
-  //     date_creation: "12/01/2023",
-  //     status: "inscrit",
-  //   },
-  //   {
-  //     id: 6,
-  //     userName: "Charles Manson",
-  //     type: "Recruteur",
-  //     profession: "Ressources Humaines",
-  //     date_creation: "01/01/2023",
-  //     status: "inscrit",
-  //   },
-  //   {
-  //     id: 7,
-  //     userName: "Anne Rice",
-  //     type: "Candidat",
-  //     profession: "Développeuse Backend",
-  //     date_creation: "01/01/2023",
-  //     status: "Attente de validation",
-  //   },
-  // ];
-
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
     {
       field: "last_name",
-      headerName: "Nom & Prénom",
-      width: 350,
+      headerName: "Nom",
+      width: 150,
     },
     {
-      field: "contract_type",
-      headerName: "Type",
-      width: 150,
+      field: "first_name",
+      headerName: "Prénom",
+      width: 100,
+    },
+    {
+      field: "researched_job",
+      headerName: "Recherche",
+      width: 250,
     },
     {
       field: "profession",
       headerName: "Profession",
-      width: 250,
+      width: 200,
     },
     {
-      field: "edition_date",
-      headerName: "Date Inscription",
+      field: "availability_date",
+      headerName: "Date disponibilité",
       type: "number",
       width: 190,
     },
     {
-      field: "status",
-      headerName: "Status",
+      field: "job_search_location",
+      headerName: "Recherche géographique",
       width: 250,
     },
     {
@@ -161,7 +96,7 @@ export default function AdminDashboard() {
       width: 200,
       renderCell: (params) => {
         const { id } = params.row;
-        console.warn(params.id);
+        // console.warn(params.id);
         return (
           <Box
             sx={{
@@ -170,11 +105,11 @@ export default function AdminDashboard() {
               justifyContent: "space-around",
             }}
           >
-            <Box>
+            {/* <Box>
               <IconButton aria-label="edit" onClick={() => handleEdit(id)}>
                 <EditIcon />
               </IconButton>
-            </Box>
+            </Box> */}
             <Box>
               <IconButton aria-label="delete" onClick={() => handleDelete(id)}>
                 <DeleteIcon />
@@ -196,36 +131,8 @@ export default function AdminDashboard() {
         margin: "auto",
       }}
     >
-      <h2 style={{ textAlign: "center" }}>Mes offres</h2>
-      <Grid container spacing={2} alignItems="center" sx={{ mb: "15px" }}>
-        <Grid item xs={3}>
-          <TextField
-            id="outlined-password-input"
-            label="Offres, Type de contrat..."
-            type="searchInput"
-            autoComplete="current-password"
-          />
-        </Grid>
-        <Grid item xs={3}>
-          <TextField
-            id="outlined-where-input"
-            label="Où ?..."
-            type="searchInput"
-            autoComplete="current-location"
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <IconButton aria-label="filter">
-            <FilterListRoundedIcon />
-          </IconButton>
-        </Grid>
+      <h2 style={{ textAlign: "center" }}>Liste des candidats</h2>
 
-        <Grid item xs={2}>
-          <IconButton aria-label="setup">
-            <SettingsRoundedIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
       <Box sx={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={data}
