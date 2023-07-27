@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import { Grid } from "@mui/material";
 
 import axios from "axios";
@@ -40,18 +37,19 @@ export default function AdminDashboard() {
       });
   }, []);
 
-  const handleEdit = (id) => {
-    if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
-      axios
-        .put(`http://localhost:5000/job_offers/${id}`)
-        .then((response) => {
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  };
+  // TODO: renvoyer au forumlaire d'édition de l'offre
+  // const handleEdit = (id) => {
+  //   if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
+  //     axios
+  //       .put(`http://localhost:5000/job_offers/${id}`)
+  //       .then((response) => {
+  //         setData(response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   }
+  // };
 
   const handleDelete = (id) => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
@@ -143,27 +141,6 @@ export default function AdminDashboard() {
     >
       <h2 style={{ textAlign: "center" }}>Mes offres</h2>
       <Grid container spacing={2} alignItems="center" sx={{ mb: "15px" }}>
-        <Grid item xs={3}>
-          <TextField
-            id="outlined-password-input"
-            label="Offres, Type de contrat..."
-            type="searchInput"
-            autoComplete="current-password"
-          />
-        </Grid>
-        <Grid item xs={3}>
-          <TextField
-            id="outlined-where-input"
-            label="Où ?..."
-            type="searchInput"
-            autoComplete="current-location"
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <IconButton aria-label="filter">
-            <FilterListRoundedIcon />
-          </IconButton>
-        </Grid>
         <Grid item xs={2}>
           <Button
             variant="contained"
@@ -171,11 +148,6 @@ export default function AdminDashboard() {
           >
             + Nouvelle Offre
           </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <IconButton aria-label="setup">
-            <SettingsRoundedIcon />
-          </IconButton>
         </Grid>
       </Grid>
       <Box sx={{ height: 400, width: "100%" }}>
