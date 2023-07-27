@@ -28,7 +28,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/job_offers")
+      .get("http://localhost:5550/job_offers")
       .then((response) => {
         setData(response.data); // Mettre à jour les données dans le state
       })
@@ -54,7 +54,7 @@ export default function AdminDashboard() {
   const handleDelete = (id) => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .delete(`http://localhost:5000/job_offers/${id}`)
+        .delete(`http://localhost:5550/job_offers/${id}`)
         .then((response) => {
           setData(response.data);
         })

@@ -30,7 +30,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/candidateDashboard")
+      .get("http://localhost:5550/candidateDashboard")
       .then((response) => {
         setData(response.data); // Mettre à jour les données dans le state
       })
@@ -43,7 +43,7 @@ export default function AdminDashboard() {
   const handleDelete = (id) => {
     if (role.includes("ROLE_ADMIN") || role.includes("ROLE_HEADHUNTER")) {
       axios
-        .delete(`http://localhost:5000/user/${id}`, {
+        .delete(`http://localhost:5550/user/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
