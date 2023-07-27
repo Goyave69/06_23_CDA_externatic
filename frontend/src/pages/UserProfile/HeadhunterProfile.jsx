@@ -8,6 +8,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import { useToken } from "../../context/TokenContext";
+import ApiHelper from "../../services/ApiHelper";
 
 function HeadhunterProfile() {
   const [data, setData] = useState([]);
@@ -70,19 +71,52 @@ function HeadhunterProfile() {
 
   const age = calculateAge(data.birth_date);
 
-  const handleFormSubmit = (event) => {
+  // Update function
+
+  const handleUpdateHeadhunter = async (event) => {
     event.preventDefault();
-    // Send a POST request to the backend with the updated data
-    axios
-      .put(`${VITE_BACKEND_URL}/userHeadhunter/${userId}`, data)
-      .then((response) => {
-        // Handle the response if needed
-        console.log("Headhunter profile updated successfully:", response.data);
-      })
-      .catch((error) => {
-        // Handle errors if any
-        console.error("Error updating headhunter profile:", error);
+
+    const formData = new FormData();
+    if (
+      data.first_name &&
+      data.last_name &&
+      data.email &&
+      data.birth_date &&
+      data.phone &&
+      data.profile_description &&
+      data.adress &&
+      data.profession &&
+      data.researched_job &&
+      data.job_search_location &&
+      data.availability_date &&
+      data.skills &&
+      data.languages
+    ) {
+      const userData = JSON.stringify({
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        photo_url: data.photo_url,
+        password: data.password,
+        role: data.role,
+        birth_date: data.birth_date.split("T")[0],
+        phone: data.phone,
+        profile_description: data.profile_description,
+        adress: data.adress,
       });
+      formData.append("data", userData);
+      formData.append("userId", userId);
+      formData.append("photo", photoInputRef.current.files[0]);
+      const headhunterData = JSON.stringify({
+        skills_area: data.skills_area,
+        research_sector: data.research_sector,
+      });
+      formData.append("headhunterData", headhunterData);
+      ApiHelper(`/headhunter/${data.id}`, "PUT", token, formData, "").then(
+        (res) => console.log(res)
+      );
+      window.location.reload();
+    }
   };
 
   return (
@@ -107,7 +141,7 @@ function HeadhunterProfile() {
       >
         MON PROFIL
       </div>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleUpdateHeadhunter}>
         <div
           className="leftAndRightProfile"
           style={{
@@ -419,6 +453,7 @@ function HeadhunterProfile() {
               <Button
                 variant="contained"
                 size="small"
+                type="submit"
                 style={{ backgroundColor: "#000000", width: "120px" }}
               >
                 ENREGISTRER

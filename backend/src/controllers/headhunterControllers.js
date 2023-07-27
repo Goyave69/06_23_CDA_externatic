@@ -32,31 +32,85 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
-  const headhunter = req.body;
+const edit = async (req, res) => {
+  const data = JSON.parse(req.body.data);
+  const photo = req.file;
+  if (photo) {
+    data.photo_url = photo.filename;
+  }
+  data.password = await passwordHasher(data.password);
+  const headhunterData = JSON.parse(req.body.candidateData);
 
-  // TODO validations (length, format...)
-
-  const { error } = validator.validateHeadhunter(headhunter, false);
-  if (error) {
-    res.status(422).json({ validationErrors: error.details });
+  const { error: userError } = validator.validateUser(data, false);
+  if (userError) {
+    res.status(422).json({ validationErrors: userError.details });
   } else {
     const id = parseInt(req.params.id, 10);
-    models.headhunter
-      .update(id, headhunter)
-      .then(([result]) => {
-        if (result.affectedRows === 0) {
-          res.sendStatus(404);
-        } else {
-          res.sendStatus(204);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
+
+    try {
+      // First, update the user table
+      const [userUpdateResult] = await models.user.update(
+        req.body.userId,
+        data
+      );
+      if (userUpdateResult.affectedRows === 0) {
+        return res.sendStatus(404);
+      }
+
+      // Validate the candidate data
+      const { error: headhunterError } = headhunterValidator.validateCandidate(
+        headhunterData,
+        false
+      );
+      if (headhunterError) {
+        return res
+          .status(422)
+          .json({ validationErrors: headhunterError.details });
+      }
+
+      // Next, update the candidate table
+      const [headhunterUpdateResult] = await models.headhunter.update(
+        id,
+        headhunterData
+      );
+      if (headhunterUpdateResult.affectedRows === 0) {
+        return res.sendStatus(404);
+      }
+
+      // If everything is successful, send the final response
+      return res.sendStatus(204);
+    } catch (err) {
+      console.error(err);
+      return res.sendStatus(500);
+    }
   }
 };
+
+// const edit = (req, res) => {
+//   const headhunter = req.body;
+
+//   // TODO validations (length, format...)
+
+//   const { error } = validator.validateHeadhunter(headhunter, false);
+//   if (error) {
+//     res.status(422).json({ validationErrors: error.details });
+//   } else {
+//     const id = parseInt(req.params.id, 10);
+//     models.headhunter
+//       .update(id, headhunter)
+//       .then(([result]) => {
+//         if (result.affectedRows === 0) {
+//           res.sendStatus(404);
+//         } else {
+//           res.sendStatus(204);
+//         }
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//         res.sendStatus(500);
+//       });
+//   }
+// };
 
 const add = async (req, res) => {
   const data = JSON.parse(req.body.data);
@@ -67,10 +121,10 @@ const add = async (req, res) => {
   const headhunterData = JSON.parse(req.body.headhunterData);
 
   // TODO validations (length, format...)
-  const { error } = validator.validateUser(data);
+  const { error: userError } = validator.validateUser(data);
 
-  if (error) {
-    res.status(422).json({ validationErrors: error.details });
+  if (userError) {
+    res.status(422).json({ validationErrors: userError.details });
   } else {
     models.user
       .insert(data)
