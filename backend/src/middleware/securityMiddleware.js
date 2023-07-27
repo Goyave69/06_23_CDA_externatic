@@ -64,10 +64,25 @@ const verifyTokenByRoleAdminOrCandidate = (req, res, next) => {
     res.sendStatus(401);
   }
 };
+const verifyTokenByRoleAdminOrSelfId = (req, res, next) => {
+  try {
+    if (
+      !req.payload.role.includes("ROLE_ADMIN") &&
+      req.payload.userId !== parseInt(req.params.id, 10)
+    ) {
+      throw new Error("Token payload Role Admin does not match requested role");
+    }
+    next();
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(401);
+  }
+};
 
 module.exports = {
   verifyToken,
   verifyTokenById,
   verifyTokenByRoleAdminOrHeadhunter,
   verifyTokenByRoleAdminOrCandidate,
+  verifyTokenByRoleAdminOrSelfId,
 };
