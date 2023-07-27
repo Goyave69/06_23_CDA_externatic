@@ -8,16 +8,19 @@ export function useToken() {
 }
 
 export default function TokenProvider({ children }) {
-  const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("token")) || ""
-  );
+  const storedToken = localStorage.getItem("token");
+  const initialToken = storedToken ? JSON.parse(storedToken) : "";
 
-  localStorage.setItem("token", JSON.stringify(token));
+  const [token, setToken] = useState(initialToken);
 
+  const updateTokenInLocalStorage = (newToken) => {
+    setToken(newToken);
+    localStorage.setItem("token", JSON.stringify(newToken));
+  };
   const contextValue = useMemo(
     () => ({
       token,
-      setToken,
+      setToken: updateTokenInLocalStorage,
     }),
     [token]
   );

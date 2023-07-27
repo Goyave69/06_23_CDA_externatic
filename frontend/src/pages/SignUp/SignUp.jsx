@@ -104,7 +104,7 @@ function SignUp() {
         status: 1,
       });
       formData.append("data", userData);
-      formData.append("photo", photoInputRef.current.files[0]);
+      formData.append("avatar", photoInputRef.current.files[0]);
       const candidateData = JSON.stringify({
         profession,
         researched_job,
@@ -117,19 +117,19 @@ function SignUp() {
       });
       formData.append("candidateData", candidateData);
       formData.append("cv", cvInputRef.current.files[0]);
-      formData.append(
-        "motivation_letter",
-        motivation_letterInputRef.current.files[0]
-      );
+      formData.append("lm", motivation_letterInputRef.current.files[0]);
 
-      await ApiHelper("/user", "POST", null, formData, "")
-        .then((response) => response.json())
-        .then(async (result) => {
-          await ApiHelper("/candidate", "POST", null, formData, "");
-          console.error(result.token);
-          return setToken(result.token);
-        })
-        .then(() => navigate("/"));
+      ApiHelper("/candidate", "POST", null, formData, "").then(() => {
+        ApiHelper("/login", "POST", null, JSON.stringify({ email, password }))
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result.token);
+            if (result.token) {
+              setToken(result.token);
+            }
+            navigate("/");
+          });
+      });
     }
   };
 
@@ -181,14 +181,17 @@ function SignUp() {
 
       formData.append("headhunterData", headhunterData);
 
-      await ApiHelper("/user", "POST", null, formData, "")
-        .then((response) => response.json())
-        .then(async (result) => {
-          await ApiHelper("/headhunter", "POST", null, formData, "");
-          console.error(result.token);
-          return setToken(result.token);
-        })
-        .then(() => navigate("/"));
+      ApiHelper("/headhunter", "POST", null, formData, "").then(() => {
+        ApiHelper("/login", "POST", null, JSON.stringify({ email, password }))
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result.token);
+            if (result.token) {
+              setToken(result.token);
+            }
+            navigate("/");
+          });
+      });
     }
   };
 

@@ -8,6 +8,7 @@ class CandidateManager extends AbstractManager {
   }
 
   insert(candidate) {
+    // console.log(candidate);
     return this.connection.query(
       `insert into ${this.table} ( profession, researched_job, job_search_location, availability_date, skills, languages, cv_url, motivation_letter_url, user_id) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [

@@ -15,13 +15,15 @@ function Login() {
     event.preventDefault();
     if (email && password) {
       const data = JSON.stringify({ email, password });
-      await ApiHelper("/login", "POST", null, data)
+      ApiHelper("/login", "POST", null, data)
         .then((response) => response.json())
         .then((result) => {
           console.error(result.token);
-          return setToken(result.token);
-        })
-        .then(() => navigate("/"));
+          if (result.token) {
+            setToken(result.token);
+          }
+          navigate("/");
+        });
     }
   };
 
