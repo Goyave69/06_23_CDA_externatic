@@ -166,7 +166,6 @@ export default function Header() {
                     style={{
                       display: "flex",
                       backgroundColor: "black",
-                      width: "150px",
                       borderRadius: 35,
                       height: "50%",
                       textTransform: "uppercase",

@@ -71,7 +71,7 @@ function Home() {
             <img
               src={image1}
               alt="people home page 1"
-              style={{ height: "100%", width: "100%", marginTop: "10%" }}
+              style={{ height: "100%", width: "100%", marginTop: "30%" }}
             />
           </div>
         </div>
@@ -110,7 +110,7 @@ function Home() {
             <img
               src={image3}
               alt="people home page 3"
-              style={{ height: "100%", width: "100%", marginTop: "5%" }}
+              style={{ height: "100%", width: "100%", marginTop: "25%" }}
             />
           </div>
         </div>
@@ -155,7 +155,7 @@ function Home() {
             <img
               src={image4}
               alt="people home page 4"
-              style={{ height: "100%", width: "100%", marginTop: "2.5%" }}
+              style={{ height: "100%", width: "100%", marginTop: "25%" }}
             />
           </div>
         </div>

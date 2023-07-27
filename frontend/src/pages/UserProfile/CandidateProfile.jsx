@@ -129,16 +129,18 @@ function CandidateProfile() {
       window.location.reload();
     }
   };
-  const handleDeleteCandidate = async () => {
-    if (window.confirm("Are you sure you want to delete your profile?")) {
-      try {
-        await ApiHelper(`/candidate/${data.id}`, "DELETE", token, null, "");
-        alert("Profile deleted successfully.");
-      } catch (error) {
-        alert("Failed to delete profile. Please try again later.");
-      }
-    }
-  };
+  // Delete à reprendre car il ne fonctionne pas - a regarder candidateController
+
+  // const handleDeleteCandidate = async () => {
+  //   if (window.confirm("Are you sure you want to delete your profile?")) {
+  //     try {
+  //       await ApiHelper(`/candidate/${data.id}`, "DELETE", token, null, "");
+  //       alert("Profile deleted successfully.");
+  //     } catch (error) {
+  //       alert("Failed to delete profile. Please try again later.");
+  //     }
+  //   }
+  // };
 
   return (
     <Box
@@ -319,7 +321,7 @@ function CandidateProfile() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                width: "100%",
+                width: "90%",
               }}
             >
               <div className="nameBirthDate" style={{ display: "flex" }}>
@@ -646,17 +648,23 @@ function CandidateProfile() {
                 </div>
               </div>
             </div>
-            <div className="saveButton" style={{ marginBottom: "10px" }}>
+            <div
+              className="saveButton"
+              style={{ marginBottom: "10px", marginLeft: "25px" }}
+            >
               <Button
                 variant="contained"
                 size="small"
                 type="submit"
-                style={{ backgroundColor: "#000000", width: "120px" }}
+                style={{
+                  backgroundColor: "#000000",
+                  width: "120px",
+                }}
               >
                 ENREGISTRER
               </Button>
             </div>
-            <div className="deleteButton" style={{ marginBottom: "10px" }}>
+            {/* <div className="deleteButton" style={{ marginBottom: "10px" }}>
               <Button
                 variant="contained"
                 size="small"
@@ -665,7 +673,7 @@ function CandidateProfile() {
               >
                 DELETE
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </form>

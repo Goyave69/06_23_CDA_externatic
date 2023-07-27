@@ -412,7 +412,10 @@ function HeadhunterProfile() {
                 </div>
               </div>
             </div>
-            <div className="saveButton" style={{ marginBottom: "10px" }}>
+            <div
+              className="saveButton"
+              style={{ marginBottom: "15px", marginLeft: "25px" }}
+            >
               <Button
                 variant="contained"
                 size="small"
