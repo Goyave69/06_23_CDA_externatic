@@ -5,11 +5,10 @@ import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import JobOffers from "./jobOffers";
 import ErrorPage from "./errorPage";
-
 import OfferSearch from "./offerSearch";
 import DetailsOffer from "./detailsOffer";
-import ApplyOffer from "./applyOffer";
-
+import ApplyOffer from "./ApplyOffer";
+import Pageoffer from "./Pageoffer";
 import Companies from "./companies";
 import CompaniesDetails from "./companyDetails";
 import CandidateProfile from "./UserProfile/CandidateProfile";
@@ -40,6 +39,7 @@ const Routes = [
         path: "/detailsOffer",
         element: <DetailsOffer />,
       },
+      { path: "/Pageoffer", element: <Pageoffer /> },
       {
         path: "/applyOffer",
         element: <ApplyOffer />,

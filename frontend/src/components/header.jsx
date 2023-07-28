@@ -260,12 +260,14 @@ export default function Header() {
                   ),
                 }}
               />
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#CA2061", width: "200px" }}
-              >
-                RECHERCHE
-              </Button>
+              <NavLink to="/Pageoffer">
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#CA2061", width: "200px" }}
+                >
+                  RECHERCHE
+                </Button>
+              </NavLink>
             </Box>
             <Box className="contractType">
               <Box
@@ -339,12 +341,13 @@ export default function Header() {
                   <MenuItem value={30}>Systèmes embarqués</MenuItem>
                 </Select>
               </FormControl>
-              <NavLink to="/jobOffers">
+              <NavLink to="/Pageoffer">
+                {/* /joboffer */}
                 <Button
                   variant="contained"
                   style={{ backgroundColor: "#CA2061", width: "200px" }}
                 >
-                  Offres d'emploi
+                  OFFRES D'EMPLOI
                 </Button>
               </NavLink>
             </Box>

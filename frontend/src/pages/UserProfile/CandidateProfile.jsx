@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable camelcase */
 import { React, useState, useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
@@ -195,7 +196,6 @@ function CandidateProfile() {
                     borderRadius: "15px",
                     backgroundColor: "white",
                     boxShadow: "none",
-
                     padding: 0,
                     width: "fit-content",
                     "&:hover": {
