@@ -15,6 +15,7 @@ import jwt_decode from "jwt-decode";
 import { useToken } from "../context/TokenContext";
 
 export default function AdminDashboard() {
+  const { VITE_BACKEND_URL } = import.meta.env;
   const { token } = useToken();
   let role = "";
   let userId = "";
@@ -28,7 +29,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5555/job_offers")
+      .get(`${VITE_BACKEND_URL}/job_offers/`)
       .then((response) => {
         setData(response.data); // Mettre à jour les données dans le state
       })
