@@ -1,37 +1,24 @@
-.bordure {
+* {
+  margin: 0;
+  padding: 0;
+}
+.bordureOffres {
+  padding: 10px;
   margin: auto;
-  width: 90%;
+  margin-bottom: 30px;
+  height: 110vh;
+  width: 100%;
   border-radius: 25px;
   border: solid black 2px;
 }
 
-.bordure:hover {
+.bordureOffres:hover {
   border: solid blue 2px;
 }
-.offers {
-  width: 100%;
-  height: 70vh;
-  margin: 10px;
-  overflow-y: scroll;
-}
-.suboffer {
+.offres {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
-button img {
-  width: 30px;
-}
-.btnEtoile {
-  background-color: transparent;
-  width: fit-content;
-  max-width: 9%;
-}
-.btnEtoile:hover {
-  background-color: inherit;
-}
 strong {
   color: black;
   text-decoration: underline;
@@ -41,13 +28,5 @@ a {
   color: #000;
   text-decoration: none;
   font-size: 2rem;
-}
-.describe {
-  padding: 0 15px;
-}
-.offer {
-  padding: 10px;
-  overflow-y: scroll;
-  margin-right: 2%;
-  height: 50vh;
+  cursor: pointer;
 }

@@ -5,8 +5,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
- 
- 
 }
 
 .login-cardC {
@@ -17,7 +15,6 @@
   width: 600px;
   padding: 30px;
   font-family: "Jost", sans-serif;
-  
 }
 
 .login-cardC h2 {
@@ -52,7 +49,7 @@ button {
   width: 100%;
   padding: 10px;
   border-radius: 15px;
-  background-color: #CA2061;
+  background-color: #ca2061;
   color: white;
   border: none;
   cursor: pointer;
@@ -70,22 +67,22 @@ button:hover {
 }
 .firstAndSecondGroup {
   display: flex;
-  gap:50px;
+  gap: 50px;
 }
 .firstGroupC,
 .secondGroupC {
   width: 50%;
 }
 
-.buttons{
+.buttons {
   display: flex;
-  gap:30px
+  gap: 30px;
 }
 
 .uploadButtons {
   display: flex;
- justify-content: center;
- gap:15px;
+  justify-content: center;
+  gap: 15px;
 }
 .fileNames {
   display: flex;
@@ -93,6 +90,3 @@ button:hover {
   align-items: center;
   margin: 0;
 }
-
-
-

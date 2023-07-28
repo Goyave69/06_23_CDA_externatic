@@ -67,7 +67,6 @@ button:hover {
 }
 .firstandSecondGroup {
   display: flex;
- 
 }
 
 .error-message {
@@ -78,8 +77,3 @@ button:hover {
   font-family: "Jost", sans-serif;
   font-size: 14px;
 }
-
-
- 
-
-

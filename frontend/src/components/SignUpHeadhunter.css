@@ -5,7 +5,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
- 
 }
 
 .login-cardH {
@@ -50,7 +49,7 @@ button {
   width: 100%;
   padding: 10px;
   border-radius: 15px;
-  background-color: #CA2061;
+  background-color: #ca2061;
   color: white;
   border: none;
   cursor: pointer;
@@ -68,14 +67,14 @@ button:hover {
 }
 .firstAndSecondGroup {
   display: flex;
- gap:50px;
+  gap: 50px;
 }
-.buttons{
+.buttons {
   display: flex;
-  gap:30px
+  gap: 30px;
 }
 .buton {
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -83,8 +82,3 @@ button:hover {
   display: flex;
   align-items: center;
 }
-
-
-
-
-
