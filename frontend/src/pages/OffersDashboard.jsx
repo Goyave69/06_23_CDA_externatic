@@ -17,6 +17,7 @@ import jwt_decode from "jwt-decode";
 import { useToken } from "../context/TokenContext";
 
 export default function AdminDashboard() {
+  const { VITE_BACKEND_URL } = import.meta.env;
   const { token } = useToken();
   let role = "";
   let userId = "";
@@ -30,7 +31,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/job_offers")
+      .get(`${VITE_BACKEND_URL}/job_offers/`)
       .then((response) => {
         setData(response.data); // Mettre à jour les données dans le state
       })
@@ -56,7 +57,7 @@ export default function AdminDashboard() {
   const handleDelete = (id) => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .delete(`http://localhost:5000/job_offers/${id}`)
+        .delete(`http://localhost:5555/job_offers/${id}`)
         .then((response) => {
           setData(response.data);
         })

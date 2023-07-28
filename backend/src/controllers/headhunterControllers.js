@@ -38,8 +38,8 @@ const edit = async (req, res) => {
   if (photo) {
     data.photo_url = photo.filename;
   }
-  data.password = await passwordHasher(data.password);
-  const headhunterData = JSON.parse(req.body.candidateData);
+
+  const headhunterData = JSON.parse(req.body.headhunterData);
 
   const { error: userError } = validator.validateUser(data, false);
   if (userError) {
@@ -58,7 +58,7 @@ const edit = async (req, res) => {
       }
 
       // Validate the candidate data
-      const { error: headhunterError } = headhunterValidator.validateCandidate(
+      const { error: headhunterError } = headhunterValidator.validateHeadhunter(
         headhunterData,
         false
       );

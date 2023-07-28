@@ -19,6 +19,7 @@ function HeadhunterProfile() {
   };
 
   const [photoName, setPhotoName] = useState("");
+  const [reload, setReload] = useState(false);
 
   const photoInputRef = useRef();
 
@@ -52,7 +53,7 @@ function HeadhunterProfile() {
         })
         .catch((error) => console.warn(error));
     }
-  }, []);
+  }, [reload]);
 
   const calculateAge = (birthDate) => {
     const today = new Date();
@@ -76,6 +77,7 @@ function HeadhunterProfile() {
 
   const handleUpdateHeadhunter = async (event) => {
     event.preventDefault();
+    console.log("handleUpdateHeadhunter function is called.");
 
     const formData = new FormData();
     if (
@@ -86,12 +88,8 @@ function HeadhunterProfile() {
       data.phone &&
       data.profile_description &&
       data.adress &&
-      data.profession &&
-      data.researched_job &&
-      data.job_search_location &&
-      data.availability_date &&
-      data.skills &&
-      data.languages
+      data.skills_area &&
+      data.research_sector
     ) {
       const userData = JSON.stringify({
         first_name: data.first_name,
@@ -113,10 +111,12 @@ function HeadhunterProfile() {
         research_sector: data.research_sector,
       });
       formData.append("headhunterData", headhunterData);
+
       ApiHelper(`/headhunter/${data.id}`, "PUT", token, formData, "").then(
         (res) => console.log(res)
       );
-      window.location.reload();
+      setReload(!reload);
+      // window.location.reload();
     }
   };
 
@@ -414,6 +414,7 @@ function HeadhunterProfile() {
                         label="Domaine de compétences"
                         variant="standard"
                         value={data.skills_area}
+                        name="skills_area"
                         onChange={handleChange}
                         fullWidth
                         InputProps={{
