@@ -21,6 +21,8 @@ function CandidateProfile() {
   const [cvName, setCvName] = useState("");
   const [motivation_letterName, setMotivation_letterName] = useState("");
 
+  const [reload, setReload] = useState(false);
+
   const photoInputRef = useRef();
   const cvInputRef = useRef();
   const motivation_letterInputRef = useRef();
@@ -55,7 +57,7 @@ function CandidateProfile() {
         })
         .catch((error) => console.warn(error));
     }
-  }, []);
+  }, [reload]);
 
   const calculateAge = (birthDate) => {
     const today = new Date();
@@ -124,10 +126,12 @@ function CandidateProfile() {
       formData.append("candidateData", candidateData);
       formData.append("cv", cvInputRef.current.files[0]);
       formData.append("lm", motivation_letterInputRef.current.files[0]);
+
       ApiHelper(`/candidate/${data.id}`, "PUT", token, formData, "").then(
         (res) => console.log(res)
       );
-      window.location.reload();
+      setReload(!reload);
+      // window.location.reload();
     }
   };
   // Delete à reprendre car il ne fonctionne pas - a regarder candidateController

@@ -12,7 +12,7 @@ function Pageoffer() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/job_offers")
+      .get("http://localhost:5555/job_offers")
       .then((response) => {
         setdatas(response.data);
       })

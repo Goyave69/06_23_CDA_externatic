@@ -34,7 +34,6 @@ const read = (req, res) => {
 
 const edit = async (req, res) => {
   const data = JSON.parse(req.body.data);
-  data.password = await passwordHasher(data.password);
 
   const candidateData = JSON.parse(req.body.candidateData);
   const { cv, lm, avatar } = req.files;

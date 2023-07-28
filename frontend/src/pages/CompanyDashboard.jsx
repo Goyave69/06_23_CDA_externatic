@@ -16,6 +16,7 @@ import jwt_decode from "jwt-decode";
 import { useToken } from "../context/TokenContext";
 
 export default function AdminDashboard() {
+  const { VITE_BACKEND_URL } = import.meta.env;
   const { token } = useToken();
   let role = "";
   let userId = "";
@@ -32,7 +33,8 @@ export default function AdminDashboard() {
   useEffect(() => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .get("http://localhost:5550/company")
+        .get(`${VITE_BACKEND_URL}/company/`)
+        // .get("http://localhost:5550/company")
         .then((response) => {
           setData(response.data);
         })
