@@ -39,7 +39,6 @@ const edit = async (req, res) => {
     data.photo_url = photo.filename;
   }
 
-  data.password = await passwordHasher(data.password);
   const headhunterData = JSON.parse(req.body.headhunterData);
 
   const { error: userError } = validator.validateUser(data, false);

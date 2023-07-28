@@ -18,6 +18,7 @@ function HeadhunterProfile() {
   };
 
   const [photoName, setPhotoName] = useState("");
+  const [reload, setReload] = useState(false);
 
   const photoInputRef = useRef();
 
@@ -51,7 +52,7 @@ function HeadhunterProfile() {
         })
         .catch((error) => console.warn(error));
     }
-  }, []);
+  }, [reload]);
 
   const calculateAge = (birthDate) => {
     const today = new Date();
@@ -113,7 +114,8 @@ function HeadhunterProfile() {
       ApiHelper(`/headhunter/${data.id}`, "PUT", token, formData, "").then(
         (res) => console.log(res)
       );
-      window.location.reload();
+      setReload(!reload);
+      // window.location.reload();
     }
   };
 

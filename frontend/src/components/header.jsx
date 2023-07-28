@@ -41,6 +41,7 @@ export default function Header() {
     lastName = decodedToken.last_name;
     role = decodedToken.role;
   }
+  const isAdmin = role.includes("ROLE_ADMIN");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -122,7 +123,52 @@ export default function Header() {
               ))}
             </Menu>
           </Box>
-
+          <Box className="Admin buttons" style={{ gap: "35px" }}>
+            {/* affichage conditionnel en fonction du role : boutons pour admin */}
+            {isAdmin && (
+              <>
+                <NavLink className="userDashboard" to="/offersDashboard">
+                  <Button
+                    variant="contained"
+                    style={{
+                      backgroundColor: "black",
+                      width: "150px",
+                      borderRadius: 35,
+                      height: "60%",
+                    }}
+                  >
+                    Offres
+                  </Button>
+                </NavLink>
+                <NavLink className="userDashboard" to="/userDashboard">
+                  <Button
+                    variant="contained"
+                    style={{
+                      backgroundColor: "black",
+                      width: "150px",
+                      borderRadius: 35,
+                      height: "60%",
+                    }}
+                  >
+                    Candidats
+                  </Button>
+                </NavLink>
+                <NavLink className="userDashboard" to="/companydashboard">
+                  <Button
+                    variant="contained"
+                    style={{
+                      backgroundColor: "black",
+                      width: "150px",
+                      borderRadius: 35,
+                      height: "60%",
+                    }}
+                  >
+                    Entreprises
+                  </Button>
+                </NavLink>
+              </>
+            )}
+          </Box>
           <Box
             className="rightButtons"
             sx={{
