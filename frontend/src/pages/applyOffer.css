@@ -5,7 +5,6 @@
   min-height: 230px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
   .file-inputs {

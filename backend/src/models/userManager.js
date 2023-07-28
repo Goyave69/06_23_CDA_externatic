@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const AbstractManager = require("./AbstractManager");
 
 const generateSqlSets = require("../services/generateSqlSets");
@@ -35,7 +36,7 @@ class userManager extends AbstractManager {
     );
   }
 
-  async insert(user, photoUrl) {
+  async insert(user) {
     return this.connection.query(
       `insert into ${this.table} (password, role , first_name, last_name, birth_date, phone, email,photo_url, profile_description, adress, subscription_date, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
@@ -46,7 +47,7 @@ class userManager extends AbstractManager {
         user.birth_date,
         user.phone,
         user.email,
-        photoUrl,
+        user.photo_url,
         user.profile_description,
         user.adress,
         user.subscription_date,

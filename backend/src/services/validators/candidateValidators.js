@@ -11,7 +11,6 @@ const validateCandidate = (data, forCreation = true) => {
       .presence(presence),
     skills: Joi.string().max(255).presence(presence),
     languages: Joi.string().max(255).presence(presence),
-    is_admin: Joi.boolean().presence(presence),
     cv_url: Joi.string().max(1000).presence(presence),
     motivation_letter_url: Joi.string().max(1000).presence(presence),
     user_id: Joi.number().positive().presence(presence),
