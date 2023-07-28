@@ -5,6 +5,7 @@ import DetailsOffer from "./detailsOffer";
 import ApplyOffer from "./ApplyOffer";
 
 function Pageoffer() {
+  const { VITE_BACKEND_URL } = import.meta.env;
   const [selectedOffer, setselectedOffer] = useState(0);
   const [favorites, setFavorites] = useState([]);
   const [datas, setdatas] = useState([]);
@@ -12,7 +13,7 @@ function Pageoffer() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5555/job_offers")
+      .get(`${VITE_BACKEND_URL}/job_offers/`)
       .then((response) => {
         setdatas(response.data);
       })

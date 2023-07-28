@@ -47,7 +47,8 @@ export default function AdminDashboard() {
   const handleEdit = (id) => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .put(`http://localhost:5555/company/${id}`)
+        .put(`${VITE_BACKEND_URL}/company/${id}`)
+        // .put(`http://localhost:5555/company/${id}`)
         .then((response) => {
           setData(response.data);
         })

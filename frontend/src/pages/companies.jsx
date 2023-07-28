@@ -10,6 +10,7 @@ import { Typography, CardActionArea } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 
 export default function Companies() {
+  const { VITE_BACKEND_URL } = import.meta.env;
   const [data, setData] = useState([]);
 
   const handleCardClick = (id) => {
@@ -19,7 +20,8 @@ export default function Companies() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5555/company")
+      .get(`${VITE_BACKEND_URL}/company/`)
+      // .get("http://localhost:5555/company")
       .then((response) => {
         setData(response.data); // Mettre à jour les données dans le state
       })

@@ -6,12 +6,14 @@ import Box from "@mui/material/Box";
 import axios from "axios";
 
 export default function CompanyDetails() {
+  const { VITE_BACKEND_URL } = import.meta.env;
   const [data, setData] = useState([]);
   const { id } = useParams(); // Récupère l'ID de la route
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5555/company/${id}`)
+      .get(`${VITE_BACKEND_URL}/company/`)
+      // .get(`http://localhost:5555/company/${id}`)
       .then((response) => {
         setData(response.data); // Mettre à jour les données dans le state
       })

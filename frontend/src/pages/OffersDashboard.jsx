@@ -57,7 +57,8 @@ export default function AdminDashboard() {
   const handleDelete = (id) => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .delete(`http://localhost:5555/job_offers/${id}`)
+        .delete(`${VITE_BACKEND_URL}/job_offers/${id}`)
+        // .delete(`http://localhost:5555/job_offers/${id}`)
         .then((response) => {
           setData(response.data);
         })
