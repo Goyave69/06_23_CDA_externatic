@@ -31,7 +31,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .get("http://localhost:5000/company")
+        .get("http://localhost:5550/company")
         .then((response) => {
           setData(response.data);
         })
@@ -44,7 +44,7 @@ export default function AdminDashboard() {
   const handleEdit = (id) => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .put(`http://localhost:5000/company/${id}`)
+        .put(`http://localhost:5555/company/${id}`)
         .then((response) => {
           setData(response.data);
         })
@@ -57,7 +57,7 @@ export default function AdminDashboard() {
   const handleDelete = (id) => {
     if (role.includes("ROLE_ADMIN" || "ROLE_HEADHUNTER")) {
       axios
-        .delete(`http://localhost:5000/company/${id}`)
+        .delete(`http://localhost:5550/company/${id}`)
         .then((response) => {
           setData(response.data);
         })

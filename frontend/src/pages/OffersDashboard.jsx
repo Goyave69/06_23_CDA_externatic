@@ -28,7 +28,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/job_offers")
+      .get("http://localhost:5555/job_offers")
       .then((response) => {
         setData(response.data); // Mettre à jour les données dans le state
       })

@@ -19,7 +19,7 @@ export default function Companies() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/company")
+      .get("http://localhost:5555/company")
       .then((response) => {
         setData(response.data); // Mettre à jour les données dans le state
       })
