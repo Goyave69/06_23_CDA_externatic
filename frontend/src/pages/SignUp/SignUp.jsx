@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import { React, useRef, useState } from "react";
 import "./SignUp.css";

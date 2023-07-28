@@ -1,79 +1,32 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-.discribe {
+.file-card {
+  background-color: #fff;
+  border: 3px dashed black;
+  min-width: 380px;
+  min-height: 230px;
   display: flex;
   flex-direction: column;
-}
-img {
-  margin-left: 15px;
-}
-.offerTitle {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin: 10px;
-}
-.btnTelechargement_0 > buttun {
-  background-color: #851342;
-  color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 250px;
-  border-radius: 15px;
-  padding-right: 15px;
-  padding-left: 15px;
-}
-.btnTelechargement_1 {
-  background-color: #851342;
-  color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 408px;
-  border-radius: 15px;
-  padding-right: 15px;
-  padding-left: 15px;
-}
-img {
-  width: 15px;
-}
-.boite {
-  border-radius: 15px;
-  border: solid black 2px;
-  width: 50%;
-}
-.boite:hover {
-  border: solid blue 2px;
-}
 
-.apply {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.btnContenu {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.btnDoc {
-  display: block;
-  margin: 10px;
-  width: 180px;
-  height: 35px;
-  border-radius: 10px;
-  border: solid black 2px;
-  color: black;
-  background-color: white;
-  box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7);
+  .file-inputs {
+    position: relative;
+    margin-bottom: 1.5em;
+    i {
+      width: 1.5em;
+      height: 1.5em;
+      padding: 0.4em;
+      background-color: #fff;
+      color: #ca2061;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 0.8em;
+      font-size: 0.8em;
+    }
+    &:hover {
+      button {
+        background-color: #ca2061;
+      }
+    }
+  }
 }

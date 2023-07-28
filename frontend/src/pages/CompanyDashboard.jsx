@@ -26,6 +26,7 @@ export default function AdminDashboard() {
   if (token) {
     const decodedToken = jwt_decode(token);
     role = decodedToken.role;
+    // eslint-disable-next-line no-unused-vars
     userId = decodedToken.userId;
   }
 

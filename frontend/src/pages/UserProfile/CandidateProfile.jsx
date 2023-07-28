@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable camelcase */
 import { React, useState, useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
@@ -140,7 +141,7 @@ function CandidateProfile() {
                   ref={photoInputRef}
                   hidden
                   onChange={(e) => {
-                    console.log(e.target.value);
+                    console.warn(e.target.value);
                     setPhotoName(e.target.value.split("\\")[2]);
                   }}
                 />

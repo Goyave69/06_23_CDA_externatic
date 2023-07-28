@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable camelcase */
 import { React, useState, useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
